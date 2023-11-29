@@ -36,6 +36,46 @@ public class User {
         
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public static int getCurrentID() {
+        return currentID;
+    }
+
+    public String getDateOfBirthday() {
+        return dateOfBirthday;
+    }
+
+    public String getPpsNo() {
+        return ppsNo;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public boolean isMarried() {
+        return married;
+    }
+
 
     
     

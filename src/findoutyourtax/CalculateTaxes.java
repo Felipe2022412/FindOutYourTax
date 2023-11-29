@@ -9,14 +9,48 @@ package findoutyourtax;
  *
  * @author felip
  */
-public class CalculateTaxes extends UserIncome {
+//extending UserIncome to be able to use their income,
+public class CalculateTaxes extends User {
 
+    protected double grossIncome;
+    protected double taxCredits;
+    protected double partnerGrossIncome;
     protected double totalTaxesOwed;
     protected double liquidAmount;
 
+    public CalculateTaxes(String firstName, String lastName, String userName, String password, String dateOfBirthday, String ppsNo, String email, boolean married) {
+        super(firstName, lastName, userName, password, dateOfBirthday, ppsNo, email, married);
+    }
+
+    public double getGrossIncome() {
+        return grossIncome;
+    }
+
+    public double getTaxCredits() {
+        return taxCredits;
+    }
+    
+     public double getPartnerGrossIncome() {
+        return partnerGrossIncome;
+    }
+
+
+    public void setTaxCredits(double taxCredits) {
+        this.taxCredits = taxCredits;
+    }
+
+    public void setGrossIncome(double grossIncome) {
+        this.grossIncome = grossIncome;
+    }
+
+   
+    public void setPartnerGrossIncome(double partnerGrossIncome) {
+        this.partnerGrossIncome = partnerGrossIncome;
+    }
+
     private double PAYECalc() {
 
-        if () {
+        if (User) {
         } else {
         }
 
