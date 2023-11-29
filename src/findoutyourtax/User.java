@@ -19,9 +19,10 @@ public class User {
     private String dateOfBirthday;
     private String ppsNo;
     private String email;
+    private boolean married;
 
     //Constructor to make USER objects
-    public User(String firstName, String lastName, String userName, String password, String dateOfBirthday, String ppsNo, String email) {
+    public User(String firstName, String lastName, String userName, String password, String dateOfBirthday, String ppsNo, String email, boolean married) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
@@ -30,6 +31,7 @@ public class User {
         this.dateOfBirthday = dateOfBirthday;
         this.ppsNo = ppsNo;
         this.email = email;
+        this.married = married;
         currentID++;// to incriment the id for each user each time a object is created.
         
     }

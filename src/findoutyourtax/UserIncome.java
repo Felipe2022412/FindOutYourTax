@@ -13,6 +13,7 @@ public class UserIncome {
 
     protected double grossIncome;
     protected double taxCredits;
+    protected double partnerGrossIncome;
 
     public double getGrossIncome() {
         return grossIncome;
@@ -21,6 +22,11 @@ public class UserIncome {
     public double getTaxCredits() {
         return taxCredits;
     }
+    
+     public double getPartnerGrossIncome() {
+        return partnerGrossIncome;
+    }
+
 
     public void setTaxCredits(double taxCredits) {
         this.taxCredits = taxCredits;
@@ -29,5 +35,12 @@ public class UserIncome {
     public void setGrossIncome(double grossIncome) {
         this.grossIncome = grossIncome;
     }
+
+   
+    public void setPartnerGrossIncome(double partnerGrossIncome) {
+        this.partnerGrossIncome = partnerGrossIncome;
+    }
+    
+    
 
 }
