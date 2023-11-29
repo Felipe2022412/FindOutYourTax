@@ -11,20 +11,8 @@ package findoutyourtax;
  */
 public class CalculateTaxes extends UserIncome {
 
-    protected double totalTaxesOwen;
+    protected double totalTaxesOwed;
     protected double liquidAmount;
-
-    public double getLiquidAmount() {
-        return liquidAmount;
-    }
-
-    public double getTotalTaxesOwen() {
-        return totalTaxesOwen;
-    }
-
-    public void setTotalTaxesOwen(double totalTaxesOwen) {
-        this.totalTaxesOwen = totalTaxesOwen;
-    }
 
     private double PAYECalc() {
 
@@ -52,5 +40,9 @@ public class CalculateTaxes extends UserIncome {
         if () {
         } else {
         }
+    }
+
+    private double totalTaxOwed() {
+
     }
 }
