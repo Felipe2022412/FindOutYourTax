@@ -11,33 +11,11 @@ package findoutyourtax;
  */
 public class CalculateTaxes extends UserIncome {
 
-    private double paye;
-    private double usc;
-    private double prsi;
     protected double totalTaxesOwen;
+    protected double liquidAmount;
 
-    public double getPaye() {
-        return paye;
-    }
-
-    public void setPaye(double paye) {
-        this.paye = paye;
-    }
-
-    public double getUsc() {
-        return usc;
-    }
-
-    public void setUsc(double usc) {
-        this.usc = usc;
-    }
-
-    public double getPrsi() {
-        return prsi;
-    }
-
-    public void setPrsi(double prsi) {
-        this.prsi = prsi;
+    public double getLiquidAmount() {
+        return liquidAmount;
     }
 
     public double getTotalTaxesOwen() {
@@ -50,21 +28,29 @@ public class CalculateTaxes extends UserIncome {
 
     private double PAYECalc() {
 
-        return 0;
+        if () {
+        } else {
+        }
 
     }
 
     private double USCCalc() {
 
-        return 0;
+        if () {
+        } else {
+        }
     }
 
     private double PRSICalc() {
 
-        return 0;
+        if () {
+        } else {
+        }
     }
 
-    private double incomeAfterCredit() {
-        return 0;
+    private double liquidAmount() {
+        if () {
+        } else {
+        }
     }
 }

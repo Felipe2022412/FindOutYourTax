@@ -5,27 +5,19 @@
 package findoutyourtax;
 
 /**
- *Class for user income input (getters and setters)
+ * Class for user income input (getters and setters)
+ *
  * @author felip
  */
 public class UserIncome {
-    
+
     protected double grossIncome;
     protected double taxCredits;
-    protected double liquidAmount;
 
     public double getGrossIncome() {
         return grossIncome;
     }
 
-    public double getLiquidAmount() {
-        return liquidAmount;
-    }
-
-    public void setLiquidAmount(double liquidAmount) {
-        this.liquidAmount = liquidAmount;
-    }
-  
     public double getTaxCredits() {
         return taxCredits;
     }
@@ -33,11 +25,9 @@ public class UserIncome {
     public void setTaxCredits(double taxCredits) {
         this.taxCredits = taxCredits;
     }
-        
-      public void setGrossIncome(double grossIncome) {
+
+    public void setGrossIncome(double grossIncome) {
         this.grossIncome = grossIncome;
     }
-    
-    
-    
+
 }
