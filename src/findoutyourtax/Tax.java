@@ -12,27 +12,29 @@ package findoutyourtax;
 public enum Tax {
     
      
-    PayeSingleLower(0.2),//GROSS INCOME UNDER 40.000 EURO, 20%
-    PayeSingleOver(0.4),//GROSS INCOMEOVER 40.000 EURO, 40%
-    PayeMarriedLower(0.2),//GROSS INCOME UNDER 40.000 EURO, 20%
-    PayeMarriedOver(0.4),//GROSS INCOME OVER 40.000 EURO, 40%
+    PayeSingleLowerRate(0.2),//GROSS INCOME UNDER 40.000 EURO, 20%
+    PayeSingleOverRate(0.4),//GROSS INCOMEOVER 40.000 EURO, 40%
+    PayeMarriedLowerRate(0.2),//GROSS INCOME UNDER 40.000 EURO, 20%
+    PayeMarriedOverRate(0.4),//GROSS INCOME OVER 40.000 EURO, 40%
 
-    USCClassOne(0.005), //GROSS INCOME UNDER 12.012 EURO 0.5%
-    USCClassTwo(0.02), //GROSS INCOME FROM 12,012.01 TO 22,920 EURO 2%
-    USCClassThree(0.045), //GROSS INCOME FROM 22,920.01 TO 70,044 EURO 4.5%
-    USCClassFour(0.08), //GROSS INCOME FROM 70,044.01 EURO 8%
+    USCClassOneRate(0.005), //GROSS INCOME UNDER 12.012 EURO 0.5%
+    USCClassTwoRate(0.02), //GROSS INCOME FROM 12,012.01 TO 22,920 EURO 2%
+    USCClassThreeRate(0.045), //GROSS INCOME FROM 22,920.01 TO 70,044 EURO 4.5%
+    USCClassFourRate(0.08), //GROSS INCOME FROM 70,044.01 EURO 8%
     
-    PRSIClassOne(0.0),  //GROSS INCOME UNDER 18,354.30 EURO
-    PRSIClassTwo(0.04); //GROSS INCOME OVER 18,354.30 EURO
+    PRSIClassOneRate(0.0),  //GROSS INCOME UNDER 18,354.30 EURO
+    PRSIClassTwoRate(0.04); //GROSS INCOME OVER 18,354.30 EURO
     
     private final double rate;
 
+    // Created a constructor for my enums and passed their value as rate
     Tax(double rate) {
         this.rate = rate;
     }
 
+    // A getter to get the rate assigned for each enum
     public double getRate() {
         return rate;
     }
 }
-    
+

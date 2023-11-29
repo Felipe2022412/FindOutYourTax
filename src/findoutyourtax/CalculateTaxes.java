@@ -48,13 +48,21 @@ public class CalculateTaxes extends User {
         this.partnerGrossIncome = partnerGrossIncome;
     }
 
-    private double PAYECalc() {
-
-        if (User) {
+   private double PAYECalc() {
+    if (!isMarried()) {
+        if (getGrossIncome() <= 40000) {
+            return Tax.PayeSingleLower.getRate() * getGrossIncome();
         } else {
+            return Tax.PayeSingleOver.getRate() * getGrossIncome();
         }
-
+    } else {
+        if (getGrossIncome() > 40000) {
+            return Tax.PayeMarriedLower.getRate() * getGrossIncome();
+        } else {
+            return Tax.PayeMarriedOver.getRate() * getGrossIncome();
+        }
     }
+}
 
     private double USCCalc() {
 
