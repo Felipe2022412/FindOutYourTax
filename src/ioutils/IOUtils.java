@@ -4,7 +4,7 @@
  */
 package ioutils;
 
-import java.sql.Date;
+import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
@@ -290,6 +290,7 @@ public class IOUtils {
      *
      * @param prompt the prompt to issue
      * @return a VALID date of birth
+     * @author Douglas Dierings and Felipe Marques
      */
     public String getUserDateOfBirth(String prompt) {
         Scanner myKB = new Scanner(System.in);
@@ -311,7 +312,7 @@ public class IOUtils {
         return userDateOfBirth;
     }
 
-    // Helper method to check if the date of birth is valid
+    // Method to check if the date of birth is valid to store later in the SQL database, so we do not get errors
     private boolean isValidDateOfBirth(String dateOfBirth) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         dateFormat.setLenient(false); //Disable lenient mode to ensuring that the date format must match exactly
@@ -323,5 +324,39 @@ public class IOUtils {
             return false;
         }
     }
+    
+    
+    /**
+     * Get a valid PPSN from the user by issuing a prompt. Keep asking if
+     * the user does not enter a valid PPSN in the format '1234567A' or '1234567AB'.
+     *
+     * @param prompt the prompt to issue
+     * @return a VALID PPSN
+     * @author Douglas Dierings and Felipe Marques
+     */
+    public String getUserPPSN(String prompt) {
+        Scanner myKB = new Scanner(System.in);
+        String userPPSN;
+        boolean valid;
 
+        do {
+            System.out.println(prompt); // Display prompt
+            userPPSN = myKB.nextLine().toUpperCase(); // Get user input and convert to uppercase
+            valid = isValidPPSN(userPPSN);
+
+            if (!valid) {
+                System.out.println("Invalid PPSN. Please enter a valid PPSN in the format '1234567A' or '1234567AB'.");
+            }
+
+        } while (!valid);
+
+        return userPPSN;
+    }
+
+    //method to check if the PPSN is valid
+    private boolean isValidPPSN(String ppsn) {
+        // PPSN should have 7 digits followed by 1 or 2 letters (https://www.citizensinformation.ie)
+        return ppsn.matches("\\d{7}[A-Za-z]{1,2}");
+    
+    }
 }
