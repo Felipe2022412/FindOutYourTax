@@ -52,8 +52,8 @@ public class FindOutYourTax {
                 firstName = input.getUserText("Enter your first name:");
                 lastName = input.getUserText("Enter your last name:");
                 userName = input.getUserText("Enter a user name that will be use for login:");
-                email = input.getUserText("Enter your email:");
-                password = input.getUserText("Enter a password:");
+                email = input.getUserEmail("Enter your email:");
+                password = input.getUserPassword("Enter a password:");
                 dateOfBirthday = input.getUserText("Enter your date of birthday in the follow format = AAAA-MM-DD:");
                 ppsNo = input.getUserText("Enter your PPSNO:");
                 married = input.getUserBollean("IF your married enter 1 if not 2", 1, 2);

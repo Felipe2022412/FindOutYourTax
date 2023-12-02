@@ -4,7 +4,12 @@
  */
 package ioutils;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * A set of useful Input methods - get text -get a int (no limits) - get a
@@ -171,8 +176,8 @@ public class IOUtils {
 
         return userInput;
     }
-    
-        /**
+
+    /**
      * Get an integer from the user by issuing a prompt Must be within a range
      * provided (min/max)
      *
@@ -182,7 +187,6 @@ public class IOUtils {
      * @return a valid Boolean if 1 true and 2 return false
      * @author Douglas Dierings and Felipe Marques
      */
-
     public boolean getUserBollean(String prompt, int minValue, int maxValue) {
 
         Scanner myKB = new Scanner(System.in);
@@ -212,4 +216,112 @@ public class IOUtils {
 
         return validBoolean;
     }
+
+    /**
+     * Get a valid email address from the user by issuing a prompt. Keep asking
+     * if the user does not enter a valid email address.
+     *
+     * @param prompt the prompt to issue
+     * @return a VALID email address
+     * @author Douglas Dierings and Felipe Marques
+     */
+    public String getUserEmail(String prompt) {
+        Scanner myKB = new Scanner(System.in);
+        String userEmail = "";
+        boolean valid = false;
+
+        do {
+            System.out.println(prompt); // Display prompt
+
+            try {
+                userEmail = myKB.nextLine(); // Get user input
+
+                // Check if contains '@' and at least one dot after '@'
+                if (userEmail.contains("@") && userEmail.indexOf('@') < userEmail.length() - 1 && userEmail.contains(".")) {
+                    valid = true; // É um endereço de e-mail válido
+                } else {
+                    System.out.println("Invalid email address. Please enter a valid email.");
+                }
+            } catch (Exception e) {
+                System.out.println("An error occurred: " + e.getMessage());
+            }
+
+        } while (!valid);
+
+        return userEmail;
+    }
+
+    /**
+     * Get a valid password from the user by issuing a prompt. Keep asking if
+     * the user does not enter a valid password.
+     *
+     * @param prompt the prompt to issue
+     * @return a VALID password
+     * @author Douglas Dierings and Felipe Marques
+     */
+    public String getUserPassword(String prompt) {
+        Scanner myKB = new Scanner(System.in);
+        String userPassword;
+        boolean valid;
+
+        do {
+            System.out.println(prompt); // Display prompt
+
+            userPassword = myKB.nextLine(); // Get user input
+            valid = isValidPassword(userPassword);
+
+            if (!valid) {
+                System.out.println("Invalid password. Please enter a password with at least one number, one capital letter, and one symbol.");
+            }
+
+        } while (!valid);
+
+        return userPassword;
+    }
+
+    //Method to check if the password is valid, this method will be called inside the loop
+    private boolean isValidPassword(String password) {
+        return password.matches(".*\\d.*") && password.matches(".*[A-Z].*") && password.matches(".*[!@#$%^&*()-=_+{};':\",.<>?/|`~\\[\\]\\\\].*");
+    }
+    
+        /**
+     * Get a valid date of birth from the user by issuing a prompt. Keep asking if
+     * the user does not enter a valid date of birth in the "AAAA-MM-DD" format.
+     *
+     * @param prompt the prompt to issue
+     * @return a VALID date of birth
+     */
+    public String getUserDateOfBirth(String prompt) {
+        Scanner myKB = new Scanner(System.in);
+        String userDateOfBirth;
+        boolean valid;
+
+        do {
+            System.out.println(prompt); // Display prompt
+
+            userDateOfBirth = myKB.nextLine(); // Get user input
+            valid = isValidDateOfBirth(userDateOfBirth);
+
+            if (!valid) {
+                System.out.println("Invalid date of birth. Please enter a valid date in the format 'AAAA-MM-DD'.");
+            }
+
+        } while (!valid);
+
+        return userDateOfBirth;
+    }
+
+    // Helper method to check if the date of birth is valid
+    private boolean isValidDateOfBirth(String dateOfBirth) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormat.setLenient(false); //Disable lenient mode to ensuring that the date format must match exactly
+
+        try {
+            Date parsedDate = (Date) dateFormat.parse(dateOfBirth);
+            return true;
+        } catch (ParseException e) {
+            return false;
+        }
+    }
+
 }
