@@ -93,7 +93,7 @@ public class CalculateTaxes extends User {
 //    USCClassTwoRate(0.02), //GROSS INCOME FROM 12,012.01 TO 22,920 EURO 2%
 //    USCClassThreeRate(0.045), //GROSS INCOME FROM 22,920.01 TO 70,044 EURO 4.5%
 //    USCClassFourRate(
-private double PRSICalc() {
+/*private double PRSICalc() {
 
         if () {
         } else {
@@ -108,5 +108,5 @@ private double PRSICalc() {
 
     private double totalTaxOwed() {
 
-    }
+    }*/
 }

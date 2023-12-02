@@ -11,9 +11,9 @@ package database;
 public abstract class Database {
     
     protected final static String DB_BASE_URL = "jdbc:mysql://localhost";
-    protected final static String USER = "ooc2023";
-    protected final static String PASSWORD = "ooc2023";
-    protected final static String DB_NAME = "";
-    //protected final static String TABLE_NAME = "patientData"; Alterar para as nossas tables
+    protected final static String DB_USER = "ooc2023";
+    protected final static String DB_PASSWORD = "ooc2023";
+    protected final static String DB_NAME = "IrelandRevenueData";
+    protected final static String TABLE_NAME = "userData"; //Alterar para as nossas tables
     
 }
