@@ -4,6 +4,8 @@
  */
 package findoutyourtax;
 
+import database.DatabaseSetup;
+
 /**
  *
  * @author felip
@@ -13,8 +15,15 @@ public class FindOutYourTax {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         // TODO code application logic here
+        
+        //test database
+        //DatabaseSetup database = new DatabaseSetup();
+        //database.setupDB();
+        
+        
+        System.out.println("===== Welcome to Find out Your tax =====");
     }
     
 }
