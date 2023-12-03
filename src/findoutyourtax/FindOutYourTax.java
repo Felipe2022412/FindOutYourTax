@@ -26,8 +26,8 @@ public class FindOutYourTax {
         int option;
 
         //test database
-        //DatabaseSetup database = new DatabaseSetup();
-        //database.setupDB();
+        DatabaseSetup database = new DatabaseSetup();
+        database.setupDB();
         System.out.println("===== Welcome to Find out Your tax =====");
 
         System.out.println(" 1 - Log In \n 2 - Sing In");

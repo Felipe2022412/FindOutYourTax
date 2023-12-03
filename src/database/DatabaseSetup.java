@@ -37,6 +37,7 @@ public class DatabaseSetup extends Database {
                     + "bloodType VARCHAR(2),"
                     + "id INT(10)"
                     + ");";
+            stmt.execute(sqlTable);
             return true;
         } catch (Exception e) {
             System.out.println(e);
