@@ -84,8 +84,7 @@ public class RegularUser extends User implements Modify, ViewRegularUser {
 
     @Override
     public String viewEmailRegularUser() {
-      return getEmail();
+        return getEmail();
     }
 
-  
 }

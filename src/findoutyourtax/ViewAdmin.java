@@ -12,6 +12,7 @@ public interface ViewAdmin {
     
    
     //View methods that will belong to the admin - the method will return the ability to see everything from the database 
+    String viewUserNameAdmin();
     String viewFirstNameAdmin();
     String viewLastNameAdmin();
     String viewPasswordAdmin();
