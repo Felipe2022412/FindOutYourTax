@@ -8,7 +8,7 @@ package findoutyourtax;
  *Class for User personal details
  * @author felip
  */
-public class User {
+public abstract class User {
     
     private String firstName;
     private String lastName;
