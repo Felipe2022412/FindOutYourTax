@@ -6,7 +6,9 @@ package findoutyourtax;
 
 import database.DatabaseSetup;
 import database.DatabaseWriter;
+import database.UserCheck;
 import ioutils.IOUtils;
+import java.sql.SQLException;
 
 /**
  *
@@ -17,7 +19,7 @@ public class FindOutYourTax {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         // TODO code application logic here
 
         //Initialize necessary objects and variables
@@ -30,12 +32,21 @@ public class FindOutYourTax {
         //test database
         DatabaseSetup database = new DatabaseSetup();
         database.setupDB();
+        UserCheck userCheck = new UserCheck();
         System.out.println("===== Welcome to Find out Your tax =====");
 
         System.out.println(" 1 - Log In \n 2 - Sing In");
         option = input.getUserInt("Enter one of the options above:", 1, 2);
         switch (option) {
             case 1:
+                //User log in
+                String userNameLogin;
+                String passwordLogin;
+                
+                userNameLogin = input.getUserText("Enter your user name:");
+                passwordLogin = input.getUserText("Enter your password:");
+                
+                userCheck.checkAdminUser(userNameLogin, passwordLogin);
                 
                 break;
             case 2:
