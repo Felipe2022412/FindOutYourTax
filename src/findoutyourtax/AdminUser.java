@@ -5,22 +5,25 @@
 package findoutyourtax;
 
 /**
- *Class for the Admin User with its methods - extends the class User and implements its specifics interfaces to use the methods modify and view.
+ * Class for the Admin User with its methods - extends the class User and
+ * implements its specifics interfaces to use the methods modify and view.
+ *
  * @author dougl
  */
-public class AdminUser extends User implements Modify, ViewAdmin{
-    
-    
-    
+public class AdminUser extends User implements Modify, ViewAdmin {
+
     public AdminUser(String firstName, String lastName, String userName, String password, String dateOfBirth, String ppsNo, String email, boolean married) {
         super(firstName, lastName, userName, password, dateOfBirth, ppsNo, email, married);
-        adminAccess = true;
+        this.setAdminAccess(true);
     }
 
-    
+    public AdminUser(int userId, String firstName, String lastName, String userName, String password, String dateOfBirth, String ppsNo, String email, boolean married) {
+        super(userId,firstName, lastName, userName, password, dateOfBirth, ppsNo, email, married);
+        this.setAdminAccess(true);
+    }
+
     //Overriding the methods from the interfaces to return the new settings if any variable is modified and, to return the variables the admin User needs to see.
-    
-     @Override
+    @Override
     public String modifyFirstName(String newFirstName) {
         setFirstName(newFirstName);
         return getFirstName();
@@ -90,10 +93,7 @@ public class AdminUser extends User implements Modify, ViewAdmin{
 
     @Override
     public String viewEmailAdmin() {
-      return getEmail();
+        return getEmail();
     }
 
-    
-    
-    
 }

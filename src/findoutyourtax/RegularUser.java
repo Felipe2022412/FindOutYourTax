@@ -13,6 +13,11 @@ public class RegularUser extends User implements Modify, ViewRegularUser {
     public RegularUser(String firstName, String lastName, String userName, String password, String dateOfBirth, String ppsNo, String email, boolean married) {
         super(firstName, lastName, userName, password, dateOfBirth, ppsNo, email, married);
     }
+    
+        public RegularUser(int userId, String firstName, String lastName, String userName, String password, String dateOfBirth, String ppsNo, String email, boolean married) {
+        super(userId,firstName, lastName, userName, password, dateOfBirth, ppsNo, email, married);
+
+    }
 
     
     //Overriding the methods from the interfaces to return the new settings if any variable is modified and, to return the variables the regular User can see.

@@ -283,10 +283,11 @@ public class IOUtils {
     private boolean isValidPassword(String password) {
         return password.matches(".*\\d.*") && password.matches(".*[A-Z].*") && password.matches(".*[!@#$%^&*()-=_+{};':\",.<>?/|`~\\[\\]\\\\].*");
     }
-    
-        /**
-     * Get a valid date of birth from the user by issuing a prompt. Keep asking if
-     * the user does not enter a valid date of birth in the "AAAA-MM-DD" format.
+
+    /**
+     * Get a valid date of birth from the user by issuing a prompt. Keep asking
+     * if the user does not enter a valid date of birth in the "AAAA-MM-DD"
+     * format.
      *
      * @param prompt the prompt to issue
      * @return a VALID date of birth
@@ -324,11 +325,10 @@ public class IOUtils {
             return false;
         }
     }
-    
-    
+
     /**
-     * Get a valid PPSN from the user by issuing a prompt. Keep asking if
-     * the user does not enter a valid PPSN in the format '1234567A' or '1234567AB'.
+     * Get a valid PPSN from the user by issuing a prompt. Keep asking if the
+     * user does not enter a valid PPSN in the format '1234567A' or '1234567AB'.
      *
      * @param prompt the prompt to issue
      * @return a VALID PPSN
@@ -357,6 +357,15 @@ public class IOUtils {
     private boolean isValidPPSN(String ppsn) {
         // PPSN should have 7 digits followed by 1 or 2 letters (https://www.citizensinformation.ie)
         return ppsn.matches("\\d{7}[A-Za-z]{1,2}");
-    
+
+    }
+
+    public String basicInput(String prompt) {
+        System.out.println(prompt); // Display prompt
+        Scanner myKB = new Scanner(System.in);
+        String userInput;
+
+        userInput = myKB.nextLine();
+        return userInput;
     }
 }

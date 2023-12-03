@@ -5,11 +5,12 @@
 package findoutyourtax;
 
 /**
- *Class for User personal details
+ * Class for User personal details
+ *
  * @author felip
  */
 public abstract class User {
-    
+
     private String firstName;
     private String lastName;
     private String userName;
@@ -20,7 +21,7 @@ public abstract class User {
     private String ppsNo;
     private String email;
     private boolean married;
-    protected boolean adminAccess;
+    private boolean adminAccess;
 
     //Constructor to make USER objects
     public User(String firstName, String lastName, String userName, String password, String dateOfBirth, String ppsNo, String email, boolean married) {
@@ -35,11 +36,23 @@ public abstract class User {
         this.married = married;
         adminAccess = false;
         currentID++;// to incriment the id for each user each time a object is created.
-        
+
+    }
+
+    public User(int userId,String firstName, String lastName, String userName, String password, String dateOfBirth, String ppsNo, String email, boolean married) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userName = userName;
+        this.password = password;
+        this.userId = userId; // user id will be the current id. It starts in 1 and increases as a new object is created.
+        this.dateOfBirth = dateOfBirth;
+        this.ppsNo = ppsNo;
+        this.email = email;
+        this.married = married;
+
     }
 
     //Getters and setters for the variables
-    
     public String getFirstName() {
         return firstName;
     }
@@ -120,8 +133,14 @@ public abstract class User {
         this.married = married;
     }
 
+    public void setAdminAccess(boolean adminAccess) {
+        this.adminAccess = adminAccess;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" + "firstName=" + firstName + ", lastName=" + lastName + ", userName=" + userName + ", userId=" + userId + ", dateOfBirth=" + dateOfBirth + ", ppsNo=" + ppsNo + ", email=" + email + ", married=" + married + ", adminAccess=" + adminAccess + '}';
+    }
     
 
-    
-    
 }

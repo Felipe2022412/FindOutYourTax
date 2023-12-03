@@ -6,7 +6,7 @@ package findoutyourtax;
 
 import database.DatabaseSetup;
 import database.DatabaseWriter;
-import database.UserCheck;
+import database.DatabaseReader;
 import ioutils.IOUtils;
 import java.sql.SQLException;
 
@@ -25,6 +25,7 @@ public class FindOutYourTax {
         //Initialize necessary objects and variables
         IOUtils input = new IOUtils();
         DatabaseWriter databaseWriter = new DatabaseWriter();
+        User user;
 
         //RegularUser = regularUser = new RegularUser
         int option;
@@ -32,7 +33,7 @@ public class FindOutYourTax {
         //test database
         DatabaseSetup database = new DatabaseSetup();
         database.setupDB();
-        UserCheck userCheck = new UserCheck();
+        DatabaseReader userCheck = new DatabaseReader();
         System.out.println("===== Welcome to Find out Your tax =====");
 
         System.out.println(" 1 - Log In \n 2 - Sing In");
@@ -42,13 +43,47 @@ public class FindOutYourTax {
                 //User log in
                 String userNameLogin;
                 String passwordLogin;
-                
+
                 userNameLogin = input.getUserText("Enter your user name:");
-                passwordLogin = input.getUserText("Enter your password:");
-                
-                userCheck.checkAdminUser(userNameLogin, passwordLogin);
-                
+                passwordLogin = input.basicInput("Enter your password:");
+
+                user = userCheck.getUser(userNameLogin, passwordLogin);
+                if (user.isAdminAccess() == true) {
+                    System.out.println(">>>>> Welcome " + user.getFirstName() + " <<<<<");
+                    System.out.println("You have admin access.");
+                } else {
+                    System.out.println(">>>>> Welcome " + user.getFirstName() + " <<<<<");
+                    System.out.println("You are a normal user.\n");
+                    System.out.println("---- MENU ----");
+                    option = input.getUserInt("Enter the number of the respective task you want to do:\n"
+                            + "1 - view profile\n"
+                            + "2 - change profile\n"
+                            + "3 - Calculate taxes\n"
+                            + "4 - see previously calculation\n"
+                            + "5 - exit", 1, 5);
+                    switch (option) {
+                        case 1:
+                            System.out.println(user.toString());
+                            break;
+                        case 2:
+
+                            break;
+                        case 3:
+
+                            break;
+                        case 4:
+
+                            break;
+                        case 5:
+                            System.out.println("Bye. See you soon.");
+                            break;
+                        default:
+                            throw new AssertionError();
+                    }
+
+                }
                 break;
+
             case 2:
                 //Take all the informatio of the user and create a object and store to the database
                 String firstName;
