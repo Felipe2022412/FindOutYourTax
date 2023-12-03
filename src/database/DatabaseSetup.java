@@ -45,7 +45,7 @@ public class DatabaseSetup extends Database {
                     + "email VARCHAR(255) UNIQUE NOT NULL,"
                     + "married BOOLEAN"
                     + ");";
-
+            
             stmt.execute(sqlTable);
             return true;
         } catch (Exception e) {
