@@ -12,8 +12,7 @@ package findoutyourtax;
  */
 public class DisplayTaxes extends CalculateTaxes {
 
-    //USAR PARA COLOCAR NA BASE DE DADOS!!!!
-    //MUDAR PARAMETROS???????????? DOUGLAAAAAS HEEEEEEELP!!!!
+    
     public DisplayTaxes(String firstName, String lastName, String userName, String password, String dateOfBirth, String ppsNo, String email, boolean married) {
         super(firstName, lastName, userName, password, dateOfBirth, ppsNo, email, married);
     }

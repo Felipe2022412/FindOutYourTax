@@ -5,7 +5,7 @@
 package findoutyourtax;
 
 /**
- *
+ *Class for the Admin User with its methods - extends the class User and implements its specifics interfaces to use the methods modify and view.
  * @author dougl
  */
 public class AdminUser extends User implements Modify, ViewAdmin{
@@ -17,6 +17,9 @@ public class AdminUser extends User implements Modify, ViewAdmin{
         adminAccess = true;
     }
 
+    
+    //Overriding the methods from the interfaces to return the new settings if any variable is modified and, to return the variables the admin User needs to see.
+    
      @Override
     public String modifyFirstName(String newFirstName) {
         setFirstName(newFirstName);

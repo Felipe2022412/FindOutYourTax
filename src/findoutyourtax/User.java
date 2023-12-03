@@ -38,6 +38,8 @@ public abstract class User {
         
     }
 
+    //Getters and setters for the variables
+    
     public String getFirstName() {
         return firstName;
     }
