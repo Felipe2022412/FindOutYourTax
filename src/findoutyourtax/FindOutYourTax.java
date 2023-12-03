@@ -26,7 +26,7 @@ public class FindOutYourTax {
         IOUtils input = new IOUtils();
         DatabaseWriter databaseWriter = new DatabaseWriter();
         User user;
-        CalculateTaxes userTaxes;
+        UserTaxes userTaxes;
 
         //RegularUser = regularUser = new RegularUser
         int option;
@@ -136,11 +136,12 @@ public class FindOutYourTax {
                                 if (user.isMarried()) {
                                     double partnerGrossIncome = input.getUserDecimal("Enter your partner gross income:");
                                     double partnerTaxCredits = input.getUserDecimal("Enter your partner tax credits:");
-                                    userTaxes = new CalculateTaxes(user,grossIncome, taxCredits, partnerGrossIncome, partnerTaxCredits);
+                                    userTaxes = new UserTaxes(user, grossIncome, taxCredits, partnerGrossIncome, partnerTaxCredits);
+                                } else {
+                                    userTaxes = new UserTaxes(user, grossIncome, taxCredits);
                                 }
-                                userTaxes = new CalculateTaxes(user,grossIncome, taxCredits);
                                 System.out.println(userTaxes.toString());
-                                
+
                                 break;
                             case 4:
 

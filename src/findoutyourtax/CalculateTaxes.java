@@ -10,26 +10,18 @@ package findoutyourtax;
  * @author felip
  */
 //extending UserIncome to be able to use their income,
-public class CalculateTaxes extends User {
+public class CalculateTaxes extends UserTaxes {
 
-    protected double grossIncome;
-    protected double taxCredits;
-    protected double incomeAfterCredits = grossIncome - taxCredits;
-    protected double partnerGrossIncome; 
-    protected double partnerTaxCredits;
-    protected double partnerIncomeAfterCredits = partnerGrossIncome - partnerTaxCredits;
-    protected double coupleTotalIncomeAfterCredits = incomeAfterCredits + partnerIncomeAfterCredits;
-    protected double totalTaxesDue;
-    protected double liquidAmount;
+    public CalculateTaxes(User user, double grossIncome, double taxCredits, double partnerGrossIncome, double partnerTaxCredits, double totalTaxesDue, double liquidAmount) {
+        super(user, grossIncome, taxCredits, partnerGrossIncome, partnerTaxCredits, totalTaxesDue, liquidAmount);
+    }
 
     //MUDAR PARAMETROS???????????? DOUGLAAAAAS HEEEEEEELP
-    public CalculateTaxes(String firstName, String lastName, String userName, String password, String dateOfBirthday, String ppsNo, String email, boolean married) {
-        super(firstName, lastName, userName, password, dateOfBirthday, ppsNo, email, married);
-    }
+
 
     //Method to calculate the PAYE - the tax is progressive an over the gross amount
     protected double PAYECalc() {
-        if (!isMarried()) { //to check if the user is married
+        if (!user.isMarried()) { //to check if the user is married
             if (getIncomeAfterCredits() <= TaxRange.PayeSingleRange.getRange()) { //checking if the income after tax credits is lower than the first range for a single person
                 return Tax.PayeSingleLowerRate.getRate() * getIncomeAfterCredits();
             } else {
