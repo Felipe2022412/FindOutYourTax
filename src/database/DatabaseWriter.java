@@ -31,8 +31,8 @@ public class DatabaseWriter extends Database{
             Statement stmt = conn.createStatement();
             // SQL query to insert data into the UserData table
             stmt.execute("USE " + DB_NAME + ";");
-            String sql = String.format("INSERT INTO " + TABLE_NAME + " VALUES ('%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', %b);",
-                     user.getUserId(),user.getFirstName(), user.getLastName(), user.getUserName(), user.getPassword(), user.getDateOfBirth(), user.getPpsNo(), user.getEmail(), user.isMarried());
+            String sql = String.format("INSERT INTO " + TABLE_NAME + " VALUES ('%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', %b, %b);",
+                     user.getUserId(),user.getFirstName(), user.getLastName(), user.getUserName(), user.getPassword(), user.getDateOfBirth(), user.getPpsNo(), user.getEmail(), user.isMarried(),user.isAdminAccess());
 
             stmt.execute(sql);
         } catch (Exception e) {

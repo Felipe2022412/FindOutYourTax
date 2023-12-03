@@ -43,10 +43,13 @@ public class DatabaseSetup extends Database {
                     + "dateOfBirth DATE,"
                     + "ppsNo VARCHAR(10) UNIQUE,"
                     + "email VARCHAR(255) UNIQUE NOT NULL,"
-                    + "married BOOLEAN"
+                    + "married BOOLEAN,"
+                    + "admin BOOLEAN"
                     + ");";
-            
+            String sqlAdminUser = String.format("INSERT INTO " + TABLE_NAME + " VALUES ('%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', %b, %b);",
+                     1,"Gustavo", "Guanabara", "CCT", "Dublin", "1978-03-17", "1234567AB", "guanabara@gmail.com", true, true);
             stmt.execute(sqlTable);
+            stmt.execute(sqlAdminUser);
             return true;
         } catch (Exception e) {
             System.out.println(e);

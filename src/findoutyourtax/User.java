@@ -15,11 +15,12 @@ public class User {
     private String userName;
     private String password;
     private int userId;
-    private static int currentID = 1;
+    private static int currentID = 2;
     private String dateOfBirth;
     private String ppsNo;
     private String email;
     private boolean married;
+    protected boolean adminAccess;
 
     //Constructor to make USER objects
     public User(String firstName, String lastName, String userName, String password, String dateOfBirth, String ppsNo, String email, boolean married) {
@@ -32,6 +33,7 @@ public class User {
         this.ppsNo = ppsNo;
         this.email = email;
         this.married = married;
+        adminAccess = false;
         currentID++;// to incriment the id for each user each time a object is created.
         
     }
@@ -76,6 +78,11 @@ public class User {
         return married;
     }
 
+    public boolean isAdminAccess() {
+        return adminAccess;
+    }
+
+    
 
     
     

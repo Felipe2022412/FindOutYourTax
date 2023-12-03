@@ -10,11 +10,11 @@ package findoutyourtax;
  */
 public class AdminUser extends User{
     
-    private boolean adminAccess;
     
-    public AdminUser(String firstName, String lastName, String userName, String password, String dateOfBirth, String ppsNo, String email, boolean married, boolean adminAccess) {
+    
+    public AdminUser(String firstName, String lastName, String userName, String password, String dateOfBirth, String ppsNo, String email, boolean married) {
         super(firstName, lastName, userName, password, dateOfBirth, ppsNo, email, married);
-        this.adminAccess = true;
+        adminAccess = true;
     }
     
     
