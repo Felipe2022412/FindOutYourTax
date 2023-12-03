@@ -11,8 +11,9 @@ package findoutyourtax;
 public interface ViewRegularUser {
     
     //View methods that will belong to the regular user - the method will return the ability to see just the personal details from the database
-    String viewNameRegularUser();
-    String viewSurnameRegularUser();
+    String viewUserNameRegularUser();
+    String viewFirstNameRegularUser();
+    String viewLastNameRegularUser();
     String viewPasswordRegularUser();
     String viewDateOfBirthRegularUser();
     String viewPPSNORegularUser();

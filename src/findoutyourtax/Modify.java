@@ -11,12 +11,12 @@ package findoutyourtax;
 public interface Modify {
     
     //Modifiers that will belong to the admin user and regular user. 
-    String modifyName(); 
-    String modifySurname();
-    String modifyPassword();
-    String modifyDateOfBirth();
-    String modifyPPSNO();
-    String modifyEmail();
+    String modifyFirstName(String newFirstName); 
+    String modifyLastName(String newLastName);
+    String modifyPassword(String newPassword);
+    String modifyDateOfBirth(String newDateOfBirth);
+    String modifyPPSNO(String newPPSNO);
+    String modifyEmail(String newEmail);
     
     
    }
