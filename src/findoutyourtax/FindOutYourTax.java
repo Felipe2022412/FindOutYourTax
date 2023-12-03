@@ -21,7 +21,7 @@ public class FindOutYourTax {
      */
     public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         // TODO code application logic here
-
+        
         //Initialize necessary objects and variables
         IOUtils input = new IOUtils();
         DatabaseWriter databaseWriter = new DatabaseWriter();
