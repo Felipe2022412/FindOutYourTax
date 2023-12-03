@@ -8,7 +8,7 @@ package findoutyourtax;
  *
  * @author dougl
  */
-public class  UserTaxes {
+public class UserTaxes {
 
     protected User user;
     protected double grossIncome;
@@ -38,23 +38,16 @@ public class  UserTaxes {
         this.taxCredits = taxCredits;
     }
 
-public UserTaxes(User user, double grossIncome, double taxCredits, double partnerGrossIncome, double partnerTaxCredits) {
-    this.user = user;
-    this.grossIncome = grossIncome;
-    this.taxCredits = taxCredits;
-    this.partnerGrossIncome = partnerGrossIncome;
-    this.partnerTaxCredits = partnerTaxCredits;
-    
-    // Calcular os valores corretamente
-    this.incomeAfterCredits = grossIncome - taxCredits;
-    this.partnerIncomeAfterCredits = partnerGrossIncome - partnerTaxCredits;
-    this.coupleTotalIncomeAfterCredits = incomeAfterCredits + partnerIncomeAfterCredits;
-    
-    // Atualizar os valores correspondentes na classe
-    this.incomeAfterCredits = incomeAfterCredits;
-    this.partnerIncomeAfterCredits = partnerIncomeAfterCredits;
-    this.coupleTotalIncomeAfterCredits = coupleTotalIncomeAfterCredits;
-}
+    public UserTaxes(User user, double grossIncome, double taxCredits, double partnerGrossIncome, double partnerTaxCredits) {
+        this.user = user;
+        this.grossIncome = grossIncome;
+        this.taxCredits = taxCredits;
+        this.partnerGrossIncome = partnerGrossIncome;
+        this.partnerTaxCredits = partnerTaxCredits;
+        this.incomeAfterCredits = grossIncome - taxCredits;
+        this.partnerIncomeAfterCredits = partnerGrossIncome - partnerTaxCredits;
+        this.coupleTotalIncomeAfterCredits = incomeAfterCredits + partnerIncomeAfterCredits;
+    }
 
     @Override
     public String toString() {
