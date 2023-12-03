@@ -42,7 +42,7 @@ public class FindOutYourTax {
                 String lastName;
                 String userName;
                 String password;
-                String dateOfBirthday;
+                String dateOfBirth;
                 String ppsNo;
                 String email;
                 boolean married;
@@ -54,11 +54,11 @@ public class FindOutYourTax {
                 userName = input.getUserText("Enter a user name that will be used for login:");
                 email = input.getUserEmail("Enter your email:");
                 password = input.getUserPassword("Enter a password:");
-                dateOfBirthday = input.getUserDateOfBirth("Enter your date of birth in the follow format = AAAA-MM-DD:");
+                dateOfBirth = input.getUserDateOfBirth("Enter your date of birth in the follow format = AAAA-MM-DD:");
                 ppsNo = input.getUserPPSN("Enter your PPSNO:");
                 married = input.getUserBollean("If you are married enter 1 if not enter 2:", 1, 2);
 
-                RegularUser regularUser = new RegularUser(firstName, lastName, userName, password, dateOfBirthday, ppsNo, email, married);
+                RegularUser regularUser = new RegularUser(firstName, lastName, userName, password, dateOfBirth, ppsNo, email, married);
 
                 break;
             default:

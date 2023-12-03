@@ -10,8 +10,8 @@ package findoutyourtax;
  */
 public class RegularUser extends User{
     
-    public RegularUser(String firstName, String lastName, String userName, String password, String dateOfBirthday, String ppsNo, String email, boolean married) {
-        super(firstName, lastName, userName, password, dateOfBirthday, ppsNo, email, married);
+    public RegularUser(String firstName, String lastName, String userName, String password, String dateOfBirth, String ppsNo, String email, boolean married) {
+        super(firstName, lastName, userName, password, dateOfBirth, ppsNo, email, married);
     }
     
 }

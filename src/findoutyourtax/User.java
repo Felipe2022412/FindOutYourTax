@@ -16,7 +16,7 @@ public class User {
     private String password;
     private int userId;
     private static int currentID = 1;
-    private String dateOfBirthday;
+    private String dateOfBirth;
     private String ppsNo;
     private String email;
     private boolean married;
@@ -28,7 +28,7 @@ public class User {
         this.userName = userName;
         this.password = password;
         this.userId = currentID; // user id will be the current id. It starts in 1 and increases as a new object is created.
-        this.dateOfBirthday = dateOfBirthday;
+        this.dateOfBirth = dateOfBirth;
         this.ppsNo = ppsNo;
         this.email = email;
         this.married = married;
@@ -60,8 +60,8 @@ public class User {
         return currentID;
     }
 
-    public String getDateOfBirthday() {
-        return dateOfBirthday;
+    public String getDateOfBirth() {
+        return dateOfBirth;
     }
 
     public String getPpsNo() {

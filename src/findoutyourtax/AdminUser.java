@@ -12,8 +12,8 @@ public class AdminUser extends User{
     
     private boolean adminAccess;
     
-    public AdminUser(String firstName, String lastName, String userName, String password, String dateOfBirthday, String ppsNo, String email, boolean married, boolean adminAccess) {
-        super(firstName, lastName, userName, password, dateOfBirthday, ppsNo, email, married);
+    public AdminUser(String firstName, String lastName, String userName, String password, String dateOfBirth, String ppsNo, String email, boolean married, boolean adminAccess) {
+        super(firstName, lastName, userName, password, dateOfBirth, ppsNo, email, married);
         this.adminAccess = true;
     }
     
