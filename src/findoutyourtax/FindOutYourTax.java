@@ -54,6 +54,7 @@ public class FindOutYourTax {
                 } else {
                     System.out.println(">>>>> Welcome " + user.getFirstName() + " <<<<<");
                     System.out.println("You are a regular user.\n");
+                    do{
                     System.out.println("---- MENU ----");
                     option = input.getUserInt("Enter the number of the respective task you want to do:\n"
                             + "1 - view profile\n"
@@ -81,7 +82,8 @@ public class FindOutYourTax {
                             throw new AssertionError();
                     }
 
-                }
+                }while(option != 5);
+                    }
                 break;
 
             case 2:
