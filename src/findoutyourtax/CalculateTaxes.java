@@ -15,37 +15,40 @@ public class CalculateTaxes extends User {
     protected double grossIncome;
     protected double taxCredits;
     protected double incomeAfterCredits = grossIncome - taxCredits;
-    protected double partnerGrossIncome;
-    protected double totalTaxesOwed;
+    protected double partnerGrossIncome; 
+    protected double partnerTaxCredits;
+    protected double partnerIncomeAfterCredits = partnerGrossIncome - partnerTaxCredits;
+    protected double coupleTotalIncomeAfterCredits = incomeAfterCredits + partnerIncomeAfterCredits;
+    protected double totalTaxesDue;
     protected double liquidAmount;
 
+    //MUDAR PARAMETROS???????????? DOUGLAAAAAS HEEEEEEELP
     public CalculateTaxes(String firstName, String lastName, String userName, String password, String dateOfBirthday, String ppsNo, String email, boolean married) {
         super(firstName, lastName, userName, password, dateOfBirthday, ppsNo, email, married);
     }
-   
 
     //Method to calculate the PAYE - the tax is progressive an over the gross amount
-    private double PAYECalc() {
+    protected double PAYECalc() {
         if (!isMarried()) {
-            if (getIncomeAfterCredits() <= TaxRange.PayeSingleRange.getRange()) {
-                return Tax.PayeSingleLowerRate.getRate() * getIncomeAfterCredits();
+            if (getCoupleTotalIncomeAfterCredits() <= TaxRange.PayeSingleRange.getRange()) {
+                return Tax.PayeSingleLowerRate.getRate() * getCoupleTotalIncomeAfterCredits();
             } else {
                 return (TaxRange.PayeSingleRange.getRange() * Tax.PayeSingleLowerRate.getRate())
-                        + ((getIncomeAfterCredits() - TaxRange.PayeSingleRange.getRange()) * Tax.PayeSingleOverRate.getRate());
+                        + ((getCoupleTotalIncomeAfterCredits() - TaxRange.PayeSingleRange.getRange()) * Tax.PayeSingleOverRate.getRate());
 
             }
         } else {
-            if (getIncomeAfterCredits() <= TaxRange.PayeMarriedOneIncomeRange.getRange()) {
-                return Tax.PayeMarriedLowerRate.getRate() * getIncomeAfterCredits();
+            if (getCoupleTotalIncomeAfterCredits() <= TaxRange.PayeMarriedOneIncomeRange.getRange()) {
+                return Tax.PayeMarriedLowerRate.getRate() * getCoupleTotalIncomeAfterCredits();
             } else {
                 return (TaxRange.PayeMarriedOneIncomeRange.getRange() * Tax.PayeMarriedLowerRate.getRate())
-                        + ((getIncomeAfterCredits() - TaxRange.PayeMarriedOneIncomeRange.getRange()) * Tax.PayeMarriedOverRate.getRate());
+                        + ((getCoupleTotalIncomeAfterCredits() - TaxRange.PayeMarriedOneIncomeRange.getRange()) * Tax.PayeMarriedOverRate.getRate());
             }
         }
     }
 
     //Method to calculate the USC - the tax is progressive an over the gross amount
-    private double USCCalc() {
+    protected double USCCalc() {
 
         if (getIncomeAfterCredits() <= TaxRange.USCRangeOne.getRange()) {
             return Tax.USCClassOneRate.getRate() * getIncomeAfterCredits();
@@ -65,11 +68,7 @@ public class CalculateTaxes extends User {
         }
     }
 
-//    // USCClassOneRate(0.005), //GROSS INCOME UNDER 12.012 EURO 0.5%
-//    USCClassTwoRate(0.02), //GROSS INCOME FROM 12,012.01 TO 22,920 EURO 2%
-//    USCClassThreeRate(0.045), //GROSS INCOME FROM 22,920.01 TO 70,044 EURO 4.5%
-//    USCClassFourRate(
-    private double PRSICalc() {
+    protected double PRSICalc() {
 
         if (getIncomeAfterCredits() <= TaxRange.PRSIRange.getRange()) {
             return getIncomeAfterCredits() * Tax.PRSIClassOneRate.getRate();
@@ -78,20 +77,20 @@ public class CalculateTaxes extends User {
         }
     }
 
-    private double liquidAmount() {
+    protected double liquidAmount() {
         return getIncomeAfterCredits() - PAYECalc() - USCCalc() - PRSICalc();
     }
 
-    private double totalTaxOwed() {
+    protected double totalTaxesDue() {
         return PAYECalc() + USCCalc() + PRSICalc();
     }
-    
+
     public double getIncomeAfterCredits() {
         return incomeAfterCredits;
     }
 
-    public double getTotalTaxesOwed() {
-        return totalTaxesOwed;
+    public double getTotalTaxesDue() {
+        return totalTaxesDue;
     }
 
     public double getLiquidAmount() {
@@ -121,5 +120,25 @@ public class CalculateTaxes extends User {
     public void setPartnerGrossIncome(double partnerGrossIncome) {
         this.partnerGrossIncome = partnerGrossIncome;
     }
-    
+
+    public double getPartnerTaxCredits() {
+        return partnerTaxCredits;
+    }
+
+    public double getPartnerIncomeAfterCredits() {
+        return partnerIncomeAfterCredits;
+    }
+
+    public double getCoupleTotalIncomeAfterCredits() {
+        return coupleTotalIncomeAfterCredits;
+    }
+
+    public void setPartnerTaxCredits(double partnerTaxCredits) {
+        this.partnerTaxCredits = partnerTaxCredits;
+    }
+
+    public void setpartnerGrossIncome(double partnerGrossIncome) {
+        this.partnerGrossIncome = partnerGrossIncome;
+    }
+
 }
