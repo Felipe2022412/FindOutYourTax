@@ -22,7 +22,7 @@ public class User {
     private boolean married;
 
     //Constructor to make USER objects
-    public User(String firstName, String lastName, String userName, String password, String dateOfBirthday, String ppsNo, String email, boolean married) {
+    public User(String firstName, String lastName, String userName, String password, String dateOfBirth, String ppsNo, String email, boolean married) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
