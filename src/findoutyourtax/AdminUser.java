@@ -22,6 +22,13 @@ public class AdminUser extends User implements Modify, ViewAdmin {
         this.setAdminAccess(true);
     }
 
+    public AdminUser(int userId, String firstName, String lastName, String userName, String dateOfBirth, String ppsNo, String email, boolean married) {
+        super(userId, firstName, lastName, userName, dateOfBirth, ppsNo, email, married);
+        this.setAdminAccess(true);
+    }
+    
+    
+
     //Overriding the methods from the interfaces to return the new settings if any variable is modified and, to return the variables the admin User needs to see.
     @Override
     public String modifyFirstName(String newFirstName) {

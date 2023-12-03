@@ -5,7 +5,9 @@
 package findoutyourtax;
 
 /**
- *Class for the Regular User with its methods - extends the class User and implements its specifics interfaces to use the methods modify and view.
+ * Class for the Regular User with its methods - extends the class User and
+ * implements its specifics interfaces to use the methods modify and view.
+ *
  * @author dougl
  */
 public class RegularUser extends User implements Modify, ViewRegularUser {
@@ -13,15 +15,18 @@ public class RegularUser extends User implements Modify, ViewRegularUser {
     public RegularUser(String firstName, String lastName, String userName, String password, String dateOfBirth, String ppsNo, String email, boolean married) {
         super(firstName, lastName, userName, password, dateOfBirth, ppsNo, email, married);
     }
-    
-        public RegularUser(int userId, String firstName, String lastName, String userName, String password, String dateOfBirth, String ppsNo, String email, boolean married) {
-        super(userId,firstName, lastName, userName, password, dateOfBirth, ppsNo, email, married);
+
+    public RegularUser(int userId, String firstName, String lastName, String userName, String password, String dateOfBirth, String ppsNo, String email, boolean married) {
+        super(userId, firstName, lastName, userName, password, dateOfBirth, ppsNo, email, married);
 
     }
+    
+    public RegularUser(int userId, String firstName, String lastName, String userName, String dateOfBirth, String ppsNo, String email, boolean married) {
+        super(userId, firstName, lastName, userName, dateOfBirth, ppsNo, email, married);
+    }
+    
 
-    
     //Overriding the methods from the interfaces to return the new settings if any variable is modified and, to return the variables the regular User can see.
-    
     @Override
     public String modifyFirstName(String newFirstName) {
         setFirstName(newFirstName);

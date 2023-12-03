@@ -39,7 +39,20 @@ public abstract class User {
 
     }
 
-    public User(int userId,String firstName, String lastName, String userName, String password, String dateOfBirth, String ppsNo, String email, boolean married) {
+    //Constructor to show all user to the admin but not the password
+    public User(int userId, String firstName, String lastName, String userName,  String dateOfBirth, String ppsNo, String email, boolean married) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userName = userName;
+        this.userId = userId; // user id will be the current id. It starts in 1 and increases as a new object is created.
+        this.dateOfBirth = dateOfBirth;
+        this.ppsNo = ppsNo;
+        this.email = email;
+        this.married = married;
+
+    }
+
+    public User(int userId, String firstName, String lastName, String userName, String password, String dateOfBirth, String ppsNo, String email, boolean married) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
@@ -141,6 +154,5 @@ public abstract class User {
     public String toString() {
         return "User{" + "firstName=" + firstName + ", lastName=" + lastName + ", userName=" + userName + ", userId=" + userId + ", dateOfBirth=" + dateOfBirth + ", ppsNo=" + ppsNo + ", email=" + email + ", married=" + married + ", adminAccess=" + adminAccess + '}';
     }
-    
 
 }
