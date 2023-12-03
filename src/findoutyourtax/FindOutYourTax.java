@@ -5,6 +5,7 @@
 package findoutyourtax;
 
 import database.DatabaseSetup;
+import database.DatabaseWriter;
 import ioutils.IOUtils;
 
 /**
@@ -21,6 +22,7 @@ public class FindOutYourTax {
 
         //Initialize necessary objects and variables
         IOUtils input = new IOUtils();
+        DatabaseWriter databaseWriter = new DatabaseWriter();
 
         //RegularUser = regularUser = new RegularUser
         int option;
@@ -34,7 +36,7 @@ public class FindOutYourTax {
         option = input.getUserInt("Enter one of the options above:", 1, 2);
         switch (option) {
             case 1:
-
+                
                 break;
             case 2:
                 //Take all the informatio of the user and create a object and store to the database
@@ -59,7 +61,7 @@ public class FindOutYourTax {
                 married = input.getUserBollean("If you are married enter 1 if not enter 2:", 1, 2);
 
                 RegularUser regularUser = new RegularUser(firstName, lastName, userName, password, dateOfBirth, ppsNo, email, married);
-
+                databaseWriter.registerUser(regularUser);
                 break;
             default:
                 throw new AssertionError();
