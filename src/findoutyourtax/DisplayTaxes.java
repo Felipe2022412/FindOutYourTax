@@ -10,10 +10,10 @@ package findoutyourtax;
  *
  * @author felip
  */
-public class DisplayTaxes extends CalculateTaxes {
+public class DisplayTaxes {
 
     
-    public DisplayTaxes(String firstName, String lastName, String userName, String password, String dateOfBirth, String ppsNo, String email, boolean married) {
+   /* public DisplayTaxes(String firstName, String lastName, String userName, String password, String dateOfBirth, String ppsNo, String email, boolean married) {
         super(firstName, lastName, userName, password, dateOfBirth, ppsNo, email, married);
     }
 
@@ -85,7 +85,7 @@ public class DisplayTaxes extends CalculateTaxes {
     private double displayCoupleTotalIncomeAfterCredits() {
         return coupleTotalIncomeAfterCredits;
 
-    }
+    }*/
 
 
 }
