@@ -53,7 +53,7 @@ public class FindOutYourTax {
                     System.out.println("You have admin access.");
                 } else {
                     System.out.println(">>>>> Welcome " + user.getFirstName() + " <<<<<");
-                    System.out.println("You are a normal user.\n");
+                    System.out.println("You are a regular user.\n");
                     System.out.println("---- MENU ----");
                     option = input.getUserInt("Enter the number of the respective task you want to do:\n"
                             + "1 - view profile\n"
