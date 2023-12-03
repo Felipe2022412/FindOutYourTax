@@ -12,20 +12,16 @@ package findoutyourtax;
 //extending UserIncome to be able to use their income,
 public class CalculateTaxes {
 
-
-
     //MUDAR PARAMETROS???????????? DOUGLAAAAAS HEEEEEEELP
-
-
     //Method to calculate the PAYE - the tax is progressive an over the gross amount
     protected double PAYECalc(UserTaxes user) {
+        
         if (!user.isMarried()) { //to check if the user is married
             if (user.getIncomeAfterCredits() <= TaxRange.PayeSingleRange.getRange()) { //checking if the income after tax credits is lower than the first range for a single person
                 return Tax.PayeSingleLowerRate.getRate() * user.getIncomeAfterCredits();
             } else {
                 return (TaxRange.PayeSingleRange.getRange() * Tax.PayeSingleLowerRate.getRate())
                         + ((user.getIncomeAfterCredits() - TaxRange.PayeSingleRange.getRange()) * Tax.PayeSingleOverRate.getRate());
-
             }
         } else {
             if (user.getCoupleTotalIncomeAfterCredits() <= TaxRange.PayeMarriedOneIncomeRange.getRange()) {//checking if the income after tax credits is lower than the first range for a married person
@@ -42,10 +38,10 @@ public class CalculateTaxes {
 
         if (user.getIncomeAfterCredits() <= TaxRange.USCRangeOne.getRange()) {//checking if income after credits is lower than the USC first range
             return Tax.USCClassOneRate.getRate() * user.getIncomeAfterCredits();
-        } else if (user.getIncomeAfterCredits() > TaxRange.USCRangeOne.getRange() && user.getIncomeAfterCredits() < TaxRange.USCRangeTwo.getRange()) {//checking if income after credits is higher than the USC first range and lower than the second range
+        } else if (user.getIncomeAfterCredits() > TaxRange.USCRangeOne.getRange() && user.getIncomeAfterCredits() <= TaxRange.USCRangeTwo.getRange()) {//checking if income after credits is higher than the USC first range and lower than the second range
             return (Tax.USCClassOneRate.getRate() * TaxRange.USCRangeOne.getRange())
                     + ((user.getIncomeAfterCredits() - TaxRange.USCRangeOne.getRange()) * Tax.USCClassTwoRate.getRate());
-        } else if (user.getIncomeAfterCredits() > TaxRange.USCRangeTwo.getRange() && user.getIncomeAfterCredits() < TaxRange.USCRangeThree.getRange()) {//checking if income after credits is higher than the USC second range and lower than the third range
+        } else if (user.getIncomeAfterCredits() > TaxRange.USCRangeTwo.getRange() && user.getIncomeAfterCredits() <= TaxRange.USCRangeThree.getRange()) {//checking if income after credits is higher than the USC second range and lower than the third range
             return (Tax.USCClassOneRate.getRate() * TaxRange.USCRangeOne.getRange())
                     + ((TaxRange.USCRangeTwo.getRange() - TaxRange.USCRangeOne.getRange()) * Tax.USCClassTwoRate.getRate())
                     + ((user.getIncomeAfterCredits() - TaxRange.USCRangeThree.getRange()) * Tax.USCClassThreeRate.getRate());
@@ -64,7 +60,7 @@ public class CalculateTaxes {
         if (user.getIncomeAfterCredits() <= TaxRange.PRSIRange.getRange()) {//checking if income after credits is higher than the PRSI range
             return user.getIncomeAfterCredits() * Tax.PRSIClassOneRate.getRate();
         } else {//otherwise if income after credits is higher than the PRSI range
-            return (user.getIncomeAfterCredits() - TaxRange.PRSIRange.getRange()) * Tax.PRSIClassTwoRate.getRate();
+            return (user.getIncomeAfterCredits() - TaxRange.PRSIRange.getRange()) * Tax.PRSIClassTwoRate.getRate();// as the first 18,354 is not taxed
         }
     }
 
@@ -133,5 +129,4 @@ public class CalculateTaxes {
     public void setpartnerGrossIncome(double partnerGrossIncome) {
         this.partnerGrossIncome = partnerGrossIncome;
     }*/
-
 }
