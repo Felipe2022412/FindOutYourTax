@@ -64,40 +64,8 @@ public class RegularUser extends User implements Modify, ViewRegularUser {
     }
 
     @Override
-    public String viewUserNameRegularUser() {
-        return getUserName();
-
-    }
-
-    @Override
-    public String viewFirstNameRegularUser() {
-        return getFirstName();
-
-    }
-
-    @Override
-    public String viewLastNameRegularUser() {
-        return getLastName();
-    }
-
-    @Override
-    public String viewPasswordRegularUser() {
-        return getPassword();
-    }
-
-    @Override
-    public String viewDateOfBirthRegularUser() {
-        return getDateOfBirth();
-    }
-
-    @Override
-    public String viewPPSNORegularUser() {
-        return getPpsNo();
-    }
-
-    @Override
-    public String viewEmailRegularUser() {
-        return getEmail();
+    public void displayMenu(User user) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }
