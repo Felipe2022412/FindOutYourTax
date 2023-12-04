@@ -225,4 +225,21 @@ public class DatabaseReader extends Database {
         return allUsersTaxes;
     }
 
+    public int getCurrentIDFromDatabase() {
+        int lastUsedID = 0;
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.execute("USE " + DB_NAME + ";");
+            String query = "SELECT MAX(userID) FROM " + TABLE_NAME_USERDATA + ";";
+            ResultSet results = stmt.executeQuery(query);
+
+            if (results.next()) {
+                lastUsedID = results.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error getting current ID: " + e.getMessage());
+        }
+        return lastUsedID;
+    }
+
 }

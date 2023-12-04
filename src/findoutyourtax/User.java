@@ -67,7 +67,9 @@ public abstract class User {
         this.lastName = lastName;
         this.userName = userName;
         this.password = password;
-        this.userId = userId; // user id will be the current id. It starts in 1 and increases as a new object is created.
+        if(currentID <= userId){
+            currentID = userId++;
+        } // user id will be the current id. It starts in 1 and increases as a new object is created.
         this.dateOfBirth = dateOfBirth;
         this.ppsNo = ppsNo;
         this.email = email;
@@ -92,13 +94,13 @@ public abstract class User {
         return password;
     }
 
-    public int getUserId() {
+   public int getUserId() {
         return userId;
     }
-
+/*
     public static int getCurrentID() {
         return currentID;
-    }
+    }*/
 
     public String getDateOfBirth() {
         return dateOfBirth;
