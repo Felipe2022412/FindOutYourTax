@@ -63,6 +63,9 @@ public class CalculateTaxes {
             return (user.getIncomeAfterCredits() - TaxRange.PRSIRange.getRange()) * Tax.PRSIClassTwoRate.getRate();// as the first 18,354 is not taxed
         }
     }
+//   protected double calculateTotalTaxesDue() {
+//        return getPAYECalc() + USCCalc() + PRSICalc();
+//    }
 
     /*//Method to calculate the LIQUID amount - after tax
     protected double liquidAmount() {
