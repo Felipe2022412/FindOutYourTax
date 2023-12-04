@@ -71,19 +71,44 @@ public class FindOutYourTax {
                                 case 2:
 
                                 case 3:
-                                    ArrayList<User> users = databaseReader.getAllUsers();
-                                    if (users.isEmpty()) {
+                                    ArrayList<User> usersList = databaseReader.getAllUsers();
+                                    if (usersList.isEmpty()) {
                                         System.out.println("No users are registered.");
                                     } else {
                                         System.out.println("List of Users:");
-                                        for (User userInDB : users) {
+                                        for (User userInDB : usersList) {
                                             System.out.println(userInDB.toString());
                                             System.out.println();
                                         }
                                     }
                                     break;
                                 case 4:
+
+                                    ArrayList<User> users = databaseReader.getAllUsers();
+
+                                    if (users.size() == 1) {
+                                        System.out.println("No users registered to be removed.");
+                                    } else {
+
+                                        int count = 1;
+                                        for (User userInDB : users) {
+                                            if (!userInDB.isAdminAccess()) {//this prevents the user to remove and Admin user
+                                                System.out.println("List of Users:");
+                                                System.out.println(count + " - " + userInDB.toString());
+                                                System.out.println();
+                                                count++;
+                                            }
+                                        }
+                                        int userToBeRemove = input.getUserInt("Enter the user ID to be revoved:");
+
+                                        if (databaseWriter.removeUser(userToBeRemove)) {
+                                            System.out.println("User removed.");
+                                        } else {
+                                            System.out.println("Error to remove the user.");
+                                        }
+                                    }
                                     break;
+
                                 case 5:
                                     break;
                                 case 6:

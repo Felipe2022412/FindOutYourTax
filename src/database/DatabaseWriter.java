@@ -66,4 +66,23 @@ public class DatabaseWriter extends Database {
             System.out.println(e);
         }
     }
+
+    public boolean removeUser(int userId) {
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.execute("USE " + DB_NAME + ";");
+
+            String sqlRemove = String.format("DELETE FROM %s WHERE userID = %d;", TABLE_NAME, userId);
+
+            stmt.execute(sqlRemove);
+            
+            
+
+            return true;
+            
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
+    }
 }
