@@ -150,7 +150,8 @@ public class DatabaseReader extends Database {
     public ArrayList<UserTaxes> getAllTaxes(User user) {
 
         ArrayList<UserTaxes> usersTaxes = new ArrayList<>();
-
+        user  = this.getUser(user.getUserId());
+        
          try {
         Statement stmt = conn.createStatement();
         stmt.execute("USE " + DB_NAME + ";");
