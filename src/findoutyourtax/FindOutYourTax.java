@@ -207,7 +207,7 @@ public class FindOutYourTax {
                                             + "5 - PPSNO\n"
                                             + "6 - Email\n"
                                             + "7 - Marital status\n"
-                                            + "8 - Cancell\n");
+                                            + "8 - Cancel\n");
                                     switch (optionModdify) {
                                         case 1:
                                             String newFirstName = input.getUserText("Enter your new name:");
@@ -261,6 +261,7 @@ public class FindOutYourTax {
                                     break;
                                 case 3:
                                     int saveOption;
+
                                     do {
                                         double grossIncome = input.getUserDecimal("Enter your gross income:");
                                         double taxCredits = input.getUserDecimal("Enter your tax credits:");
@@ -273,10 +274,28 @@ public class FindOutYourTax {
                                         }
                                         System.out.println(userTaxes.toString());
 
-                                        saveOption = input.getUserInt(" ---- MENU ----"
-                                                + "1 - Save operations"
-                                                + "2 - Calculate again"
-                                                + "3 - Cancell operation", 1, 3);
+                                        saveOption = input.getUserInt(" ---- MENU ----\n"
+                                                + "1 - Save operations\n"
+                                                + "2 - Calculate again\n"
+                                                + "3 - Cancel operation\n", 1, 3);
+                                        switch (saveOption) {
+                                            case 1:
+                                                databaseWriter.saveUserOperations(userTaxes);
+                                                System.out.println("Operations saved");
+                                                break;
+                                            case 2:
+                                                continue;
+
+                                            case 3:
+                                                System.out.println("Operation canceled.");
+                                                break;
+                                            default:
+                                                throw new AssertionError();
+                                        }
+                                        // Break out of the loop when the user chooses to save operations
+                                        if (saveOption == 1) {
+                                            break;
+                                        }
 
                                     } while (saveOption != 3);
 

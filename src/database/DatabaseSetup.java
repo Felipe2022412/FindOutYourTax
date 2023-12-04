@@ -47,6 +47,7 @@ public class DatabaseSetup extends Database {
                     + "admin BOOLEAN"
                     + ");";
             String sqlTableTaxInfo = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME_TAXINFO + " ("
+                    + "    operationID INT AUTO_INCREMENT," // Unique identifier for each operation
                     + "    userID INT,"
                     + "    grossIncome DOUBLE,"
                     + "    taxCredits DOUBLE,"
@@ -57,10 +58,10 @@ public class DatabaseSetup extends Database {
                     + "    coupleTotalIncomeAfterCredits DOUBLE,"
                     + "    totalTaxesDue DOUBLE,"
                     + "    liquidAmount DOUBLE,"
-                    + "    FOREIGN KEY (userID) REFERENCES " + TABLE_NAME_USERDATA + " (userID),"
-                    + "    PRIMARY KEY (userID)"
+                    + "    PRIMARY KEY (operationID),"
+                    + "    FOREIGN KEY (userID) REFERENCES " + TABLE_NAME_USERDATA + " (userID)"
                     + ");";
-            
+
             String sqlAdminUser = String.format("INSERT INTO " + TABLE_NAME_USERDATA + " VALUES ('%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', %b, %b);",
                     1, "Gustavo", "Guanabara", "CCT", "Dublin", "1978-03-17", "1234567AB", "guanabara@gmail.com", true, true);
             stmt.execute(sqlUserTable);
