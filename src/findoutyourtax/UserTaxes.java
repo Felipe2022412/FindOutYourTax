@@ -30,8 +30,8 @@ public class UserTaxes extends CalculateTaxes {
         this.totalTaxesDue = totalTaxesDue;
         this.liquidAmount = liquidAmount;
         // Calculate taxes
-        this.totalTaxesDue = calculateTotalTaxesDue(); // This line calculates total taxes due
-        this.liquidAmount = calculateLiquidAmount();   // This line calculates liquid amount
+        this.totalTaxesDue = totalTaxesDue; // This line calculates total taxes due
+        this.liquidAmount = liquidAmount;   // This line calculates liquid amount
 
     }
 
