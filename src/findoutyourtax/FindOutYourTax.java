@@ -9,6 +9,7 @@ import database.DatabaseWriter;
 import database.DatabaseReader;
 import ioutils.IOUtils;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -34,7 +35,7 @@ public class FindOutYourTax {
         //test database
         DatabaseSetup database = new DatabaseSetup();
         database.setupDB();
-        DatabaseReader userCheck = new DatabaseReader();
+        DatabaseReader databaseReader = new DatabaseReader();
         System.out.println("===== Welcome to Find out Your tax =====");
         do {
             System.out.println(" 1 - Log In \n 2 - Sing In \n 3 - Exit");
@@ -48,7 +49,7 @@ public class FindOutYourTax {
                     userNameLogin = input.getUserText("Enter your user name:");
                     passwordLogin = input.basicInput("Enter your password:");
 
-                    user = userCheck.getUser(userNameLogin, passwordLogin);
+                    user = databaseReader.getUser(userNameLogin, passwordLogin);
                     if (user.isAdminAccess() == true) {
                         System.out.println(">>>>> Welcome " + user.getFirstName() + " <<<<<");
                         System.out.println("You have admin access.");
@@ -61,16 +62,25 @@ public class FindOutYourTax {
                                     + "3 - Access a list of all other users in the system\n"
                                     + "4 - Remove other users from the system\n"
                                     + "5 - Review the operations performed by other users\n"
-                                    + "6 - Exit",1,6);
-                            
+                                    + "6 - Exit", 1, 6);
 
                             switch (option) {
                                 case 1:
                                     System.out.println(user.toString());
                                     break;
                                 case 2:
-                                    break;
+
                                 case 3:
+                                    ArrayList<User> users = databaseReader.getAllUsers();
+                                    if (users.isEmpty()) {
+                                        System.out.println("No users are registered.");
+                                    } else {
+                                        System.out.println("List of Users:");
+                                        for (User userInDB : users) {
+                                            System.out.println(userInDB.toString());
+                                            System.out.println();
+                                        }
+                                    }
                                     break;
                                 case 4:
                                     break;
