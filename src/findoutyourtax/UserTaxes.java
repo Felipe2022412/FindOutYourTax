@@ -8,7 +8,7 @@ package findoutyourtax;
  *
  * @author dougl
  */
-public class UserTaxes extends CalculateTaxes {
+public final class UserTaxes extends CalculateTaxes {
 
     protected User user;
     protected double grossIncome;
@@ -20,6 +20,9 @@ public class UserTaxes extends CalculateTaxes {
     protected double coupleTotalIncomeAfterCredits;
     protected double totalTaxesDue;
     protected double liquidAmount;
+    protected double PAYE;
+    protected double USC;
+    protected double PRSI;
 
     public UserTaxes(User user, double grossIncome, double taxCredits, double partnerGrossIncome, double partnerTaxCredits, double totalTaxesDue, double liquidAmount) {
         this.user = user;
@@ -29,10 +32,13 @@ public class UserTaxes extends CalculateTaxes {
         this.partnerTaxCredits = partnerTaxCredits;
         this.totalTaxesDue = totalTaxesDue;
         this.liquidAmount = liquidAmount;
-        // Calculate taxes
-         calculateIncomeAndTaxes();
-//       this.totalTaxesDue = calculateTotalTaxesDue(); // This line calculates total taxes due // put as calc? calculateTotalTaxesDue();
-//       this.liquidAmount = calculateLiquidAmount();   // This line calculates liquid amount
+       // Calculate taxes
+        
+        calculatePAYE();
+        calculateUSC();
+        calculatePRSI();
+        this.totalTaxesDue = calculateTotalTaxesDue(); // This line calculates total taxes due
+        this.liquidAmount = calculateLiquidAmount(); // This line calculates liquid amount
 
     }
 
@@ -41,42 +47,66 @@ public class UserTaxes extends CalculateTaxes {
         this.grossIncome = grossIncome;
         this.taxCredits = taxCredits;
         // Calculate taxes
-         calculateIncomeAndTaxes();
-//        this.totalTaxesDue = calculateTotalTaxesDue(); // This line calculates total taxes due
-//        this.liquidAmount = calculateLiquidAmount();   // This line calculates liquid amount
+        
+        this.PAYE = calculatePAYE();
+        this.USC = calculateUSC();
+        this.PRSI = calculatePRSI();
+        this.totalTaxesDue = calculateTotalTaxesDue(); // This line calculates total taxes due
+        this.liquidAmount = calculateLiquidAmount(); // This line calculates liquid amount
     }
 
     public UserTaxes(User user, double grossIncome, double taxCredits, double partnerGrossIncome, double partnerTaxCredits) {
-        this.user = user;
-        this.grossIncome = grossIncome;
-        this.taxCredits = taxCredits;
-        this.partnerGrossIncome = partnerGrossIncome;
-        this.partnerTaxCredits = partnerTaxCredits;
-        this.incomeAfterCredits = grossIncome - taxCredits;
-        this.partnerIncomeAfterCredits = partnerGrossIncome - partnerTaxCredits;
-        this.coupleTotalIncomeAfterCredits = incomeAfterCredits + partnerIncomeAfterCredits;
-        // Calculate taxes
-         calculateIncomeAndTaxes();
-//        this.totalTaxesDue = calculateTotalTaxesDue(); // This line calculates total taxes due
-//        this.liquidAmount = calculateLiquidAmount();   // This line calculates liquid amount
-    }
-    
-    private void calculateIncomeAndTaxes() {
-        this.incomeAfterCredits = grossIncome - taxCredits;
-        this.partnerIncomeAfterCredits = partnerGrossIncome - partnerTaxCredits;
-        this.coupleTotalIncomeAfterCredits = incomeAfterCredits + partnerIncomeAfterCredits;
+
+        if (user.isMarried()) {
+            this.user = user;
+            this.grossIncome = grossIncome;
+            this.taxCredits = taxCredits;
+            this.partnerGrossIncome = partnerGrossIncome;
+            this.partnerTaxCredits = partnerTaxCredits;
+            this.incomeAfterCredits = grossIncome - taxCredits;
+            this.partnerIncomeAfterCredits = partnerGrossIncome - partnerTaxCredits;
+            this.coupleTotalIncomeAfterCredits = incomeAfterCredits + partnerIncomeAfterCredits;
+
+          
+        } else {
+            this.user = user;
+            this.grossIncome = grossIncome;
+            this.taxCredits = taxCredits;
+            this.incomeAfterCredits = grossIncome - taxCredits;
+
+        }
 
         // Calculate taxes
-        this.totalTaxesDue = calculateTotalTaxesDue();
-        this.liquidAmount = calculateLiquidAmount();
-    }
+        
+        calculatePAYE();
+        calculateUSC();
+        calculatePRSI();
+        this.totalTaxesDue = calculateTotalTaxesDue(); // This line calculates total taxes due
+        this.liquidAmount = calculateLiquidAmount(); // This line calculates liquid amount
     
-     private double calculateTotalTaxesDue() {
-        return PAYECalc(this) + USCCalc(this) + PRSICalc(this);
+    
+     
+
+    }
+
+    private double calculateTotalTaxesDue() {
+        return calculatePAYE() + calculateUSC() + calculatePRSI();
     }
 
     private double calculateLiquidAmount() {
         return getIncomeAfterCredits() - calculateTotalTaxesDue();
+    }
+
+    private double calculatePAYE() {
+        return PAYECalc(this);
+    }
+
+    private double calculateUSC() {
+        return USCCalc(this);
+    }
+
+    private double calculatePRSI() {
+        return PRSICalc(this);
     }
 
     public double getGrossIncome() {
@@ -161,14 +191,14 @@ public class UserTaxes extends CalculateTaxes {
 
     @Override
     public String toString() {
-        return "User details as follow:\n" +
-                "User: " + user + "\n"
+        return "User details as follow:\n"
+                + "User: " + user + "\n"
                 + "Gross income: " + Math.ceil(getGrossIncome()) + "\n"
-                + "Tax credits: " + Math.ceil(getTaxCredits()) + "\n" 
+                + "Tax credits: " + Math.ceil(getTaxCredits()) + "\n"
                 + "Income after credits: " + Math.ceil(getIncomeAfterCredits()) + "\n"
                 + "Partner gross income: " + Math.ceil(getPartnerGrossIncome()) + "\n"
                 + "Partner tax credits: " + Math.ceil(getPartnerTaxCredits()) + "\n"
-                + "Partner income after credits: " + Math.ceil(getPartnerIncomeAfterCredits())  + "\n"
+                + "Partner income after credits: " + Math.ceil(getPartnerIncomeAfterCredits()) + "\n"
                 + "Couple total income after credits: " + Math.ceil(getCoupleTotalIncomeAfterCredits()) + "\n"
                 + "Total taxes due: " + Math.ceil(getTotalTaxesDue()) + "\n"
                 + "Liquid amount: " + Math.ceil(getLiquidAmount());
