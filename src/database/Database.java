@@ -14,6 +14,8 @@ public abstract class Database {
     protected final static String DB_USER = "ooc2023";
     protected final static String DB_PASSWORD = "ooc2023";
     protected final static String DB_NAME = "IrelandRevenueData";
-    protected final static String TABLE_NAME = "userData"; //Alterar para as nossas tables
+    protected final static String TABLE_NAME_USERDATA = "UserData"; //Alterar para as nossas tables
+    protected final static String TABLE_NAME_TAXINFO = "TaxInfo"; //Alterar para as nossas tables
+    
     
 }

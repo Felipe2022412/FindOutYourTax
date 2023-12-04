@@ -4,11 +4,13 @@
  */
 package database;
 
-import static database.Database.TABLE_NAME;
 import findoutyourtax.User;
+import findoutyourtax.UserTaxes;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import static database.Database.TABLE_NAME_USERDATA;
+import static database.Database.TABLE_NAME_TAXINFO;
 
 /**
  *
@@ -31,7 +33,7 @@ public class DatabaseWriter extends Database {
             Statement stmt = conn.createStatement();
             // SQL query to insert data into the UserData table
             stmt.execute("USE " + DB_NAME + ";");
-            String sql = String.format("INSERT INTO " + TABLE_NAME + " VALUES ('%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', %b, %b);",
+            String sql = String.format("INSERT INTO " + TABLE_NAME_TAXINFO + " VALUES ('%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', %b, %b);",
                     user.getUserId(), user.getFirstName(), user.getLastName(), user.getUserName(), user.getPassword(), user.getDateOfBirth(), user.getPpsNo(), user.getEmail(), user.isMarried(), user.isAdminAccess());
 
             stmt.execute(sql);
@@ -57,7 +59,7 @@ public class DatabaseWriter extends Database {
                     + "married = %b, "
                     + "admin = %b "
                     + "WHERE userID = %d;",
-                    TABLE_NAME, user.getFirstName(), user.getLastName(), user.getUserName(), user.getPassword(),
+                    TABLE_NAME_TAXINFO, user.getFirstName(), user.getLastName(), user.getUserName(), user.getPassword(),
                     user.getDateOfBirth(), user.getPpsNo(), user.getEmail(), user.isMarried(), user.isAdminAccess(),
                     user.getUserId());
 
@@ -72,7 +74,7 @@ public class DatabaseWriter extends Database {
             Statement stmt = conn.createStatement();
             stmt.execute("USE " + DB_NAME + ";");
 
-            String sqlRemove = String.format("DELETE FROM %s WHERE userID = %d;", TABLE_NAME, userId);
+            String sqlRemove = String.format("DELETE FROM %s WHERE userID = %d;", TABLE_NAME_TAXINFO, userId);
 
             stmt.execute(sqlRemove);
             
@@ -85,4 +87,32 @@ public class DatabaseWriter extends Database {
             return false;
         }
     }
+    
+    public boolean saveUserOperations(UserTaxes userTaxes) {
+    try {
+        Statement stmt = conn.createStatement();
+        stmt.execute("USE " + DB_NAME + ";");
+
+        // Assuming TaxInfo table structure matches UserTaxes fields
+        String sql = String.format("INSERT INTO " + TABLE_NAME_TAXINFO + " (userID, grossIncome, taxCredits, incomeAfterCredits, partnerGrossIncome, partnerTaxCredits, partnerIncomeAfterCredits, coupleTotalIncomeAfterCredits, totalTaxesDue, liquidAmount) "
+                + "VALUES (%d, %f, %f, %f, %f, %f, %f, %f, %f, %f);",
+                userTaxes.getUser().getUserId(),
+                userTaxes.getGrossIncome(),
+                userTaxes.getTaxCredits(),
+                userTaxes.getIncomeAfterCredits(),
+                userTaxes.getPartnerGrossIncome(),
+                userTaxes.getPartnerTaxCredits(),
+                userTaxes.getPartnerIncomeAfterCredits(),
+                userTaxes.getCoupleTotalIncomeAfterCredits(),
+                userTaxes.getTotalTaxesDue(),
+                userTaxes.getLiquidAmount());
+
+        stmt.execute(sql);
+        return true;
+    } catch (SQLException e) {
+        System.out.println("Error saving user operations: " + e.getMessage());
+        return false;
+    }
+}
+
 }

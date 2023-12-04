@@ -33,8 +33,8 @@ public class DatabaseSetup extends Database {
             Statement stmt = conn.createStatement();
             stmt.execute("CREATE DATABASE IF NOT EXISTS " + DB_NAME + ";");
             stmt.execute("USE " + DB_NAME + ";");
-            String sqlTable
-                    = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " ("
+            String sqlUserTable
+                    = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME_USERDATA + " ("
                     + "userID INT PRIMARY KEY,"
                     + "firstName VARCHAR(255) NOT NULL,"
                     + "lastName VARCHAR(255) NOT NULL,"
@@ -46,9 +46,25 @@ public class DatabaseSetup extends Database {
                     + "married BOOLEAN,"
                     + "admin BOOLEAN"
                     + ");";
-            String sqlAdminUser = String.format("INSERT INTO " + TABLE_NAME + " VALUES ('%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', %b, %b);",
-                     1,"Gustavo", "Guanabara", "CCT", "Dublin", "1978-03-17", "1234567AB", "guanabara@gmail.com", true, true);
-            stmt.execute(sqlTable);
+            String sqlTableTaxInfo = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME_TAXINFO + " ("
+                    + "    userID INT,"
+                    + "    grossIncome DOUBLE,"
+                    + "    taxCredits DOUBLE,"
+                    + "    incomeAfterCredits DOUBLE,"
+                    + "    partnerGrossIncome DOUBLE,"
+                    + "    partnerTaxCredits DOUBLE,"
+                    + "    partnerIncomeAfterCredits DOUBLE,"
+                    + "    coupleTotalIncomeAfterCredits DOUBLE,"
+                    + "    totalTaxesDue DOUBLE,"
+                    + "    liquidAmount DOUBLE,"
+                    + "    FOREIGN KEY (userID) REFERENCES " + TABLE_NAME_USERDATA + " (userID),"
+                    + "    PRIMARY KEY (userID)"
+                    + ");";
+            
+            String sqlAdminUser = String.format("INSERT INTO " + TABLE_NAME_USERDATA + " VALUES ('%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', %b, %b);",
+                    1, "Gustavo", "Guanabara", "CCT", "Dublin", "1978-03-17", "1234567AB", "guanabara@gmail.com", true, true);
+            stmt.execute(sqlUserTable);
+            stmt.execute(sqlTableTaxInfo);
             stmt.execute(sqlAdminUser);
             return true;
         } catch (Exception e) {
@@ -57,7 +73,5 @@ public class DatabaseSetup extends Database {
         }
 
     }
-
-
 
 }

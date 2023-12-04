@@ -125,6 +125,11 @@ public class UserTaxes {
         return user.isMarried();
     }
 
+    public User getUser() {
+        return user;
+    }
+    
+
     @Override
     public String toString() {
         return "UserTaxes{" + "user=" + user + ", grossIncome=" + grossIncome + ", taxCredits=" + taxCredits + ", incomeAfterCredits=" + incomeAfterCredits + ", partnerGrossIncome=" + partnerGrossIncome + ", partnerTaxCredits=" + partnerTaxCredits + ", partnerIncomeAfterCredits=" + partnerIncomeAfterCredits + ", coupleTotalIncomeAfterCredits=" + coupleTotalIncomeAfterCredits + ", totalTaxesDue=" + totalTaxesDue + ", liquidAmount=" + liquidAmount + '}';
