@@ -145,15 +145,14 @@ public class DatabaseReader extends Database {
         return users;
     }
 
-    public UserTaxes getAllTaxes(User user) {
+    public ArrayList<UserTaxes> getAllTaxes(User user) {
 
-        UserTaxes userTaxes = null;
-        user = this.getUser(user.getUserId());
+        ArrayList<UserTaxes> userTaxesList = new ArrayList<>();
 
         try {
             Statement stmt = conn.createStatement();
             stmt.execute("USE " + DB_NAME + ";");
-            String query = String.format("SELECT userID, grossIncome, taxCredits, partnerGrossIncome, partnerTaxCredits, totalTaxesDue, liquidAmount FROM %s;", TABLE_NAME_TAXINFO);
+            String query = String.format("SELECT userID, grossIncome, taxCredits, partnerGrossIncome, partnerTaxCredits, totalTaxesDue, liquidAmount FROM %s WHERE userID = %d;", TABLE_NAME_TAXINFO, user.getUserId());
 
             ResultSet results = stmt.executeQuery(query);
 
@@ -166,24 +165,28 @@ public class DatabaseReader extends Database {
                 double totalTaxesDue = results.getDouble("totalTaxesDue");
                 double liquidAmount = results.getDouble("liquidAmount");
 
-                // Use the user object directly in the UserTaxes constructor
-                userTaxes = new UserTaxes(user, grossIncome, taxCredits, partnerGrossIncome, partnerTaxCredits, totalTaxesDue, liquidAmount);
+                // Create a new UserTaxes object for each row and add it to the list
+                UserTaxes userTaxes = new UserTaxes(user, grossIncome, taxCredits, partnerGrossIncome, partnerTaxCredits, totalTaxesDue, liquidAmount);
+                userTaxesList.add(userTaxes);
             }
         } catch (SQLException e) {
             System.out.println("Error getting all taxes: " + e.getMessage());
         }
 
-        return userTaxes;
+        return userTaxesList;
     }
 
-    public ArrayList<UserTaxes> getAllTaxesAllUsers(User user) {
-
+    public ArrayList<UserTaxes> getAllTaxesAllUsers() {
         ArrayList<UserTaxes> allUsersTaxes = new ArrayList<>();
 
         try {
             Statement stmt = conn.createStatement();
             stmt.execute("USE " + DB_NAME + ";");
-            String query = String.format("SELECT userID, grossIncome, taxCredits, partnerGrossIncome, partnerTaxCredits, totalTaxesDue, liquidAmount FROM %s;", TABLE_NAME_TAXINFO);
+            String query = String.format("SELECT T.userID, T.grossIncome, T.taxCredits, T.partnerGrossIncome, T.partnerTaxCredits, T.totalTaxesDue, T.liquidAmount, "
+                    + "U.userID, U.firstName, U.lastName, U.userName, U.dateOfBirth, U.ppsNo, U.email, U.married "
+                    + "FROM %s T "
+                    + "JOIN %s U ON T.userID = U.userID "
+                    + "WHERE U.admin = false;", TABLE_NAME_TAXINFO, TABLE_NAME_USERDATA);
 
             ResultSet results = stmt.executeQuery(query);
 
@@ -196,8 +199,24 @@ public class DatabaseReader extends Database {
                 double totalTaxesDue = results.getDouble("totalTaxesDue");
                 double liquidAmount = results.getDouble("liquidAmount");
 
-                // Use the user object directly in the UserTaxes constructor
-                allUsersTaxes.add(new UserTaxes(user, grossIncome, taxCredits, partnerGrossIncome, partnerTaxCredits, totalTaxesDue, liquidAmount));
+                // Retrieve user information
+                int userUserID = results.getInt("U.userID");
+                String firstName = results.getString("U.firstName");
+                String lastName = results.getString("U.lastName");
+                String userName = results.getString("U.userName");
+                String dateOfBirth = results.getString("U.dateOfBirth");
+                String ppsNo = results.getString("U.ppsNo");
+                String email = results.getString("U.email");
+                boolean married = results.getBoolean("U.married");
+
+                // Create User object
+                User user = new RegularUser(userUserID, firstName, lastName, userName, dateOfBirth, ppsNo, email, married);
+
+                // Create UserTaxes object
+                UserTaxes userTaxes = new UserTaxes(user, grossIncome, taxCredits, partnerGrossIncome, partnerTaxCredits, totalTaxesDue, liquidAmount);
+
+                // Add to the list
+                allUsersTaxes.add(userTaxes);
             }
         } catch (SQLException e) {
             System.out.println("Error getting all taxes from all users: " + e.getMessage());

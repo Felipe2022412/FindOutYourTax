@@ -8,8 +8,8 @@ package findoutyourtax;
  *
  * @author dougl
  */
-public class UserTaxes {
-    
+public class UserTaxes extends CalculateTaxes {
+
     protected User user;
     protected double grossIncome;
     protected double taxCredits;
@@ -29,6 +29,9 @@ public class UserTaxes {
         this.partnerTaxCredits = partnerTaxCredits;
         this.totalTaxesDue = totalTaxesDue;
         this.liquidAmount = liquidAmount;
+        // Calculate taxes
+        this.totalTaxesDue = calculateTotalTaxesDue(); // This line calculates total taxes due
+        this.liquidAmount = calculateLiquidAmount();   // This line calculates liquid amount
 
     }
 
@@ -36,6 +39,9 @@ public class UserTaxes {
         this.user = user;
         this.grossIncome = grossIncome;
         this.taxCredits = taxCredits;
+        // Calculate taxes
+        this.totalTaxesDue = calculateTotalTaxesDue(); // This line calculates total taxes due
+        this.liquidAmount = calculateLiquidAmount();   // This line calculates liquid amount
     }
 
     public UserTaxes(User user, double grossIncome, double taxCredits, double partnerGrossIncome, double partnerTaxCredits) {
@@ -47,6 +53,17 @@ public class UserTaxes {
         this.incomeAfterCredits = grossIncome - taxCredits;
         this.partnerIncomeAfterCredits = partnerGrossIncome - partnerTaxCredits;
         this.coupleTotalIncomeAfterCredits = incomeAfterCredits + partnerIncomeAfterCredits;
+        // Calculate taxes
+        this.totalTaxesDue = calculateTotalTaxesDue(); // This line calculates total taxes due
+        this.liquidAmount = calculateLiquidAmount();   // This line calculates liquid amount
+    }
+
+    private double calculateTotalTaxesDue() {
+        return PAYECalc(this) + USCCalc(this) + PRSICalc(this);
+    }
+
+    private double calculateLiquidAmount() {
+        return getIncomeAfterCredits() - getTaxCredits() - calculateTotalTaxesDue();
     }
 
     public double getGrossIncome() {
@@ -120,20 +137,18 @@ public class UserTaxes {
     public void setLiquidAmount(double liquidAmount) {
         this.liquidAmount = liquidAmount;
     }
-    
-    public boolean isMarried(){
+
+    public boolean isMarried() {
         return user.isMarried();
     }
 
     public User getUser() {
         return user;
     }
-    
 
     @Override
     public String toString() {
         return "UserTaxes{" + "user=" + user + ", grossIncome=" + grossIncome + ", taxCredits=" + taxCredits + ", incomeAfterCredits=" + incomeAfterCredits + ", partnerGrossIncome=" + partnerGrossIncome + ", partnerTaxCredits=" + partnerTaxCredits + ", partnerIncomeAfterCredits=" + partnerIncomeAfterCredits + ", coupleTotalIncomeAfterCredits=" + coupleTotalIncomeAfterCredits + ", totalTaxesDue=" + totalTaxesDue + ", liquidAmount=" + liquidAmount + '}';
     }
-    
 
 }

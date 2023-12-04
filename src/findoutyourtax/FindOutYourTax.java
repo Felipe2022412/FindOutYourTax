@@ -172,7 +172,21 @@ public class FindOutYourTax {
                                     break;
 
                                 case 5:
+                                    ArrayList<UserTaxes> usersOperations = databaseReader.getAllTaxesAllUsers();
+                                    int count = 1;
+                                    if (usersOperations.isEmpty()) {
+                                        System.out.println("No tax information available.");
+                                    } else {
+                                        System.out.println("List of operations:");
+                                        for (UserTaxes userInDB : usersOperations) {
+                                            System.out.println(userInDB.getUser().getFirstName());
+                                            System.out.println(count + " - " + userInDB.toString());
+                                            System.out.println();
+                                            count++;
+                                        }
+                                    }
                                     break;
+
                                 case 6:
                                     System.out.println("Bye. See you soon.");
                                     break;
@@ -297,13 +311,27 @@ public class FindOutYourTax {
                                         if (saveOption == 1) {
                                             break;
                                         }
-
                                     } while (saveOption != 3);
 
                                     break;
                                 case 4:
+                                    ArrayList<UserTaxes> usersOperation = databaseReader.getAllTaxes(user);
+                                    int count = 1;
 
+                                    if (usersOperation.isEmpty()) {
+                                        System.out.println("No tax information available.");
+                                    } else {
+                                        System.out.println("List of operations:");
+
+                                        for (UserTaxes allUserTaxes : usersOperation) {
+                                            System.out.println(allUserTaxes.getUser().getFirstName());
+                                            System.out.println(count + " - " + allUserTaxes.toString());
+                                            System.out.println();
+                                            count++;
+                                        }
+                                    }
                                     break;
+
                                 case 5:
                                     System.out.println("Bye. See you soon.");
                                     break;
