@@ -17,6 +17,12 @@ public class AdminUser extends User implements Modify, ViewAdmin {
         this.setAdminAccess(true);
     }
 
+    public AdminUser(int userId, String firstName, String lastName) {
+        super(userId, firstName, lastName);
+        this.setAdminAccess(true);
+    }
+        
+    
     public AdminUser(int userId, String firstName, String lastName, String userName, String password, String dateOfBirth, String ppsNo, String email, boolean married) {
         super(userId,firstName, lastName, userName, password, dateOfBirth, ppsNo, email, married);
         this.setAdminAccess(true);

@@ -39,8 +39,16 @@ public abstract class User {
 
     }
 
+    //Contructor to get only userID, first name and last name - to get the user in the database reader
+    public User(int userId, String firstName, String lastName) {
+        this.userId = userId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+
+    }
+
     //Constructor to show all user to the admin but not the password
-    public User(int userId, String firstName, String lastName, String userName,  String dateOfBirth, String ppsNo, String email, boolean married) {
+    public User(int userId, String firstName, String lastName, String userName, String dateOfBirth, String ppsNo, String email, boolean married) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
@@ -51,6 +59,8 @@ public abstract class User {
         this.married = married;
 
     }
+    
+    
 
     public User(int userId, String firstName, String lastName, String userName, String password, String dateOfBirth, String ppsNo, String email, boolean married) {
         this.firstName = firstName;
@@ -152,7 +162,7 @@ public abstract class User {
 
     @Override
     public String toString() {
-        return "User{" + " userId=" + userId  + ", firstName=" + firstName + ", lastName=" + lastName + ", userName=" + userName + ", dateOfBirth=" + dateOfBirth + ", ppsNo=" + ppsNo + ", email=" + email + ", married=" + married + ", adminAccess=" + adminAccess + '}';
+        return "User{" + " userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", userName=" + userName + ", dateOfBirth=" + dateOfBirth + ", ppsNo=" + ppsNo + ", email=" + email + ", married=" + married + ", adminAccess=" + adminAccess + '}';
     }
 
 }
