@@ -78,12 +78,12 @@ public class DatabaseReader extends Database {
 
     }
 
-     //public AdminUser(int userId, String firstName, String lastName)
+    //public AdminUser(int userId, String firstName, String lastName)
     //considering the user is admin!! FOR ADMIN ONLY
     public User getUser(int userId) {
 
         User user = null;
-        
+
         try {
             Statement stmt = conn.createStatement();
             stmt.execute("USE " + DB_NAME + ";");
@@ -94,17 +94,17 @@ public class DatabaseReader extends Database {
 
             //isAdmin = true;
             if (results.next()) {
-            int userID = results.getInt("userID");
-            String firstName = results.getString("firstName");
-            String lastName = results.getString("lastName");
+                int userID = results.getInt("userID");
+                String firstName = results.getString("firstName");
+                String lastName = results.getString("lastName");
 
-            // Create an AdminUser instance
-            User adminUser = new AdminUser(userID, firstName, lastName);
-            user = adminUser;
-        } else {
-            // Handle the case where no user with the specified userId is found
-            System.out.println("No user found with userId: " + userId);
-        }
+                // Create an AdminUser instance
+                User adminUser = new AdminUser(userID, firstName, lastName);
+                user = adminUser;
+            } else {
+                // Handle the case where no user with the specified userId is found
+                System.out.println("No user found with userId: " + userId);
+            }
         } catch (SQLException e) {
             System.out.println("Error identifying the user: " + e.getMessage());
         }
@@ -112,8 +112,6 @@ public class DatabaseReader extends Database {
         return user;
     }
 
-    
-    
     public ArrayList<User> getAllUsers() {
         ArrayList<User> users = new ArrayList<>();
 
@@ -147,47 +145,65 @@ public class DatabaseReader extends Database {
         return users;
     }
 
-    public ArrayList<UserTaxes> getAllTaxes(User user) {
+    public UserTaxes getAllTaxes(User user) {
 
-        ArrayList<UserTaxes> usersTaxes = new ArrayList<>();
-        user  = this.getUser(user.getUserId());
-        
-         try {
-        Statement stmt = conn.createStatement();
-        stmt.execute("USE " + DB_NAME + ";");
-        String query = String.format("SELECT userID, grossIncome, taxCredits, partnerGrossIncome, partnerTaxCredits, totalTaxesDue, liquidAmount FROM %s;", TABLE_NAME_TAXINFO);
+        UserTaxes userTaxes = null;
+        user = this.getUser(user.getUserId());
 
-        ResultSet results = stmt.executeQuery(query);
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.execute("USE " + DB_NAME + ";");
+            String query = String.format("SELECT userID, grossIncome, taxCredits, partnerGrossIncome, partnerTaxCredits, totalTaxesDue, liquidAmount FROM %s;", TABLE_NAME_TAXINFO);
 
-        while (results.next()) {
-            int userID = results.getInt("userID");
-            double grossIncome = results.getDouble("grossIncome");
-            double taxCredits = results.getDouble("taxCredits");
-            double partnerGrossIncome = results.getDouble("partnerGrossIncome");
-            double partnerTaxCredits = results.getDouble("partnerTaxCredits");
-            double totalTaxesDue = results.getDouble("totalTaxesDue");
-            double liquidAmount = results.getDouble("liquidAmount");
+            ResultSet results = stmt.executeQuery(query);
 
-            // Use the user object directly in the UserTaxes constructor
-            usersTaxes.add(new UserTaxes(user, grossIncome, taxCredits, partnerGrossIncome, partnerTaxCredits, totalTaxesDue, liquidAmount));
+            while (results.next()) {
+                int userID = results.getInt("userID");
+                double grossIncome = results.getDouble("grossIncome");
+                double taxCredits = results.getDouble("taxCredits");
+                double partnerGrossIncome = results.getDouble("partnerGrossIncome");
+                double partnerTaxCredits = results.getDouble("partnerTaxCredits");
+                double totalTaxesDue = results.getDouble("totalTaxesDue");
+                double liquidAmount = results.getDouble("liquidAmount");
+
+                // Use the user object directly in the UserTaxes constructor
+                userTaxes = new UserTaxes(user, grossIncome, taxCredits, partnerGrossIncome, partnerTaxCredits, totalTaxesDue, liquidAmount);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error getting all taxes: " + e.getMessage());
         }
-    } catch (SQLException e) {
-        System.out.println("Error getting all taxes: " + e.getMessage());
+
+        return userTaxes;
     }
 
-    return usersTaxes;
-}
-}
-//     operationID INT AUTO_INCREMENT," // Unique identifier for each operation
-//                    + "    userID INT,"
-//                    + "    grossIncome DOUBLE,"
-//                    + "    taxCredits DOUBLE,"
-//                    + "    incomeAfterCredits DOUBLE,"
-//                    + "    partnerGrossIncome DOUBLE,"
-//                    + "    partnerTaxCredits DOUBLE,"
-//                    + "    partnerIncomeAfterCredits DOUBLE,"
-//                    + "    coupleTotalIncomeAfterCredits DOUBLE,"
-//                    + "    totalTaxesDue DOUBLE,"
-//                    + "    liquidAmount DOUBLE,"
+    public ArrayList<UserTaxes> getAllTaxesAllUsers(User user) {
 
+        ArrayList<UserTaxes> allUsersTaxes = new ArrayList<>();
 
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.execute("USE " + DB_NAME + ";");
+            String query = String.format("SELECT userID, grossIncome, taxCredits, partnerGrossIncome, partnerTaxCredits, totalTaxesDue, liquidAmount FROM %s;", TABLE_NAME_TAXINFO);
+
+            ResultSet results = stmt.executeQuery(query);
+
+            while (results.next()) {
+                int userID = results.getInt("userID");
+                double grossIncome = results.getDouble("grossIncome");
+                double taxCredits = results.getDouble("taxCredits");
+                double partnerGrossIncome = results.getDouble("partnerGrossIncome");
+                double partnerTaxCredits = results.getDouble("partnerTaxCredits");
+                double totalTaxesDue = results.getDouble("totalTaxesDue");
+                double liquidAmount = results.getDouble("liquidAmount");
+
+                // Use the user object directly in the UserTaxes constructor
+                allUsersTaxes.add(new UserTaxes(user, grossIncome, taxCredits, partnerGrossIncome, partnerTaxCredits, totalTaxesDue, liquidAmount));
+            }
+        } catch (SQLException e) {
+            System.out.println("Error getting all taxes from all users: " + e.getMessage());
+        }
+
+        return allUsersTaxes;
+    }
+
+}
