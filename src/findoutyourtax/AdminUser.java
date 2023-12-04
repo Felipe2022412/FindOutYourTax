@@ -66,41 +66,10 @@ public class AdminUser extends User implements Modify, ViewAdmin {
         return getEmail();
     }
 
-    @Override
-    public String viewUserNameAdmin() {
-        return getUserName();
-
-    }
 
     @Override
-    public String viewFirstNameAdmin() {
-        return getFirstName();
-
-    }
-
-    @Override
-    public String viewLastNameAdmin() {
-        return getLastName();
-    }
-
-    @Override
-    public String viewPasswordAdmin() {
-        return getPassword();
-    }
-
-    @Override
-    public String viewDateOfBirthAdmin() {
-        return getDateOfBirth();
-    }
-
-    @Override
-    public String viewPPSNOAdmin() {
-        return getPpsNo();
-    }
-
-    @Override
-    public String viewEmailAdmin() {
-        return getEmail();
+    public void displayMenu(User user) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }
