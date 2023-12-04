@@ -63,7 +63,7 @@ public class UserTaxes extends CalculateTaxes {
     }
 
     private double calculateLiquidAmount() {
-        return getIncomeAfterCredits() - getTaxCredits() - calculateTotalTaxesDue();
+        return getIncomeAfterCredits() - calculateTotalTaxesDue();
     }
 
     public double getGrossIncome() {
