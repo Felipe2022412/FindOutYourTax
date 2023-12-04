@@ -132,8 +132,17 @@ public class UserTaxes {
 
     @Override
     public String toString() {
-        return "UserTaxes{" + "user=" + user + ", grossIncome=" + grossIncome + ", taxCredits=" + taxCredits + ", incomeAfterCredits=" + incomeAfterCredits + ", partnerGrossIncome=" + partnerGrossIncome + ", partnerTaxCredits=" + partnerTaxCredits + ", partnerIncomeAfterCredits=" + partnerIncomeAfterCredits + ", coupleTotalIncomeAfterCredits=" + coupleTotalIncomeAfterCredits + ", totalTaxesDue=" + totalTaxesDue + ", liquidAmount=" + liquidAmount + '}';
+        return "User details as follow:\n" +
+                "User: " + user + "\n"
+                + "Gross income: " + Math.ceil(grossIncome) + "\n"
+                + "Tax credits: " + Math.ceil(taxCredits) + "\n" 
+                + "Income after credits: " + Math.ceil(incomeAfterCredits) + "\n"
+                + "Partner gross income: " + Math.ceil(partnerGrossIncome) + "\n"
+                + "Partner tax credits: " + Math.ceil(partnerTaxCredits) + "\n"
+                + "Partner income after credits: " + Math.ceil(partnerIncomeAfterCredits)  + "\n"
+                + "Couple total income after credits: " + Math.ceil(coupleTotalIncomeAfterCredits) + "\n"
+                + "Total taxes due: " + Math.ceil(totalTaxesDue) + "\n"
+                + "Liquid amount: " + Math.ceil(liquidAmount);
     }
-    
 
 }

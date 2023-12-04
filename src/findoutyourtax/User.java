@@ -162,7 +162,16 @@ public abstract class User {
 
     @Override
     public String toString() {
-        return "User{" + " userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", userName=" + userName + ", dateOfBirth=" + dateOfBirth + ", ppsNo=" + ppsNo + ", email=" + email + ", married=" + married + ", adminAccess=" + adminAccess + '}';
+       return "User details as follow:\n"
+            + "User ID: " + userId + "\n"
+            + "First Name: " + firstName + "\n"
+            + "Last Name: " + lastName + "\n"
+            + "User Name: " + userName + "\n"
+            + "Date of Birth: " + dateOfBirth + "\n"
+            + "PPS Number: " + ppsNo + "\n"
+            + "Email: " + email + "\n"
+            + "Married: " + married;
     }
 
+    
 }
