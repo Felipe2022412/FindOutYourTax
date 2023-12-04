@@ -39,7 +39,7 @@ public class FindOutYourTax {
         DatabaseReader databaseReader = new DatabaseReader();
         System.out.println("===== Welcome to Find out Your tax =====");
         do {
-            System.out.println(" 1 - Log In \n 2 - Sing In \n 3 - Exit");
+            System.out.println(" 1 - Log In \n 2 - Sing Up \n 3 - Exit");
             option = input.getUserInt("Enter one of the options above:", 1, 3);
             switch (option) {
                 case 1:
