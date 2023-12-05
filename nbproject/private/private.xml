@@ -3,16 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/dougl/Documents/NetBeansProjects/FindOutYourTax/src/findoutyourtax/SignUpMenu.java</file>
-            <file>file:/C:/Users/dougl/Documents/NetBeansProjects/FindOutYourTax/src/findoutyourtax/ViewAdmin.java</file>
-            <file>file:/C:/Users/dougl/Documents/NetBeansProjects/FindOutYourTax/src/findoutyourtax/UserTaxes.java</file>
-            <file>file:/C:/Users/dougl/Documents/NetBeansProjects/FindOutYourTax/src/findoutyourtax/SingUpInterface.java</file>
-            <file>file:/C:/Users/dougl/Documents/NetBeansProjects/FindOutYourTax/src/database/DatabaseWriter.java</file>
             <file>file:/C:/Users/dougl/Documents/NetBeansProjects/FindOutYourTax/src/findoutyourtax/FindOutYourTax.java</file>
+            <file>file:/C:/Users/dougl/Documents/NetBeansProjects/FindOutYourTax/src/findoutyourtax/RegularUser.java</file>
             <file>file:/C:/Users/dougl/Documents/NetBeansProjects/FindOutYourTax/src/findoutyourtax/User.java</file>
-            <file>file:/C:/Users/dougl/Documents/NetBeansProjects/FindOutYourTax/src/findoutyourtax/CalculateTaxes.java</file>
-            <file>file:/C:/Users/dougl/Documents/NetBeansProjects/FindOutYourTax/src/database/DatabaseReader.java</file>
-            <file>file:/C:/Users/dougl/Documents/NetBeansProjects/FindOutYourTax/src/database/DatabaseSetup.java</file>
+            <file>file:/C:/Users/dougl/Documents/NetBeansProjects/FindOutYourTax/src/findoutyourtax/AdminUser.java</file>
+            <file>file:/C:/Users/dougl/Documents/NetBeansProjects/FindOutYourTax/src/findoutyourtax/DisplayMenu.java</file>
         </group>
     </open-files>
 </project-private>
