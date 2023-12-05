@@ -30,7 +30,7 @@ public class DatabaseSetup extends Database {
             stmt.execute("CREATE DATABASE IF NOT EXISTS " + DB_NAME + ";");
             stmt.execute("USE " + DB_NAME + ";");
             String sqlUserTable = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME_USERDATA + " ("
-                    + "userID INT PRIMARY KEY,"
+                    + "userID INT AUTO_INCREMENT PRIMARY KEY,"
                     + "firstName VARCHAR(255) NOT NULL,"
                     + "lastName VARCHAR(255) NOT NULL,"
                     + "userName VARCHAR(255) UNIQUE NOT NULL,"
@@ -57,13 +57,17 @@ public class DatabaseSetup extends Database {
                     + "    PRIMARY KEY (operationID),"
                     + "    FOREIGN KEY (userID) REFERENCES " + TABLE_NAME_USERDATA + " (userID)"
                     + ");";
-            //Create the admin user
-            String sqlAdminUser = String.format("INSERT INTO " + TABLE_NAME_USERDATA + " VALUES ('%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', %b, %b);",
-                    1, "Gustavo", "Guanabara", "CCT", "Dublin", "1978-03-17", "1234567AB", "guanabara@gmail.com", true, true);
-
+            // Check if the admin user already exists
+            String sqlCheckAdminUser = "SELECT * FROM " + TABLE_NAME_USERDATA + " WHERE userName = 'CCT';";
+            if (!stmt.executeQuery(sqlCheckAdminUser).next()) {
+                // Create the admin user
+                String sqlAdminUser = String.format("INSERT INTO " + TABLE_NAME_USERDATA + " (firstName, lastName, userName, password, dateOfBirth, ppsNo, email, married, admin) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', %b, %b);",
+                        "Gustavo", "Guanabara", "CCT", "Dublin", "1978-03-17", "1234567AB", "guanabara@gmail.com", true, true);
+                stmt.execute(sqlAdminUser);
+            }
             stmt.execute(sqlUserTable);
             stmt.execute(sqlTableTaxInfo);
-            stmt.execute(sqlAdminUser);
+
             return true;
         } catch (Exception e) {
             System.out.println(e);

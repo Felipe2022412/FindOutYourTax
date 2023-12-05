@@ -40,7 +40,7 @@ public class DatabaseReader extends Database {
             Statement stmt = conn.createStatement();
             stmt.execute("USE " + DB_NAME + ";");
             //String query = String.format("SELECT admin FROM %s WHERE userName = '%s' AND password = '%s';", TABLE_NAME, userName, password);
-            String query = String.format("SELECT userID, admin, firstName, lastName, dateOfBirth, ppsNo, email, married FROM %s WHERE userName = '%s' AND password = '%s';", TABLE_NAME_USERDATA, userName, password);
+            String query = String.format("SELECT userID, admin, firstName, lastName, dateOfBirth, ppsNo, email, married FROM %s WHERE userName = '%s' AND BINARY password = '%s';", TABLE_NAME_USERDATA, userName, password);//BINARY means case sensitive for the password
 
             ResultSet results = stmt.executeQuery(query);
 

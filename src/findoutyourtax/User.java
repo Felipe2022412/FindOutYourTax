@@ -16,7 +16,7 @@ public abstract class User {
     private String userName;
     private String password;
     private int userId;
-    private static int currentID = 1;
+    //private static int currentID = 1;
     private String dateOfBirth;
     private String ppsNo;
     private String email;
@@ -29,16 +29,13 @@ public abstract class User {
         this.lastName = lastName;
         this.userName = userName;
         this.password = password;
-        if (currentID <= userId) {
-            currentID = userId + 1; // Incrementa o currentID apenas se necessário
-        }
-        this.userId = currentID; // user id will be the current id. It starts in 1 and increases as a new object is created.
+        //this.userId = currentID; // user id will be the current id. It starts in 1 and increases as a new object is created.
         this.dateOfBirth = dateOfBirth;
         this.ppsNo = ppsNo;
         this.email = email;
         this.married = married;
         adminAccess = false;
-        currentID++;// to incriment the id for each user each time a object is created.
+        //currentID++;// to incriment the id for each user each time a object is created.
 
     }
 
@@ -69,12 +66,12 @@ public abstract class User {
         this.userName = userName;
         this.password = password;
 
-        if (currentID <= userId) {
-            currentID = userId + 1; // Incrementa o currentID apenas se necessário
-        }
+        //if (currentID <= userId) {
+        //    currentID = userId + 1; // Incrementa o currentID apenas se necessário
+       // }
 
-        this.userId = currentID; // user id será o currentID, que pode ser o userId ajustado
-        currentID++; // Incrementa o currentID para o próximo usuário
+        this.userId = userId; // user id será o currentID, que pode ser o userId ajustado
+       // currentID++; // Incrementa o currentID para o próximo usuário
         this.dateOfBirth = dateOfBirth;
         this.ppsNo = ppsNo;
         this.email = email;

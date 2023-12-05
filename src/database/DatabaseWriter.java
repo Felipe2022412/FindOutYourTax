@@ -30,13 +30,13 @@ public class DatabaseWriter extends Database {
 
     public void registerUser(User user) {
         try {
-            
+
             Statement stmt = conn.createStatement();
             // SQL query to insert data into the UserData table
             stmt.execute("USE " + DB_NAME + ";");
             String sql = String.format("INSERT INTO " + TABLE_NAME_USERDATA + " VALUES ('%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', %b, %b);",
                     user.getUserId(), user.getFirstName(), user.getLastName(), user.getUserName(), user.getPassword(), user.getDateOfBirth(), user.getPpsNo(), user.getEmail(), user.isMarried(), user.isAdminAccess());
-            
+
             stmt.execute(sql);
         } catch (Exception e) {
             System.out.println(e);
@@ -75,10 +75,18 @@ public class DatabaseWriter extends Database {
             Statement stmt = conn.createStatement();
             stmt.execute("USE " + DB_NAME + ";");
 
-            String sqlRemove = String.format("DELETE FROM %s WHERE userID = %d;", TABLE_NAME_USERDATA, userId);
+            String sqlCheckUser = String.format("SELECT * FROM %s WHERE userID = %d;", TABLE_NAME_USERDATA, userId);
 
+
+            if (!stmt.executeQuery(sqlCheckUser).next()) {
+                System.out.println("User not found.");
+                return false;
+            }
+
+            String sqlRemove = String.format("DELETE FROM %s WHERE userID = %d;", TABLE_NAME_USERDATA, userId);
             stmt.execute(sqlRemove);
 
+            System.out.println("User removed successfully.");
             return true;
 
         } catch (Exception e) {
@@ -113,7 +121,5 @@ public class DatabaseWriter extends Database {
             return false;
         }
     }
-    
-    
 
 }

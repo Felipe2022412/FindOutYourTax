@@ -197,6 +197,7 @@ public class FindOutYourTax {
                                                 }
                                             } while (saveOption != 3);
 
+                                            
                                             break;
                                         case 4:
                                             ArrayList<UserTaxes> usersOperation = databaseReader.getAllTaxes(user);
