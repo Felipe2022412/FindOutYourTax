@@ -9,7 +9,7 @@ package findoutyourtax;
  *
  * @author felip
  */
-public interface ViewAdmin {
+public interface DisplayMenu {
 
     //View methods that will belong to the admin - the method will return the ability to see everything from the database 
     void displayMenu(User user);

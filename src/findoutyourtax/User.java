@@ -23,6 +23,14 @@ public abstract class User {
     private boolean married;
     private boolean adminAccess;
 
+    
+    //call the interfaces
+    public User() {
+    }
+    
+    
+    
+
     //Constructor to make USER objects
     public User(String firstName, String lastName, String userName, String password, String dateOfBirth, String ppsNo, String email, boolean married) {
         this.firstName = firstName;
