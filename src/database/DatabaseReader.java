@@ -71,7 +71,7 @@ public class DatabaseReader extends Database {
 
             }
         } catch (SQLException e) {
-            System.out.println("Error identifying the user: " + e.getMessage());
+            System.out.println("Error identifying the user");
         }
 
         return user;
