@@ -35,7 +35,7 @@ public class DatabaseWriter extends Database {
             stmt.execute("USE " + DB_NAME + ";");
             String sql = String.format("INSERT INTO " + TABLE_NAME_USERDATA + " VALUES ('%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', %b, %b);",
                     user.getUserId(), user.getFirstName(), user.getLastName(), user.getUserName(), user.getPassword(), user.getDateOfBirth(), user.getPpsNo(), user.getEmail(), user.isMarried(), user.isAdminAccess());
-
+            
             stmt.execute(sql);
         } catch (Exception e) {
             System.out.println(e);

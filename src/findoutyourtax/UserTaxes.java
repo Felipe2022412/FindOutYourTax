@@ -41,7 +41,7 @@ public final class UserTaxes extends CalculateTaxes {
         this.liquidAmount = calculateLiquidAmount(); // This line calculates liquid amount
 
     }
-
+    //Create a single user
     public UserTaxes(User user, double grossIncome, double taxCredits) {
         this.user = user;
         this.grossIncome = grossIncome;

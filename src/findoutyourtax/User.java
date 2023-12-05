@@ -59,22 +59,23 @@ public abstract class User {
         this.married = married;
 
     }
-    
-    
 
     public User(int userId, String firstName, String lastName, String userName, String password, String dateOfBirth, String ppsNo, String email, boolean married) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
         this.password = password;
-        if(currentID <= userId){
-            currentID = userId++;
-        } // user id will be the current id. It starts in 1 and increases as a new object is created.
+
+        if (currentID <= userId) {
+            currentID = userId + 1; // Incrementa o currentID apenas se necessário
+        }
+
+        this.userId = currentID; // user id será o currentID, que pode ser o userId ajustado
+        currentID++; // Incrementa o currentID para o próximo usuário
         this.dateOfBirth = dateOfBirth;
         this.ppsNo = ppsNo;
         this.email = email;
         this.married = married;
-
     }
 
     //Getters and setters for the variables
@@ -94,10 +95,11 @@ public abstract class User {
         return password;
     }
 
-   public int getUserId() {
+    public int getUserId() {
         return userId;
     }
-/*
+
+    /*
     public static int getCurrentID() {
         return currentID;
     }*/
@@ -164,16 +166,15 @@ public abstract class User {
 
     @Override
     public String toString() {
-       return "User details as follow:\n"
-            + "User ID: " + userId + "\n"
-            + "First Name: " + firstName + "\n"
-            + "Last Name: " + lastName + "\n"
-            + "User Name: " + userName + "\n"
-            + "Date of Birth: " + dateOfBirth + "\n"
-            + "PPS Number: " + ppsNo + "\n"
-            + "Email: " + email + "\n"
-            + "Married: " + married;
+        return "User details as follow:\n"
+                + "User ID: " + userId + "\n"
+                + "First Name: " + firstName + "\n"
+                + "Last Name: " + lastName + "\n"
+                + "User Name: " + userName + "\n"
+                + "Date of Birth: " + dateOfBirth + "\n"
+                + "PPS Number: " + ppsNo + "\n"
+                + "Email: " + email + "\n"
+                + "Married: " + married;
     }
 
-    
 }
