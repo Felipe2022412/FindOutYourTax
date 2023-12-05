@@ -57,6 +57,7 @@ public class DatabaseSetup extends Database {
                     + "    PRIMARY KEY (operationID),"
                     + "    FOREIGN KEY (userID) REFERENCES " + TABLE_NAME_USERDATA + " (userID)"
                     + ");";
+            //Create the admin user
             String sqlAdminUser = String.format("INSERT INTO " + TABLE_NAME_USERDATA + " VALUES ('%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', %b, %b);",
                     1, "Gustavo", "Guanabara", "CCT", "Dublin", "1978-03-17", "1234567AB", "guanabara@gmail.com", true, true);
 

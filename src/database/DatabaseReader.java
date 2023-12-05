@@ -30,7 +30,7 @@ public class DatabaseReader extends Database {
         }
     }
 
-// Verificar se o usuário é um administrador
+// Verificar se o usuário é um administrador e se existe no banco de dados na hora do login
     public User getUser(String userName, String password) {
 
         //boolean isAdmin = false;
@@ -241,5 +241,16 @@ public class DatabaseReader extends Database {
         }
         return lastUsedID;
     }
+
+    public boolean userExists(String userName, String ppsNo) {
+        for (User userInDB : getAllUsers()) {
+            if (userInDB.getUserName().equals(userName) || userInDB.getPpsNo().equals(ppsNo)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    
 
 }

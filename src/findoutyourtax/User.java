@@ -16,7 +16,7 @@ public abstract class User {
     private String userName;
     private String password;
     private int userId;
-    private static int currentID = 2;
+    private static int currentID = 1;
     private String dateOfBirth;
     private String ppsNo;
     private String email;
@@ -29,6 +29,9 @@ public abstract class User {
         this.lastName = lastName;
         this.userName = userName;
         this.password = password;
+        if (currentID <= userId) {
+            currentID = userId + 1; // Incrementa o currentID apenas se necessário
+        }
         this.userId = currentID; // user id will be the current id. It starts in 1 and increases as a new object is created.
         this.dateOfBirth = dateOfBirth;
         this.ppsNo = ppsNo;
@@ -103,7 +106,6 @@ public abstract class User {
     public static int getCurrentID() {
         return currentID;
     }*/
-
     public String getDateOfBirth() {
         return dateOfBirth;
     }

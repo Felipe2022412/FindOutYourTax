@@ -30,6 +30,7 @@ public class DatabaseWriter extends Database {
 
     public void registerUser(User user) {
         try {
+            
             Statement stmt = conn.createStatement();
             // SQL query to insert data into the UserData table
             stmt.execute("USE " + DB_NAME + ";");
@@ -112,5 +113,7 @@ public class DatabaseWriter extends Database {
             return false;
         }
     }
+    
+    
 
 }

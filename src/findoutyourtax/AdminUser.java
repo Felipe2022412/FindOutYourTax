@@ -10,7 +10,7 @@ package findoutyourtax;
  *
  * @author dougl
  */
-public class AdminUser extends User implements Modify, ViewAdmin {
+public class AdminUser extends User implements  ViewAdmin {
 
     public AdminUser(String firstName, String lastName, String userName, String password, String dateOfBirth, String ppsNo, String email, boolean married) {
         super(firstName, lastName, userName, password, dateOfBirth, ppsNo, email, married);
@@ -32,45 +32,7 @@ public class AdminUser extends User implements Modify, ViewAdmin {
         super(userId, firstName, lastName, userName, dateOfBirth, ppsNo, email, married);
         this.setAdminAccess(true);
     }
-    
-    
 
-    //Overriding the methods from the interfaces to return the new settings if any variable is modified and, to return the variables the admin User needs to see.
-    @Override
-    public String modifyFirstName(String newFirstName) {
-        setFirstName(newFirstName);
-        return getFirstName();
-    }
-
-    @Override
-    public String modifyLastName(String newLastName) {
-        setLastName(newLastName);
-        return getLastName();
-    }
-
-    @Override
-    public String modifyPassword(String newPassword) {
-        setPassword(newPassword);
-        return getPassword();
-    }
-
-    @Override
-    public String modifyDateOfBirth(String newDateOfBirth) {
-        setDateOfBirth(newDateOfBirth);
-        return getDateOfBirth();
-    }
-
-    @Override
-    public String modifyPPSNO(String newPPSNO) {
-        setPpsNo(newPPSNO);
-        return getPpsNo();
-    }
-
-    @Override
-    public String modifyEmail(String newEmail) {
-        setEmail(newEmail);
-        return getEmail();
-    }
 
 
     @Override
