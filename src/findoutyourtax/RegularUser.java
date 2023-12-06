@@ -46,7 +46,7 @@ public class RegularUser extends User implements DisplayMenu {
         IOUtils input = new IOUtils();
         int option;
         UserTaxes userTaxes;
-        //implements the displayMenu for the admin
+        //inicialize the interfaces and objects that need to be inside the try catch
         try {
             modifyProfile = new ModifyProfile();
             databaseWriter = new DatabaseWriter();
@@ -68,17 +68,18 @@ public class RegularUser extends User implements DisplayMenu {
                     + "5 - exit", 1, 5);
             switch (option) {
                 case 1:
-                    System.out.println(user.toString());
+                    System.out.println(user.toString());//View the profile
                     break;
                 case 2:
-                    modifyProfile.modifyProfile(user);
+                    modifyProfile.modifyProfile(user);//call the modify interface so the user can modify the profile
                     break;
                 case 3:
-                    int saveOption;
+                    int saveOption;//Will store the choice of the user save/do again/exit
                     do {
+                        //get the input from the user to do the calculation
                         double grossIncome = input.getUserDecimal("Enter your gross income:");
                         double taxCredits = input.getUserDecimal("Enter your tax credits:");
-                        if (user.isMarried()) {
+                        if (user.isMarried()) {//Check if the user is meried and ask for the parther income
                             double partnerGrossIncome = input.getUserDecimal("Enter your partner gross income:");
                             double partnerTaxCredits = input.getUserDecimal("Enter your partner tax credits:");
                             userTaxes = new UserTaxes(user, grossIncome, taxCredits, partnerGrossIncome, partnerTaxCredits);
@@ -86,19 +87,19 @@ public class RegularUser extends User implements DisplayMenu {
                             userTaxes = new UserTaxes(user, grossIncome, taxCredits);
                         }
                         System.out.println(userTaxes.toString());
-
+                        //Pront the options for the user to do it
                         saveOption = input.getUserInt(" ---- MENU ----\n"
                                 + "1 - Save operations\n"
                                 + "2 - Calculate again\n"
                                 + "3 - Cancel operation\n", 1, 3);
                         switch (saveOption) {
                             case 1:
-                                databaseWriter.saveUserOperations(userTaxes);
+                                databaseWriter.saveUserOperations(userTaxes);//Call the method to save the operation
                                 System.out.println("Operations saved");
                                 break;
                             case 2:
-                                continue;
-
+                                continue;//Will get the input again from the user
+                                //Calcell the operation
                             case 3:
                                 System.out.println("Operation canceled.");
                                 break;
