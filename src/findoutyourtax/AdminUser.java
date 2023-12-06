@@ -5,7 +5,6 @@
 package findoutyourtax;
 
 import database.DatabaseReader;
-import database.DatabaseSetup;
 import database.DatabaseWriter;
 import ioutils.IOUtils;
 import java.util.ArrayList;
