@@ -37,7 +37,7 @@ public class DatabaseReader extends Database {
         try {
             Statement stmt = conn.createStatement();
             stmt.execute("USE " + DB_NAME + ";");
-            String query = String.format("SELECT userID, admin, firstName, lastName, dateOfBirth, ppsNo, email, married FROM %s WHERE userName = '%s' AND password = '%s';", TABLE_NAME_USERDATA, userName, password);
+            String query = String.format("SELECT userID, admin, firstName, lastName, dateOfBirth, ppsNo, email, married FROM %s WHERE userName = '%s' AND BINARY password = '%s';", TABLE_NAME_USERDATA, userName, password);
 
             ResultSet results = stmt.executeQuery(query);
 
@@ -67,7 +67,7 @@ public class DatabaseReader extends Database {
 
             }
         } catch (SQLException e) {
-            System.out.println("Error identifying the user: " + e.getMessage());
+            System.out.println("Error identifying the user");
         }
 
         return user;
