@@ -62,6 +62,7 @@ public final class UserTaxes extends CalculateTaxes {
             calculateTaxes();
         }
     }
+    
 
     private void calculateTaxes() {
         this.PAYE = PAYECalc(this);

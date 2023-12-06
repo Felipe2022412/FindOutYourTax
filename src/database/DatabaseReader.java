@@ -186,26 +186,25 @@ public class DatabaseReader extends Database {
             stmt.execute("USE " + DB_NAME + ";");
 
             String query = String.format(
-                    "SELECT \n"
-                    + "    T.userID AS taxUserID, T.grossIncome, T.taxCredits,\n"
-                    + "    P.partnerGrossIncome, P.partnerTaxCredits,\n"
-                    + "    U.userID AS userUserID, U.firstName, U.lastName, U.userName, U.dateOfBirth, U.ppsNo, U.email, U.married\n"
-                    + "FROM \n"
-                    + "    %s T\n"
-                    + "JOIN \n"
-                    + "    %s P ON T.userID = P.userID\n"
-                    + "JOIN \n"
-                    + "    %s U ON T.userID = U.userID\n"
-                    + "WHERE \n"
-                    + "    U.admin = false;",
+                    "SELECT T.userID, T.grossIncome, T.taxCredits, "
+                    + "P.partnerGrossIncome, P.partnerTaxCredits, "
+                    + "U.userID, U.firstName, U.lastName, U.userName, U.dateOfBirth, U.ppsNo, U.email, U.married "
+                    + "FROM %s T "
+                    + "JOIN %s P ON T.userID = P.userID "
+                    + "JOIN %s U ON T.userID = U.userID "
+                    + "WHERE U.admin = false;",
                     TABLE_NAME_TAXINFO, TABLE_NAME_PARTNER_TAXINFO, TABLE_NAME_USERDATA
             );
 
             ResultSet results = stmt.executeQuery(query);
+            //nao esta mostrando resultados dos solteiros e dos casados mostra duas vezes
+            //tem a ver com o construtor se e casado ou solteiro
 
             while (results.next()) {
                 double grossIncome = results.getDouble("grossIncome");
                 double taxCredits = results.getDouble("taxCredits");
+                double partnerGrossIncome = results.getDouble("partnerGrossIncome");
+                double partnerTaxCredits = results.getDouble("partnerTaxCredits");
 
                 // Retrieve user information
                 int userUserID = results.getInt("U.userID");
@@ -221,7 +220,7 @@ public class DatabaseReader extends Database {
                 User user = new RegularUser(userUserID, firstName, lastName, userName, dateOfBirth, ppsNo, email, married);
 
                 // Create UserTaxes object
-                UserTaxes userTaxes = new UserTaxes(user, grossIncome, taxCredits);
+                UserTaxes userTaxes = new UserTaxes(user, grossIncome, taxCredits,partnerGrossIncome,partnerTaxCredits);
 
                 // Add to the list
                 allUsersTaxes.add(userTaxes);
