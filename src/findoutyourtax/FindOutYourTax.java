@@ -53,6 +53,7 @@ public class FindOutYourTax {
                         passwordLogin = input.basicInput("Enter your password:");
                         
                         try {
+                            System.out.println("-----------------------------------");
                             user = databaseReader.getUser(userNameLogin, passwordLogin);
                             //Display the menu
                             if (user.isAdminAccess()) {

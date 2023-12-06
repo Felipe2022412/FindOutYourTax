@@ -62,7 +62,7 @@ public class AdminUser extends User implements DisplayMenu {
         }
 
         System.out.println(">>>>> Welcome " + user.getFirstName() + " <<<<<");
-        System.out.println("You have admin access.");
+        System.out.println("You have admin access.\n");
 
         do {
             System.out.println("---- MENU ----");

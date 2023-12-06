@@ -120,6 +120,7 @@ public class RegularUser extends User implements DisplayMenu {
                         System.out.println("List of operations:");
 
                         for (UserTaxes allUserTaxes : usersOperation) {
+                            System.out.println("-----------------------------------");
                             System.out.println(allUserTaxes.getUser().getFirstName());
                             System.out.println(count + " - " + allUserTaxes.toString());
                             System.out.println();
