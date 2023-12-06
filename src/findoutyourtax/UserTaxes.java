@@ -28,6 +28,7 @@ public final class UserTaxes extends CalculateTaxes {
         this.user = user;
         this.grossIncome = grossIncome;
         this.taxCredits = taxCredits;
+        this.incomeAfterCredits = grossIncome - taxCredits;
         this.partnerGrossIncome = partnerGrossIncome;
         this.partnerTaxCredits = partnerTaxCredits;
         this.partnerIncomeAfterCredits = partnerGrossIncome - partnerTaxCredits;
@@ -44,6 +45,7 @@ public final class UserTaxes extends CalculateTaxes {
         this.user = user;
         this.grossIncome = grossIncome;
         this.taxCredits = taxCredits;
+        this.incomeAfterCredits = grossIncome - taxCredits;
         calculateTaxes();
         this.liquidAmount = grossIncome - totalTaxesDue;
 
@@ -55,6 +57,7 @@ public final class UserTaxes extends CalculateTaxes {
             this.user = user;
             this.grossIncome = grossIncome;
             this.taxCredits = taxCredits;
+            this.incomeAfterCredits = grossIncome - taxCredits;
             this.partnerGrossIncome = partnerGrossIncome;
             this.partnerTaxCredits = partnerTaxCredits;
             this.partnerIncomeAfterCredits = partnerGrossIncome - partnerTaxCredits;

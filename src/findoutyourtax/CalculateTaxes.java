@@ -29,14 +29,14 @@ public class CalculateTaxes {
             } else if (user.getCoupleTotalIncomeAfterCredits() > TaxRange.PAYEMARRIEDONEINCOMERANGE.getRange() && user.getPartnerGrossIncome()==0) {
                 PAYE = (TaxRange.PAYEMARRIEDONEINCOMERANGE.getRange() * Tax.PAYEMARRIEDLOWERRATE.getRate())
                         + ((user.getCoupleTotalIncomeAfterCredits() - TaxRange.PAYEMARRIEDONEINCOMERANGE.getRange()) * Tax.PAYEMARRIEDOVERRATE.getRate());
-            } else if(user.getCoupleTotalIncomeAfterCredits() < TaxRange.PAYEMARRIEDTWOINCOMESRANGE.getRange() && user.getPartnerGrossIncome()>0){
+            } else if(user.getCoupleTotalIncomeAfterCredits() < TaxRange.PAYEMARRIEDTWOINCOMESRANGE.getRange() && user.getPartnerGrossIncome()==0){
                 PAYE = Tax.PAYEMARRIEDLOWERRATE.getRate() * user.getCoupleTotalIncomeAfterCredits();
             } else { 
                 PAYE = (TaxRange.PAYEMARRIEDTWOINCOMESRANGE.getRange() * Tax.PAYEMARRIEDLOWERRATE.getRate())
                         + ((user.getCoupleTotalIncomeAfterCredits() - TaxRange.PAYEMARRIEDTWOINCOMESRANGE.getRange()) * Tax.PAYEMARRIEDOVERRATE.getRate());}
             
         }
-         System.out.println(PAYE);// TO DEBUG
+         
         return PAYE;
         
     }
@@ -60,7 +60,7 @@ public class CalculateTaxes {
                     + ((user.getIncomeAfterCredits() - TaxRange.USCRANGETHREE.getRange()) * Tax.USCCLASSFOURRATE.getRate());
 
         }
-        System.out.println(USC);// TO DEBUG
+        
         return USC;
     }
 
@@ -72,7 +72,7 @@ public class CalculateTaxes {
         } else {//otherwise if income after credits is higher than the PRSI range
             PRSI = (user.getIncomeAfterCredits() - TaxRange.PRSIRANGE.getRange()) * Tax.PRSICLASSTWORATE.getRate();// as the first 18,354 is not taxed
         }
-        System.out.println(PRSI); // TO DEBUG
+       
         return PRSI;
     }
 
