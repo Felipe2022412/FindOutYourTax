@@ -45,7 +45,7 @@ public class CalculateTaxes {
         } else if (user.getIncomeAfterCredits() > TaxRange.USCRANGETWO.getRange() && user.getIncomeAfterCredits() <= TaxRange.USCRANGETHREE.getRange()) {//checking if income after credits is higher than the USC second range and lower than the third range
             USC = (Tax.USCCLASSONERATE.getRate() * TaxRange.USCRANGEONE.getRange())
                     + ((TaxRange.USCRANGETWO.getRange() - TaxRange.USCRANGEONE.getRange()) * Tax.USCCLASSTWORATE.getRate())
-                    + ((user.getIncomeAfterCredits() - TaxRange.USCRANGETHREE.getRange()) * Tax.USCCLASSTHREERATE.getRate());
+                    + ((user.getIncomeAfterCredits() - TaxRange.USCRANGETWO.getRange()) * Tax.USCCLASSTHREERATE.getRate());
         } else {//otherwise if income after credits is higher than the USC third range 
             USC = (Tax.USCCLASSONERATE.getRate() * TaxRange.USCRANGEONE.getRange())
                     + ((TaxRange.USCRANGETWO.getRange() - TaxRange.USCRANGEONE.getRange()) * Tax.USCCLASSTWORATE.getRate())

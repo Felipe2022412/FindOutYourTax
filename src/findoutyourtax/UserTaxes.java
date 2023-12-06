@@ -32,6 +32,7 @@ public final class UserTaxes extends CalculateTaxes {
         this.partnerTaxCredits = partnerTaxCredits;
         setIncomeAfterCredits(grossIncome + partnerGrossIncome - taxCredits - partnerTaxCredits);
         calculateTaxes();
+        
         // Calculate taxes
     }
 
@@ -41,6 +42,7 @@ public final class UserTaxes extends CalculateTaxes {
         this.taxCredits = taxCredits;
         setIncomeAfterCredits(grossIncome - taxCredits);
         calculateTaxes();
+        
         // Calculate taxes
     }
 
