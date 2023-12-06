@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author dougl
+ * @author Douglas and Felipe
  */
 public class DatabaseReader extends Database {
 
@@ -30,22 +30,18 @@ public class DatabaseReader extends Database {
         }
     }
 
-// Verificar se o usuário é um administrador
     public User getUser(String userName, String password) {
 
-        //boolean isAdmin = false;
         User user = null;
 
         try {
             Statement stmt = conn.createStatement();
             stmt.execute("USE " + DB_NAME + ";");
-            //String query = String.format("SELECT admin FROM %s WHERE userName = '%s' AND password = '%s';", TABLE_NAME, userName, password);
             String query = String.format("SELECT userID, admin, firstName, lastName, dateOfBirth, ppsNo, email, married FROM %s WHERE userName = '%s' AND password = '%s';", TABLE_NAME_USERDATA, userName, password);
 
             ResultSet results = stmt.executeQuery(query);
 
             if (results.next() && results.getBoolean("admin")) {
-                //isAdmin = true;
                 int userID = results.getInt("userID");
                 String firstName = results.getString("firstName");
                 String lastName = results.getString("lastName");
@@ -92,7 +88,6 @@ public class DatabaseReader extends Database {
 
             ResultSet results = stmt.executeQuery(query);
 
-            //isAdmin = true;
             if (results.next()) {
                 int userID = results.getInt("userID");
                 String firstName = results.getString("firstName");

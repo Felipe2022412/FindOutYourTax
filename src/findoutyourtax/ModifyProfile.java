@@ -8,22 +8,25 @@ import database.DatabaseWriter;
 import ioutils.IOUtils;
 
 /**
- *
- * @author dougl
+ * ModifyProfile class implements the ModifyProfileInterface and provides
+ * methods to modify User profiles. Authors: Douglas and Felipe
  */
 public class ModifyProfile implements ModifyProfileInterface {
 
+    // DatabaseWriter instance for writing to the database
     DatabaseWriter databaseWriter;
+    // Constructor initializes DatabaseWriter
 
     public ModifyProfile() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         databaseWriter = new DatabaseWriter();
     }
-
+    // Implementation of the modifyProfile method from the ModifyProfileInterface
     @Override
     public void modifyProfile(User user) {
-        //Initialize necessary objects and variables
+        //Initialize necessary objects
         IOUtils input = new IOUtils();
-
+        
+        // Prompt the user to choose the attribute to modify
         int optionModdify;
         optionModdify = input.getUserInt("---- Enter the number of the info you want to change ----\n"
                 + "1 - First name\n"
@@ -34,11 +37,13 @@ public class ModifyProfile implements ModifyProfileInterface {
                 + "6 - Email\n"
                 + "7 - Marital status\n"
                 + "8 - Cancell\n");
+        
+        // Switch statement to handle the chosen modification
         switch (optionModdify) {
             case 1:
                 String newFirstName = input.getUserText("Enter your new name:");
-                user.setFirstName(newFirstName);
-                databaseWriter.modifyUser(user);
+                user.setFirstName(newFirstName);//Set the new first name
+                databaseWriter.modifyUser(user);//Will write the changes made to the user in the database
                 System.out.println("Name updated.");
                 break;
             case 2:
@@ -77,6 +82,7 @@ public class ModifyProfile implements ModifyProfileInterface {
                 databaseWriter.modifyUser(user);
                 System.out.println("Marital status updated.");
                 break;
+                //Cancel the operation
             case 8:
                 System.out.println("Cancelling modification.");
                 break;

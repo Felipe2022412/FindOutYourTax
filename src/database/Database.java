@@ -5,17 +5,17 @@
 package database;
 
 /**
+ * Class that stores the database info
  *
- * @author dougl
+ * @author Douglas adn Felipe
  */
 public abstract class Database {
-    
+
     protected final static String DB_BASE_URL = "jdbc:mysql://localhost";
     protected final static String DB_USER = "ooc2023";
     protected final static String DB_PASSWORD = "ooc2023";
     protected final static String DB_NAME = "IrelandRevenueData";
     protected final static String TABLE_NAME_USERDATA = "UserData"; //Alterar para as nossas tables
     protected final static String TABLE_NAME_TAXINFO = "TaxInfo"; //Alterar para as nossas tables
-    protected final static String TABLE_NAME_PARTNER_TAXINFO = "PartnerTaxInfo"; //Alterar para as nossas tables
-    
+
 }

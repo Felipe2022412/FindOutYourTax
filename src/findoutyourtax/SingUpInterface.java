@@ -5,9 +5,12 @@
 package findoutyourtax;
 
 /**
+ * SignUpInterface defines a contract for classes that support user sign-up
+ * functionality.
  *
- * @author dougl
+ * @author Douglas and Felipe
  */
 public interface SingUpInterface {
+
     void signUp();
 }

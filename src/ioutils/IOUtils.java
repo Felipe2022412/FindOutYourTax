@@ -8,15 +8,13 @@ import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * A set of useful Input methods - get text -get a int (no limits) - get a
  * decimal - get an int (with a minimum value) - get a int (with a min and max
  * value)
  *
- * @author Ken Healy
+ * @author Ken Healy and modify by Douglas Vinicius Dierings
  */
 public class IOUtils {
 

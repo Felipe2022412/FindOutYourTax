@@ -10,8 +10,9 @@ import ioutils.IOUtils;
 import java.util.ArrayList;
 
 /**
- *
- * @author dougl
+ * SignUpMenu class implements the SignUpInterface and provides a user registration menu.
+ * It collects user information, creates a RegularUser object, and stores it in the database.
+ * @author Douglas and Felipe
  */
 public class SignUpMenu implements SingUpInterface {
 
@@ -29,7 +30,6 @@ public class SignUpMenu implements SingUpInterface {
     @Override
     public void signUp() {
 
-        //Initialize necessary objects and variables
         //Take all the information of the user and create an object and store it in the database
         String firstName;
         String lastName;
@@ -42,7 +42,7 @@ public class SignUpMenu implements SingUpInterface {
 
         do {
             System.out.println(">>> Register form <<<");
-
+            //Get all the user information
             firstName = input.getUserText("Enter your first name:");
             lastName = input.getUserText("Enter your last name:");
             userName = input.getUserText("Enter a user name that will be used for login:");
@@ -51,10 +51,10 @@ public class SignUpMenu implements SingUpInterface {
             dateOfBirth = input.getUserDateOfBirth("Enter your date of birth in the following format = AAAA-MM-DD:");
             ppsNo = input.getUserPPSN("Enter your PPSNO:");
             married = input.getUserBollean("If you are married enter 1 if not enter 2:", 1, 2);
-
+            //Will check if the user alrady exist in the database checkin the username and PPSN
             if (databaseReader.userExists(userName, ppsNo)) {
                 System.out.println("User with the same username or PPSN already exists. Please choose different credentials.");
-            } else {
+            } else {//If not exists will create the user
                 RegularUser regularUser = new RegularUser(firstName, lastName, userName, password, dateOfBirth, ppsNo, email, married);
                 databaseWriter.registerUser(regularUser);
                 System.out.println("You have been registered successfully.");

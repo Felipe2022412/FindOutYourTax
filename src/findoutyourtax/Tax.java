@@ -5,9 +5,9 @@
 package findoutyourtax;
 
 /**
- *Enum for each tax in Ireland
- * All gross incomes are calculated on annual basis
- * @author felip
+ * Enum representing different tax rates in Ireland for tax calculation.
+ * All gross incomes are calculated on an annual basis.
+ * @author Douglas and Felipe
  */
 public enum Tax {
     

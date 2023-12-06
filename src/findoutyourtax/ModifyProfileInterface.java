@@ -5,13 +5,14 @@
 package findoutyourtax;
 
 /**
- *Interface for the modifier methods - for each User's attribute.
- * @author felip
+ * Interface for modifier methods that can be implemented by classes for
+ * modifying User profiles.
+ *
+ * @author Douglas and Felipe
  */
 public interface ModifyProfileInterface {
-    
-    //Modifiers that will belong to the admin user and regular user. 
+
+    //Modifiers that will belong to the admin user and regular user and change their information. 
     void modifyProfile(User user);
-    
-    
-   }
+
+}

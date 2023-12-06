@@ -7,7 +7,7 @@ package findoutyourtax;
 /**
  * Interface for the view methods for the admin - for each User's attribute.
  *
- * @author felip
+ * @author Douglas and Felipe
  */
 public interface DisplayMenu {
 

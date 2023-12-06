@@ -9,22 +9,24 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- *
- * @author dougl
+ * DatabaseConnection class for handling database connections. Extends the
+ * Database class. Authors: Douglas and Felipe
  */
-public class DatabaseConection extends Database{
-    
+public class DatabaseConection extends Database {
+
     public Connection connectToDB() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        // Load the MySQL JDBC driver
         Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
         Connection conn = null;
         try {
+            // Attempt to establish a connection to the database using provided credentials
             conn = DriverManager.getConnection(DB_BASE_URL, DB_USER, DB_PASSWORD);
         } catch (SQLException error) {
-            // Lida com a exceção adequadamente (pode relançar ou registrar o erro)
+        // Handle the SQLException appropriately
             throw error;
         }
+        //Return a conection to interact with the database 
         return conn;
     }
-    
-    
+
 }

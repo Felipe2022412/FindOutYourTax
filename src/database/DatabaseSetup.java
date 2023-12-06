@@ -9,13 +9,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
+ * DatabaseSetup class handles the setup of database tables and initial data.
  *
- * @author dougl
+ * @author Douglas and Felipe
  */
 public class DatabaseSetup extends Database {
 
     private Connection conn;
-
+    // Constructor initializes the DatabaseSetup and establishes a connection to the database
     public DatabaseSetup() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         try {
             conn = new DatabaseConection().connectToDB();
@@ -23,12 +24,13 @@ public class DatabaseSetup extends Database {
             System.out.println("Error to conect to the Database");
         }
     }
-
+    // Method to set up the database with necessary tables and initial data (user admin that was provaided)
     public boolean setupDB() {
         try {
+            // Create a statement to execute SQL commands
             Statement stmt = conn.createStatement();
-            stmt.execute("CREATE DATABASE IF NOT EXISTS " + DB_NAME + ";");
-            stmt.execute("USE " + DB_NAME + ";");
+            stmt.execute("CREATE DATABASE IF NOT EXISTS " + DB_NAME + ";");//Create the database
+            stmt.execute("USE " + DB_NAME + ";");//Select the database to be used
             String sqlUserTable = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME_USERDATA + " ("
                     + "userID INT PRIMARY KEY,"
                     + "firstName VARCHAR(255) NOT NULL,"
@@ -57,9 +59,10 @@ public class DatabaseSetup extends Database {
                     + "    PRIMARY KEY (operationID),"
                     + "    FOREIGN KEY (userID) REFERENCES " + TABLE_NAME_USERDATA + " (userID)"
                     + ");";
+            // Insert an admin user into USERDATA table
             String sqlAdminUser = String.format("INSERT INTO " + TABLE_NAME_USERDATA + " VALUES ('%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', %b, %b);",
                     1, "Gustavo", "Guanabara", "CCT", "Dublin", "1978-03-17", "1234567AB", "guanabara@gmail.com", true, true);
-
+            //Execute SQL commands
             stmt.execute(sqlUserTable);
             stmt.execute(sqlTableTaxInfo);
             stmt.execute(sqlAdminUser);
