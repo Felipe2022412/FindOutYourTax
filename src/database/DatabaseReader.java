@@ -146,27 +146,29 @@ public class DatabaseReader extends Database {
     }
 
     public ArrayList<UserTaxes> getAllTaxes(User user) {
-
         ArrayList<UserTaxes> userTaxesList = new ArrayList<>();
 
         try {
             Statement stmt = conn.createStatement();
             stmt.execute("USE " + DB_NAME + ";");
-            String query = String.format("SELECT userID, grossIncome, taxCredits, partnerGrossIncome, partnerTaxCredits, totalTaxesDue, liquidAmount FROM %s WHERE userID = %d;", TABLE_NAME_TAXINFO, user.getUserId());
+
+            String query = String.format(
+                    "SELECT T.userID, T.grossIncome, T.taxCredits, "
+                    + "P.partnerGrossIncome, P.partnerTaxCredits " // Added a space here
+                    + "FROM %s T "
+                    + "LEFT JOIN %s P ON T.userID = P.userID "
+                    + "WHERE T.userID = %d;",
+                    TABLE_NAME_TAXINFO, TABLE_NAME_PARTNER_TAXINFO, user.getUserId()
+            );
 
             ResultSet results = stmt.executeQuery(query);
 
             while (results.next()) {
-                int userID = results.getInt("userID");
                 double grossIncome = results.getDouble("grossIncome");
                 double taxCredits = results.getDouble("taxCredits");
-                double partnerGrossIncome = results.getDouble("partnerGrossIncome");
-                double partnerTaxCredits = results.getDouble("partnerTaxCredits");
-                double totalTaxesDue = results.getDouble("totalTaxesDue");
-                double liquidAmount = results.getDouble("liquidAmount");
 
                 // Create a new UserTaxes object for each row and add it to the list
-                UserTaxes userTaxes = new UserTaxes(user, grossIncome, taxCredits, partnerGrossIncome, partnerTaxCredits, totalTaxesDue, liquidAmount);
+                UserTaxes userTaxes = new UserTaxes(user, grossIncome, taxCredits);
                 userTaxesList.add(userTaxes);
             }
         } catch (SQLException e) {
@@ -182,22 +184,28 @@ public class DatabaseReader extends Database {
         try {
             Statement stmt = conn.createStatement();
             stmt.execute("USE " + DB_NAME + ";");
-            String query = String.format("SELECT T.userID, T.grossIncome, T.taxCredits, T.partnerGrossIncome, T.partnerTaxCredits, T.totalTaxesDue, T.liquidAmount, "
-                    + "U.userID, U.firstName, U.lastName, U.userName, U.dateOfBirth, U.ppsNo, U.email, U.married "
-                    + "FROM %s T "
-                    + "JOIN %s U ON T.userID = U.userID "
-                    + "WHERE U.admin = false;", TABLE_NAME_TAXINFO, TABLE_NAME_USERDATA);
+
+            String query = String.format(
+                    "SELECT \n"
+                    + "    T.userID AS taxUserID, T.grossIncome, T.taxCredits,\n"
+                    + "    P.partnerGrossIncome, P.partnerTaxCredits,\n"
+                    + "    U.userID AS userUserID, U.firstName, U.lastName, U.userName, U.dateOfBirth, U.ppsNo, U.email, U.married\n"
+                    + "FROM \n"
+                    + "    %s T\n"
+                    + "JOIN \n"
+                    + "    %s P ON T.userID = P.userID\n"
+                    + "JOIN \n"
+                    + "    %s U ON T.userID = U.userID\n"
+                    + "WHERE \n"
+                    + "    U.admin = false;",
+                    TABLE_NAME_TAXINFO, TABLE_NAME_PARTNER_TAXINFO, TABLE_NAME_USERDATA
+            );
 
             ResultSet results = stmt.executeQuery(query);
 
             while (results.next()) {
-                int userID = results.getInt("userID");
                 double grossIncome = results.getDouble("grossIncome");
                 double taxCredits = results.getDouble("taxCredits");
-                double partnerGrossIncome = results.getDouble("partnerGrossIncome");
-                double partnerTaxCredits = results.getDouble("partnerTaxCredits");
-                double totalTaxesDue = results.getDouble("totalTaxesDue");
-                double liquidAmount = results.getDouble("liquidAmount");
 
                 // Retrieve user information
                 int userUserID = results.getInt("U.userID");
@@ -213,10 +221,11 @@ public class DatabaseReader extends Database {
                 User user = new RegularUser(userUserID, firstName, lastName, userName, dateOfBirth, ppsNo, email, married);
 
                 // Create UserTaxes object
-                UserTaxes userTaxes = new UserTaxes(user, grossIncome, taxCredits, partnerGrossIncome, partnerTaxCredits, totalTaxesDue, liquidAmount);
+                UserTaxes userTaxes = new UserTaxes(user, grossIncome, taxCredits);
 
                 // Add to the list
                 allUsersTaxes.add(userTaxes);
+                System.out.println("USER ADD");
             }
         } catch (SQLException e) {
             System.out.println("Error getting all taxes from all users: " + e.getMessage());
@@ -250,7 +259,5 @@ public class DatabaseReader extends Database {
         }
         return false;
     }
-    
-    
 
 }

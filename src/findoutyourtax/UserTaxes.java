@@ -30,7 +30,7 @@ public final class UserTaxes extends CalculateTaxes {
         this.taxCredits = taxCredits;
         this.partnerGrossIncome = partnerGrossIncome;
         this.partnerTaxCredits = partnerTaxCredits;
-        setIncomeAfterCredits(grossIncome - taxCredits);
+        setIncomeAfterCredits(grossIncome + partnerGrossIncome - taxCredits - partnerTaxCredits);
         calculateTaxes();
         // Calculate taxes
     }
@@ -43,6 +43,7 @@ public final class UserTaxes extends CalculateTaxes {
         calculateTaxes();
         // Calculate taxes
     }
+
     //Is good becaus in case the tax change the sistem will calculate with the new taxes and show to the user
     public UserTaxes(User user, double grossIncome, double taxCredits, double partnerGrossIncome, double partnerTaxCredits) {
         if (user.isMarried()) {
@@ -51,7 +52,7 @@ public final class UserTaxes extends CalculateTaxes {
             this.taxCredits = taxCredits;
             this.partnerGrossIncome = partnerGrossIncome;
             this.partnerTaxCredits = partnerTaxCredits;
-            setIncomeAfterCredits(grossIncome - taxCredits);
+            setIncomeAfterCredits(grossIncome + partnerGrossIncome - taxCredits - partnerTaxCredits);
             calculateTaxes();
         } else {
             this.user = user;
@@ -66,6 +67,7 @@ public final class UserTaxes extends CalculateTaxes {
         this.PAYE = PAYECalc(this);
         this.USC = USCCalc(this);
         this.PRSI = PRSICalc(this);
+        this.totalTaxesDue = PAYE + USC + PRSI;
     }
 
     public double getGrossIncome() {

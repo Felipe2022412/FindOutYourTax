@@ -29,7 +29,7 @@ public class DatabaseSetup extends Database {
             Statement stmt = conn.createStatement();
             stmt.execute("CREATE DATABASE IF NOT EXISTS " + DB_NAME + ";");
             stmt.execute("USE " + DB_NAME + ";");
-            String sqlUserTable = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME_USERDATA + " ("
+            String sqlUserTable = "CREATE TABLE IF NOT EXISTS " + DB_NAME + "." + TABLE_NAME_USERDATA + " ("
                     + "userID INT AUTO_INCREMENT PRIMARY KEY,"
                     + "firstName VARCHAR(255) NOT NULL,"
                     + "lastName VARCHAR(255) NOT NULL,"
@@ -47,16 +47,21 @@ public class DatabaseSetup extends Database {
                     + "    userID INT,"
                     + "    grossIncome DECIMAL(10, 2),"
                     + "    taxCredits DECIMAL(10, 2),"
-                    + "    incomeAfterCredits DECIMAL(10, 2),"
-                    + "    partnerGrossIncome DECIMAL(10, 2),"
-                    + "    partnerTaxCredits DECIMAL(10, 2),"
-                    + "    partnerIncomeAfterCredits DECIMAL(10, 2),"
-                    + "    coupleTotalIncomeAfterCredits DECIMAL(10, 2),"
-                    + "    totalTaxesDue DECIMAL(10, 2),"
-                    + "    liquidAmount DECIMAL(10, 2),"
                     + "    PRIMARY KEY (operationID),"
                     + "    FOREIGN KEY (userID) REFERENCES " + TABLE_NAME_USERDATA + " (userID)"
                     + ");";
+
+            String sqlPartnerTaxInfoTable = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME_PARTNER_TAXINFO + " ("
+                    + "partnerID INT AUTO_INCREMENT PRIMARY KEY,"
+                    + "userID INT,"
+                    + "partnerGrossIncome DECIMAL(10, 2),"
+                    + "partnerTaxCredits DECIMAL(10, 2),"
+                    + "FOREIGN KEY (userID) REFERENCES " + TABLE_NAME_USERDATA + " (userID)"
+                    + ");";
+
+            stmt.execute(sqlUserTable);
+            stmt.execute(sqlTableTaxInfo);
+            stmt.execute(sqlPartnerTaxInfoTable);
             // Check if the admin user already exists
             String sqlCheckAdminUser = "SELECT * FROM " + TABLE_NAME_USERDATA + " WHERE userName = 'CCT';";
             if (!stmt.executeQuery(sqlCheckAdminUser).next()) {
@@ -65,8 +70,6 @@ public class DatabaseSetup extends Database {
                         "Gustavo", "Guanabara", "CCT", "Dublin", "1978-03-17", "1234567AB", "guanabara@gmail.com", true, true);
                 stmt.execute(sqlAdminUser);
             }
-            stmt.execute(sqlUserTable);
-            stmt.execute(sqlTableTaxInfo);
 
             return true;
         } catch (Exception e) {

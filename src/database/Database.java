@@ -16,6 +16,6 @@ public abstract class Database {
     protected final static String DB_NAME = "IrelandRevenueData";
     protected final static String TABLE_NAME_USERDATA = "UserData"; //Alterar para as nossas tables
     protected final static String TABLE_NAME_TAXINFO = "TaxInfo"; //Alterar para as nossas tables
-    
+    protected final static String TABLE_NAME_PARTNER_TAXINFO = "PartnerTaxInfo"; //Alterar para as nossas tables
     
 }
