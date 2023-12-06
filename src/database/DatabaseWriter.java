@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import static database.Database.TABLE_NAME_USERDATA;
 import static database.Database.TABLE_NAME_TAXINFO;
+import java.sql.ResultSet;
 
 /**
  *
@@ -69,14 +70,55 @@ public class DatabaseWriter extends Database {
         }
     }
 
+    /*public boolean removeUser(int userId) {
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.execute("USE " + DB_NAME + ";");
+            String sqlRemoveOperations = String.format("DELETE FROM %s WHERE userID = %d;", TABLE_NAME_TAXINFO, userId);
+            stmt.execute(sqlRemoveOperations);
+            String sqlRemove = String.format("DELETE FROM %s WHERE userID = %d;", TABLE_NAME_USERDATA, userId);
+
+            stmt.execute(sqlRemove);
+
+            return true;
+
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
+    }*/
     public boolean removeUser(int userId) {
         try {
             Statement stmt = conn.createStatement();
             stmt.execute("USE " + DB_NAME + ";");
 
-            String sqlRemove = String.format("DELETE FROM %s WHERE userID = %d;", TABLE_NAME_USERDATA, userId);
+            // Check if the user exists before proceeding with deletion
+            String sqlCheckUserExistence = String.format("SELECT COUNT(*) FROM %s WHERE userID = %d;", TABLE_NAME_USERDATA, userId);
+            ResultSet userExistenceResult = stmt.executeQuery(sqlCheckUserExistence);
 
-            stmt.execute(sqlRemove);
+            if (userExistenceResult.next() && userExistenceResult.getInt(1) == 0) {
+                // The user does not exist
+                System.out.println("User does not exist. No action taken.");
+                return false;
+            }
+
+            // Check if the user is the admin before proceeding with deletion
+            String sqlCheckAdmin = String.format("SELECT admin FROM %s WHERE userID = %d;", TABLE_NAME_USERDATA, userId);
+            ResultSet adminCheckResult = stmt.executeQuery(sqlCheckAdmin);
+
+            if (adminCheckResult.next() && adminCheckResult.getBoolean("admin")) {
+                // The user is an admin, don't allow deletion
+                System.out.println("Cannot delete admin user.");
+                return false;
+            }
+
+            // Delete associated records from taxinfo table
+            String sqlRemoveOperations = String.format("DELETE FROM %s WHERE userID = %d;", TABLE_NAME_TAXINFO, userId);
+            stmt.execute(sqlRemoveOperations);
+
+            // Delete the user from userdata table
+            String sqlRemoveUser = String.format("DELETE FROM %s WHERE userID = %d;", TABLE_NAME_USERDATA, userId);
+            stmt.execute(sqlRemoveUser);
 
             return true;
 

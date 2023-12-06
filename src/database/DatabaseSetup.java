@@ -49,23 +49,23 @@ public class DatabaseSetup extends Database {
             String sqlTableTaxInfo = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME_TAXINFO + " ("
                     + "    operationID INT AUTO_INCREMENT," // Unique identifier for each operation
                     + "    userID INT,"
-                    + "    grossIncome DOUBLE,"
-                    + "    taxCredits DOUBLE,"
-                    + "    incomeAfterCredits DOUBLE,"
-                    + "    partnerGrossIncome DOUBLE,"
-                    + "    partnerTaxCredits DOUBLE,"
-                    + "    partnerIncomeAfterCredits DOUBLE,"
-                    + "    coupleTotalIncomeAfterCredits DOUBLE,"
-                    + "    totalTaxesDue DOUBLE,"
-                    + "    liquidAmount DOUBLE,"
+                    + "    grossIncome DECIMAL(12, 2)," // Example: up to 12 total digits, with 2 after the decimal point
+                    + "    taxCredits DECIMAL(12, 2),"
+                    + "    incomeAfterCredits DECIMAL(12, 2),"
+                    + "    partnerGrossIncome DECIMAL(12, 2),"
+                    + "    partnerTaxCredits DECIMAL(12, 2),"
+                    + "    partnerIncomeAfterCredits DECIMAL(12, 2),"
+                    + "    coupleTotalIncomeAfterCredits DECIMAL(12, 2),"
+                    + "    totalTaxesDue DECIMAL(12, 2),"
+                    + "    liquidAmount DECIMAL(12, 2),"
                     + "    PRIMARY KEY (operationID),"
                     + "    FOREIGN KEY (userID) REFERENCES " + TABLE_NAME_USERDATA + " (userID)"
                     + ");";
-            
+
             //Execute SQL commands
             stmt.execute(sqlUserTable);
             stmt.execute(sqlTableTaxInfo);
-            
+
             // Insert an admin user into USERDATA table
             // Check if the admin user already exists
             String sqlCheckAdminUser = "SELECT * FROM " + TABLE_NAME_USERDATA + " WHERE userName = 'CCT';";

@@ -39,7 +39,7 @@ public class FindOutYourTax {
         System.out.println("===== Welcome to Find out Your tax =====");
         //Will loop until the user chose to leave
         do {
-            System.out.println(" 1 - Log In \n 2 - Sing Up \n 3 - Exit");
+            System.out.println(" 1 - Log In \n 2 - Sign Up \n 3 - Exit");
             option = input.getUserInt("Enter one of the options above:", 1, 3);
             boolean userExists = true;//Use to check if the user exists on the database in the loop
             //This is the main Switch tha will be responsable for interactin between the classes and interfaces
