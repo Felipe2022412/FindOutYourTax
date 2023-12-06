@@ -24,12 +24,9 @@ public abstract class User {
     private boolean adminAccess;
 
     
-    //call the interfaces
+    //Constructor to call the interfaces
     public User() {
     }
-    
-    
-    
 
     //Constructor to make USER objects
     public User(String firstName, String lastName, String userName, String password, String dateOfBirth, String ppsNo, String email, boolean married) {
@@ -37,17 +34,15 @@ public abstract class User {
         this.lastName = lastName;
         this.userName = userName;
         this.password = password;
-        //this.userId = currentID; // user id will be the current id. It starts in 1 and increases as a new object is created.
         this.dateOfBirth = dateOfBirth;
         this.ppsNo = ppsNo;
         this.email = email;
         this.married = married;
         adminAccess = false;
-        //currentID++;// to incriment the id for each user each time a object is created.
 
     }
 
-    //Contructor to get only userID, first name and last name - to get the user in the database reader
+    //Contructor to get only userID, first name and last name - to get the user in the database reader using the ID
     public User(int userId, String firstName, String lastName) {
         this.userId = userId;
         this.firstName = firstName;
@@ -67,19 +62,13 @@ public abstract class User {
         this.married = married;
 
     }
-
+    //To get a user from the database when the loging is sucecfull
     public User(int userId, String firstName, String lastName, String userName, String password, String dateOfBirth, String ppsNo, String email, boolean married) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
         this.password = password;
-
-        //if (currentID <= userId) {
-        //    currentID = userId + 1; // Incrementa o currentID apenas se necessário
-       // }
-
         this.userId = userId; // user id será o currentID, que pode ser o userId ajustado
-       // currentID++; // Incrementa o currentID para o próximo usuário
         this.dateOfBirth = dateOfBirth;
         this.ppsNo = ppsNo;
         this.email = email;
@@ -107,10 +96,6 @@ public abstract class User {
         return userId;
     }
 
-    /*
-    public static int getCurrentID() {
-        return currentID;
-    }*/
     public String getDateOfBirth() {
         return dateOfBirth;
     }

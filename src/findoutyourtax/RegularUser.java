@@ -20,6 +20,7 @@ public class RegularUser extends User implements DisplayMenu {
     DatabaseWriter databaseWriter;
     DatabaseReader databaseReader;
     ModifyProfileInterface modifyProfile;
+    //All constructors from the User
 
     public RegularUser(String firstName, String lastName, String userName, String password, String dateOfBirth, String ppsNo, String email, boolean married) {
         super(firstName, lastName, userName, password, dateOfBirth, ppsNo, email, married);
@@ -37,6 +38,7 @@ public class RegularUser extends User implements DisplayMenu {
     public RegularUser() {
     }
 
+    //Call the displayMenu for the Regularuser
     @Override
     public void displayMenu(User user) {
 
@@ -44,7 +46,7 @@ public class RegularUser extends User implements DisplayMenu {
         IOUtils input = new IOUtils();
         int option;
         UserTaxes userTaxes;
-
+        //implements the displayMenu for the admin
         try {
             modifyProfile = new ModifyProfile();
             databaseWriter = new DatabaseWriter();
@@ -136,7 +138,7 @@ public class RegularUser extends User implements DisplayMenu {
                     throw new AssertionError();
             }
 
-        }while (option != 5);
+        } while (option != 5);
 
     }
 }

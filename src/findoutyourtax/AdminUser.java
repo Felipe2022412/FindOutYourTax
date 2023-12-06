@@ -16,11 +16,13 @@ import java.util.ArrayList;
  * @author dougl
  */
 public class AdminUser extends User implements DisplayMenu {
-
+    //Inicialaizer the intefaces and objects
     DatabaseWriter databaseWriter;
     DatabaseReader databaseReader;
     ModifyProfileInterface modifyProfile;
 
+    
+    //All constructors from the User
     public AdminUser() {
     }
     
@@ -44,13 +46,13 @@ public class AdminUser extends User implements DisplayMenu {
         super(userId, firstName, lastName, userName, dateOfBirth, ppsNo, email, married);
         this.setAdminAccess(true);
     }
-
+    //implements the displayMenu for the admin
     @Override
     public void displayMenu(User user) {
         //Initialize necessary objects and variables
         IOUtils input = new IOUtils();
         int option;
-
+        //inicialize the interfaces and objects that need to be inside the try catch
         try {
             modifyProfile = new ModifyProfile();
             databaseWriter = new DatabaseWriter();
@@ -75,12 +77,13 @@ public class AdminUser extends User implements DisplayMenu {
 
             switch (option) {
                 case 1:
-                    System.out.println(user.toString());
+                    System.out.println(user.toString());//Show the user profile
                     break;
                 case 2:
-                    modifyProfile.modifyProfile(user);
+                    modifyProfile.modifyProfile(user);//call the modify interface so the user can modify the profile
                     break;
                 case 3:
+                    //Get all user from the database and display to the user
                     ArrayList<User> usersList = databaseReader.getAllUsers();
                     if (usersList.isEmpty()) {
                         System.out.println("No users are registered.");
@@ -93,14 +96,15 @@ public class AdminUser extends User implements DisplayMenu {
                     }
                     break;
                 case 4:
+                    //print a list of the users in the database and the admin can remove by entering the userID
                     ArrayList<User> users = databaseReader.getAllUsers();
 
-                    if (users.size() == 1) {
+                    if (users.size() == 1) {//In case dosen't have any users
                         System.out.println("No users registered to be removed.");
                     } else {
 
                         int count = 1;
-                        for (User userInDB : users) {
+                        for (User userInDB : users) {//print the users
                             if (!userInDB.isAdminAccess()) {//this prevents the user to remove and Admin user
                                 System.out.println("List of Users:");
                                 System.out.println(count + " - " + userInDB.toString());
@@ -108,16 +112,18 @@ public class AdminUser extends User implements DisplayMenu {
                                 count++;
                             }
                         }
+                        //get the user to be removed
                         int userToBeRemove = input.getUserInt("Enter the user ID to be revoved:");
-
+                        //Remove the user if the userID match if not prints user not found
                         if (databaseWriter.removeUser(userToBeRemove)) {
                             System.out.println("User removed.");
                         } else {
-                            System.out.println("Error to remove the user.");
+                            System.out.println("User not found.");
                         }
                     }
                     break;
                 case 5:
+                    //Get all operations performed by the users and prints for the admin
                     ArrayList<UserTaxes> usersOperations = databaseReader.getAllTaxesAllUsers();
                     int count = 1;
                     if (usersOperations.isEmpty()) {
@@ -138,7 +144,7 @@ public class AdminUser extends User implements DisplayMenu {
                 default:
                     throw new AssertionError();
             }
-        } while (option != 6);
+        } while (option != 6);//Until the admin chose to exit
     }
 
 }

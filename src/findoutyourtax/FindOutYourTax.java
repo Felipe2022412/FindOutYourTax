@@ -28,18 +28,22 @@ public class FindOutYourTax {
 
         //Interfaces
         DisplayMenu displayMenu ;
-        //RegularUser = regularUser = new RegularUser
         int option;
 
-        //test database
+        //Starts the database
         DatabaseSetup database = new DatabaseSetup();
         database.setupDB();
+        //Object that is use to read from database
         DatabaseReader databaseReader = new DatabaseReader();
+        
+        //Start themenu for the user
         System.out.println("===== Welcome to Find out Your tax =====");
+        //Will loop until the user chose to leave
         do {
             System.out.println(" 1 - Log In \n 2 - Sing Up \n 3 - Exit");
             option = input.getUserInt("Enter one of the options above:", 1, 3);
-            boolean userExists = true;
+            boolean userExists = true;//Use to check if the user exists on the database in the loop
+            //This is the main Switch tha will be responsable for interactin between the classes and interfaces
             switch (option) {
 
                 case 1:
@@ -54,32 +58,34 @@ public class FindOutYourTax {
                         
                         try {
                             System.out.println("-----------------------------------");
-                            user = databaseReader.getUser(userNameLogin, passwordLogin);
-                            //Display the menu
-                            if (user.isAdminAccess()) {
-                                userExists = false;
+                            user = databaseReader.getUser(userNameLogin, passwordLogin);//Get the user from the database using the username and login
+                            //Display the menu for regular usser or admin calling the interfaces
+                            if (user.isAdminAccess()) {//Admin user
+                                userExists = false;//will stop the loop
                                 
                                 displayMenu=new AdminUser();
                                 displayMenu.displayMenu(user);
                                 
                                 
-                            } else {
-                                userExists = false;
+                            } else {//regular user
+                                userExists = false;//will stop the loop
                                 
                                 displayMenu=new RegularUser();
                                 displayMenu.displayMenu(user);
  
                             }
-                        } catch (Exception e) {
+                        } catch (Exception e) {//in the case teh user not exists
                             System.out.println("Username or password incorect.");
                         }
-                    } while (userExists);
+                    } while (userExists);//loop until the user log in
 
                     break;
+                    //Display the sing up menu
                 case 2:
                     SingUpInterface singInMenu = new SignUpMenu();
                     singInMenu.signUp();
                     break;
+                    //Stop the program
                 case 3:
                     System.out.println("Bye. See you soon!");
                     break;
@@ -87,7 +93,7 @@ public class FindOutYourTax {
                     throw new AssertionError();
             }
 
-        } while (option != 3);
+        } while (option != 3);//loop until the user enter chose to leave
     }
 
 }
