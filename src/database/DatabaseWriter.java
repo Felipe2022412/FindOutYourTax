@@ -14,7 +14,7 @@ import static database.Database.TABLE_NAME_TAXINFO;
 
 /**
  *
- * @author dougl
+ * @author Douglas and Felipe
  */
 public class DatabaseWriter extends Database {
 

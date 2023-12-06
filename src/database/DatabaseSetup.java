@@ -32,7 +32,7 @@ public class DatabaseSetup extends Database {
             stmt.execute("CREATE DATABASE IF NOT EXISTS " + DB_NAME + ";");//Create the database
             stmt.execute("USE " + DB_NAME + ";");//Select the database to be used
             String sqlUserTable = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME_USERDATA + " ("
-                    + "userID INT PRIMARY KEY,"
+                    + "userID INT AUTO_INCREMENT PRIMARY KEY,"
                     + "firstName VARCHAR(255) NOT NULL,"
                     + "lastName VARCHAR(255) NOT NULL,"
                     + "userName VARCHAR(255) UNIQUE NOT NULL,"
