@@ -99,7 +99,7 @@ public class RegularUser extends User implements DisplayMenu {
                                 break;
                             case 2:
                                 continue;//Will get the input again from the user
-                                //Calcell the operation
+                            //Calcell the operation
                             case 3:
                                 System.out.println("Operation canceled.");
                                 break;

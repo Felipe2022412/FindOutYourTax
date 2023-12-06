@@ -24,9 +24,9 @@ public class CalculateTaxes {
                         + ((user.getIncomeAfterCredits() - TaxRange.PAYESINGLERANGE.getRange()) * Tax.PAYESINGLEOVERRATE.getRate());
             }
         } else {
-            if (user.getCoupleTotalIncomeAfterCredits() <= TaxRange.PAYEMARRIEDONEINCOMERANGE.getRange() && user.getPartnerGrossIncome()<0) {//checking if the income after tax credits is lower than the first range for a married person and that the partner actually does not earn
+            if (user.getCoupleTotalIncomeAfterCredits() <= TaxRange.PAYEMARRIEDONEINCOMERANGE.getRange() && user.getPartnerGrossIncome()==0) {//checking if the income after tax credits is lower than the first range for a married person and that the partner actually does not earn
                 PAYE = Tax.PAYEMARRIEDLOWERRATE.getRate() * user.getCoupleTotalIncomeAfterCredits();
-            } else if (user.getCoupleTotalIncomeAfterCredits() > TaxRange.PAYEMARRIEDONEINCOMERANGE.getRange() && user.getPartnerGrossIncome()<0) {
+            } else if (user.getCoupleTotalIncomeAfterCredits() > TaxRange.PAYEMARRIEDONEINCOMERANGE.getRange() && user.getPartnerGrossIncome()==0) {
                 PAYE = (TaxRange.PAYEMARRIEDONEINCOMERANGE.getRange() * Tax.PAYEMARRIEDLOWERRATE.getRate())
                         + ((user.getCoupleTotalIncomeAfterCredits() - TaxRange.PAYEMARRIEDONEINCOMERANGE.getRange()) * Tax.PAYEMARRIEDOVERRATE.getRate());
             } else if(user.getCoupleTotalIncomeAfterCredits() < TaxRange.PAYEMARRIEDTWOINCOMESRANGE.getRange() && user.getPartnerGrossIncome()>0){
@@ -36,7 +36,9 @@ public class CalculateTaxes {
                         + ((user.getCoupleTotalIncomeAfterCredits() - TaxRange.PAYEMARRIEDTWOINCOMESRANGE.getRange()) * Tax.PAYEMARRIEDOVERRATE.getRate());}
             
         }
+         System.out.println(PAYE);// TO DEBUG
         return PAYE;
+        
     }
 
     //Method to calculate the USC - the tax is progressive an over the gross amount
@@ -58,6 +60,7 @@ public class CalculateTaxes {
                     + ((user.getIncomeAfterCredits() - TaxRange.USCRANGETHREE.getRange()) * Tax.USCCLASSFOURRATE.getRate());
 
         }
+        System.out.println(USC);// TO DEBUG
         return USC;
     }
 
@@ -69,6 +72,7 @@ public class CalculateTaxes {
         } else {//otherwise if income after credits is higher than the PRSI range
             PRSI = (user.getIncomeAfterCredits() - TaxRange.PRSIRANGE.getRange()) * Tax.PRSICLASSTWORATE.getRate();// as the first 18,354 is not taxed
         }
+        System.out.println(PRSI); // TO DEBUG
         return PRSI;
     }
 

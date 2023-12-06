@@ -30,36 +30,26 @@ public final class UserTaxes extends CalculateTaxes {
         this.taxCredits = taxCredits;
         this.partnerGrossIncome = partnerGrossIncome;
         this.partnerTaxCredits = partnerTaxCredits;
-        setIncomeAfterCredits(grossIncome + partnerGrossIncome - taxCredits - partnerTaxCredits);
+        this.partnerIncomeAfterCredits = partnerGrossIncome - partnerTaxCredits;
+        this.coupleTotalIncomeAfterCredits = grossIncome + partnerGrossIncome - taxCredits - partnerTaxCredits;
         calculateTaxes();
         this.liquidAmount = grossIncome - totalTaxesDue;
 
         // Calculate taxes
     }
 
+    // constructor if the user is not married
     public UserTaxes(User user, double grossIncome, double taxCredits) {
 
-        if (user.isMarried()) {
-            this.user = user;
-            this.grossIncome = grossIncome;
-            this.taxCredits = taxCredits;
-            setPartnerIncomeAfterCredits(partnerGrossIncome - partnerTaxCredits);
-            setCoupleTotalIncomeAfterCredits(grossIncome + partnerGrossIncome - taxCredits - partnerTaxCredits);
-            calculateTaxes();
-            this.liquidAmount = grossIncome - totalTaxesDue;
+        this.user = user;
+        this.grossIncome = grossIncome;
+        this.taxCredits = taxCredits;
+        calculateTaxes();
+        this.liquidAmount = grossIncome - totalTaxesDue;
 
-        } else {
-            this.user = user;
-            this.grossIncome = grossIncome;
-            this.taxCredits = taxCredits;
-            setIncomeAfterCredits(grossIncome - taxCredits);
-            calculateTaxes();
-            this.liquidAmount = grossIncome - totalTaxesDue;
-
-        }
     }
 
-    //Is good becaus in case the tax change the sistem will calculate with the new taxes and show to the user
+    //Is good becaus in case the tax change the sistem will calculate with the new taxes and show to the user / constructor if the user is married
     public UserTaxes(User user, double grossIncome, double taxCredits, double partnerGrossIncome, double partnerTaxCredits) {
         if (user.isMarried()) {
             this.user = user;
@@ -67,15 +57,8 @@ public final class UserTaxes extends CalculateTaxes {
             this.taxCredits = taxCredits;
             this.partnerGrossIncome = partnerGrossIncome;
             this.partnerTaxCredits = partnerTaxCredits;
-            setCoupleTotalIncomeAfterCredits(grossIncome + partnerGrossIncome - taxCredits - partnerTaxCredits);
-            calculateTaxes();
-            this.liquidAmount = grossIncome - totalTaxesDue;
-
-        } else {
-            this.user = user;
-            this.grossIncome = grossIncome;
-            this.taxCredits = taxCredits;
-            setIncomeAfterCredits(grossIncome - taxCredits);
+            this.partnerIncomeAfterCredits = partnerGrossIncome - partnerTaxCredits;
+            this.coupleTotalIncomeAfterCredits = grossIncome + partnerGrossIncome - taxCredits - partnerTaxCredits;
             calculateTaxes();
             this.liquidAmount = grossIncome - totalTaxesDue;
 
@@ -86,7 +69,7 @@ public final class UserTaxes extends CalculateTaxes {
         this.PAYE = PAYECalc(this);
         this.USC = USCCalc(this);
         this.PRSI = PRSICalc(this);
-        totalTaxesDue = PAYECalc(this) + USCCalc(this) + PRSICalc(this);
+        totalTaxesDue = PAYE + USC + PRSI;
 
     }
 
