@@ -9,7 +9,6 @@ import database.DatabaseReader;
 import ioutils.IOUtils;
 import java.sql.SQLException;
 
-
 /**
  *
  * @author felip
@@ -27,7 +26,7 @@ public class FindOutYourTax {
         User user;
 
         //Interfaces
-        DisplayMenu displayMenu ;
+        DisplayMenu displayMenu;
         int option;
 
         //Starts the database
@@ -35,7 +34,7 @@ public class FindOutYourTax {
         database.setupDB();
         //Object that is use to read from database
         DatabaseReader databaseReader = new DatabaseReader();
-        
+
         //Start themenu for the user
         System.out.println("===== Welcome to Find out Your tax =====");
         //Will loop until the user chose to leave
@@ -47,45 +46,48 @@ public class FindOutYourTax {
             switch (option) {
 
                 case 1:
-                    //User log in
+                    // User log in
                     String userNameLogin;
                     String passwordLogin;
 
                     do {
-
-                        userNameLogin = input.getUserText("Enter your user name:");
-                        passwordLogin = input.basicInput("Enter your password:");
+                        System.out.println("Enter 'exit' to leave the login process in the user name field.");
                         
+                        
+                        userNameLogin = input.getUserText("Enter your user name:");
+                        //check if the user want to exit the log in process
+                        if (userNameLogin.equalsIgnoreCase("exit")) {
+                            break; // Exit the login process
+                        }
+
+                        passwordLogin = input.basicInput("Enter your password:");
+
                         try {
                             System.out.println("-----------------------------------");
-                            user = databaseReader.getUser(userNameLogin, passwordLogin);//Get the user from the database using the username and login
-                            //Display the menu for regular usser or admin calling the interfaces
-                            if (user.isAdminAccess()) {//Admin user
-                                userExists = false;//will stop the loop
-                                
-                                displayMenu=new AdminUser();
+                            user = databaseReader.getUser(userNameLogin, passwordLogin);
+
+                            if (user.isAdminAccess()) {
+                                userExists = false;
+                                displayMenu = new AdminUser();
                                 displayMenu.displayMenu(user);
-                                
-                                
-                            } else {//regular user
-                                userExists = false;//will stop the loop
-                                
-                                displayMenu=new RegularUser();
+                            } else {
+                                userExists = false;
+                                displayMenu = new RegularUser();
                                 displayMenu.displayMenu(user);
- 
                             }
-                        } catch (Exception e) {//in the case teh user not exists
-                            System.out.println("Username or password incorect.");
+                        } catch (Exception e) {
+                            System.out.println("Username or password incorrect.");
                         }
-                    } while (userExists);//loop until the user log in
+                    } while (userExists);
 
                     break;
-                    //Display the sing up menu
+
+                //Display the sing up menu
                 case 2:
                     SingUpInterface singInMenu = new SignUpMenu();
                     singInMenu.signUp();
                     break;
-                    //Stop the program
+                //Stop the program
                 case 3:
                     System.out.println("Bye. See you soon!");
                     break;
