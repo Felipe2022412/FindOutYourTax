@@ -146,17 +146,25 @@ public final class UserTaxes extends CalculateTaxes {
 
     @Override
     public String toString() {
-        return "User tax details as follows:\n"
-                + "Gross income: " + Math.ceil(getGrossIncome()) + "\n"
-                + "Tax credits: " + Math.ceil(getTaxCredits()) + "\n"
-                + "Partner gross income: " + Math.ceil(getPartnerGrossIncome()) + "\n"
-                + "Partner tax credits: " + Math.ceil(getPartnerTaxCredits()) + "\n"
-                + "Couple total income after credits: " + Math.ceil(getCoupleTotalIncomeAfterCredits()) + "\n"
-                + "PAYE: " + Math.ceil(getPAYE()) + "\n"
-                + "USC: " + Math.ceil(getUSC()) + "\n"
-                + "PRSI: " + Math.ceil(getPRSI()) + "\n"
-                + "Total taxes due: " + Math.ceil(getTotalTaxesDue()) + "\n"
-                + "Liquid amount: " + Math.ceil(getLiquidAmount());
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("User tax details as follows:\n");
+        stringBuilder.append("Gross income: ").append(Math.ceil(getGrossIncome())).append("\n");
+        stringBuilder.append("Tax credits: ").append(Math.ceil(getTaxCredits())).append("\n");
+
+        // Check if the user is married before printing partner information
+        if (getUser().isMarried()) {
+            stringBuilder.append("Partner gross income: ").append(Math.ceil(getPartnerGrossIncome())).append("\n");
+            stringBuilder.append("Partner tax credits: ").append(Math.ceil(getPartnerTaxCredits())).append("\n");
+            stringBuilder.append("Couple total income after credits: ").append(Math.ceil(getCoupleTotalIncomeAfterCredits())).append("\n");
+        }
+
+        stringBuilder.append("PAYE: ").append(Math.ceil(getPAYE())).append("\n");
+        stringBuilder.append("USC: ").append(Math.ceil(getUSC())).append("\n");
+        stringBuilder.append("PRSI: ").append(Math.ceil(getPRSI())).append("\n");
+        stringBuilder.append("Total taxes due: ").append(Math.ceil(getTotalTaxesDue())).append("\n");
+        stringBuilder.append("Liquid amount: ").append(Math.ceil(getLiquidAmount()));
+
+        return stringBuilder.toString();
     }
 
 }

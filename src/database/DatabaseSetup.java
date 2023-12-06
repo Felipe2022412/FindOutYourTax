@@ -16,6 +16,7 @@ import java.sql.Statement;
 public class DatabaseSetup extends Database {
 
     private Connection conn;
+
     // Constructor initializes the DatabaseSetup and establishes a connection to the database
     public DatabaseSetup() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         try {
@@ -24,6 +25,7 @@ public class DatabaseSetup extends Database {
             System.out.println("Error to conect to the Database");
         }
     }
+
     // Method to set up the database with necessary tables and initial data (user admin that was provaided)
     public boolean setupDB() {
         try {
@@ -59,13 +61,21 @@ public class DatabaseSetup extends Database {
                     + "    PRIMARY KEY (operationID),"
                     + "    FOREIGN KEY (userID) REFERENCES " + TABLE_NAME_USERDATA + " (userID)"
                     + ");";
-            // Insert an admin user into USERDATA table
-            String sqlAdminUser = String.format("INSERT INTO " + TABLE_NAME_USERDATA + " VALUES ('%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', %b, %b);",
-                    1, "Gustavo", "Guanabara", "CCT", "Dublin", "1978-03-17", "1234567AB", "guanabara@gmail.com", true, true);
+            
             //Execute SQL commands
             stmt.execute(sqlUserTable);
             stmt.execute(sqlTableTaxInfo);
-            stmt.execute(sqlAdminUser);
+            
+            // Insert an admin user into USERDATA table
+            // Check if the admin user already exists
+            String sqlCheckAdminUser = "SELECT * FROM " + TABLE_NAME_USERDATA + " WHERE userName = 'CCT';";
+            if (!stmt.executeQuery(sqlCheckAdminUser).next()) {
+                // Create the admin user
+                String sqlAdminUser = String.format("INSERT INTO " + TABLE_NAME_USERDATA + " (firstName, lastName, userName, password, dateOfBirth, ppsNo, email, married, admin) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', %b, %b);",
+                        "Gustavo", "Guanabara", "CCT", "Dublin", "1978-03-17", "1234567AB", "guanabara@gmail.com", true, true);
+                stmt.execute(sqlAdminUser);
+            }
+
             return true;
         } catch (Exception e) {
             System.out.println(e);
