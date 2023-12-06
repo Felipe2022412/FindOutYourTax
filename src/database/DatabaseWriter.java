@@ -30,7 +30,6 @@ public class DatabaseWriter extends Database {
 
     public void registerUser(User user) {
         try {
-
             Statement stmt = conn.createStatement();
             // SQL query to insert data into the UserData table
             stmt.execute("USE " + DB_NAME + ";");
@@ -75,17 +74,10 @@ public class DatabaseWriter extends Database {
             Statement stmt = conn.createStatement();
             stmt.execute("USE " + DB_NAME + ";");
 
-            String sqlCheckUser = String.format("SELECT * FROM %s WHERE userID = %d;", TABLE_NAME_USERDATA, userId);
-
-            if (!stmt.executeQuery(sqlCheckUser).next()) {
-                System.out.println("User not found.");
-                return false;
-            }
-
             String sqlRemove = String.format("DELETE FROM %s WHERE userID = %d;", TABLE_NAME_USERDATA, userId);
+
             stmt.execute(sqlRemove);
 
-            System.out.println("User removed successfully.");
             return true;
 
         } catch (Exception e) {
@@ -99,26 +91,21 @@ public class DatabaseWriter extends Database {
             Statement stmt = conn.createStatement();
             stmt.execute("USE " + DB_NAME + ";");
 
-            // Salvar informações na tabela TaxInfo sem a coluna coupleTotalIncomeAfterCredits
-            String sqlTaxInfo = String.format("INSERT INTO " + TABLE_NAME_TAXINFO + " (userID, grossIncome, taxCredits) "
-                    + "VALUES (%d, %f, %f);",
+            // Assuming TaxInfo table structure matches UserTaxes fields
+            String sql = String.format("INSERT INTO " + TABLE_NAME_TAXINFO + " (userID, grossIncome, taxCredits, incomeAfterCredits, partnerGrossIncome, partnerTaxCredits, partnerIncomeAfterCredits, coupleTotalIncomeAfterCredits, totalTaxesDue, liquidAmount) "
+                    + "VALUES (%d, %f, %f, %f, %f, %f, %f, %f, %f, %f);",
                     userTaxes.getUser().getUserId(),
                     userTaxes.getGrossIncome(),
-                    userTaxes.getTaxCredits());
+                    userTaxes.getTaxCredits(),
+                    userTaxes.getIncomeAfterCredits(),
+                    userTaxes.getPartnerGrossIncome(),
+                    userTaxes.getPartnerTaxCredits(),
+                    userTaxes.getPartnerIncomeAfterCredits(),
+                    userTaxes.getCoupleTotalIncomeAfterCredits(),
+                    userTaxes.getTotalTaxesDue(),
+                    userTaxes.getLiquidAmount());
 
-            stmt.execute(sqlTaxInfo);
-
-            // Salvar informações na tabela PartnerTaxInfo, incluindo coupleTotalIncomeAfterCredits
-            if (userTaxes.getUser().isMarried()) {
-                String sqlPartnerTaxInfo = String.format("INSERT INTO " + TABLE_NAME_PARTNER_TAXINFO + " (userID, partnerGrossIncome, partnerTaxCredits) "
-                        + "VALUES (%d, %f, %f);",
-                        userTaxes.getUser().getUserId(),
-                        userTaxes.getPartnerGrossIncome(),
-                        userTaxes.getPartnerTaxCredits());
-
-                stmt.execute(sqlPartnerTaxInfo);
-            }
-
+            stmt.execute(sql);
             return true;
         } catch (SQLException e) {
             System.out.println("Error saving user operations: " + e.getMessage());
