@@ -7,7 +7,7 @@ package findoutyourtax;
 /**
  * Enum for each salary range in Ireland All gross incomes are calculated on
  * annual basis
- *
+ *60.06 218.16
  * @author felip
  */
 public enum TaxRange {

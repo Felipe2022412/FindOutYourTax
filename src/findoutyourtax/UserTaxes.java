@@ -32,7 +32,8 @@ public final class UserTaxes extends CalculateTaxes {
         this.partnerTaxCredits = partnerTaxCredits;
         setIncomeAfterCredits(grossIncome + partnerGrossIncome - taxCredits - partnerTaxCredits);
         calculateTaxes();
-        
+        this.liquidAmount = grossIncome - totalTaxesDue;
+
         // Calculate taxes
     }
 
@@ -40,9 +41,10 @@ public final class UserTaxes extends CalculateTaxes {
         this.user = user;
         this.grossIncome = grossIncome;
         this.taxCredits = taxCredits;
-        setIncomeAfterCredits(grossIncome - taxCredits);
+        setIncomeAfterCredits(grossIncome + partnerGrossIncome - taxCredits - partnerTaxCredits);
         calculateTaxes();
-        
+        this.liquidAmount = grossIncome - totalTaxesDue;
+
         // Calculate taxes
     }
 
@@ -56,21 +58,25 @@ public final class UserTaxes extends CalculateTaxes {
             this.partnerTaxCredits = partnerTaxCredits;
             setIncomeAfterCredits(grossIncome + partnerGrossIncome - taxCredits - partnerTaxCredits);
             calculateTaxes();
+            this.liquidAmount = grossIncome - totalTaxesDue;
+
         } else {
             this.user = user;
             this.grossIncome = grossIncome;
             this.taxCredits = taxCredits;
             setIncomeAfterCredits(grossIncome - taxCredits);
             calculateTaxes();
+            this.liquidAmount = grossIncome - totalTaxesDue;
+
         }
     }
-    
 
     private void calculateTaxes() {
         this.PAYE = PAYECalc(this);
         this.USC = USCCalc(this);
         this.PRSI = PRSICalc(this);
-        this.totalTaxesDue = PAYE + USC + PRSI;
+        totalTaxesDue = PAYECalc(this) + USCCalc(this) + PRSICalc(this);
+
     }
 
     public double getGrossIncome() {
