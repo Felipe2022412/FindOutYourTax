@@ -24,12 +24,17 @@ public class CalculateTaxes {
                         + ((user.getIncomeAfterCredits() - TaxRange.PAYESINGLERANGE.getRange()) * Tax.PAYESINGLEOVERRATE.getRate());
             }
         } else {
-            if (user.getCoupleTotalIncomeAfterCredits() <= TaxRange.PAYEMARRIEDONEINCOMERANGE.getRange()) {//checking if the income after tax credits is lower than the first range for a married person
+            if (user.getCoupleTotalIncomeAfterCredits() <= TaxRange.PAYEMARRIEDONEINCOMERANGE.getRange() && user.getPartnerGrossIncome()<0) {//checking if the income after tax credits is lower than the first range for a married person and that the partner actually does not earn
                 PAYE = Tax.PAYEMARRIEDLOWERRATE.getRate() * user.getCoupleTotalIncomeAfterCredits();
-            } else {
+            } else if (user.getCoupleTotalIncomeAfterCredits() > TaxRange.PAYEMARRIEDONEINCOMERANGE.getRange() && user.getPartnerGrossIncome()<0) {
                 PAYE = (TaxRange.PAYEMARRIEDONEINCOMERANGE.getRange() * Tax.PAYEMARRIEDLOWERRATE.getRate())
                         + ((user.getCoupleTotalIncomeAfterCredits() - TaxRange.PAYEMARRIEDONEINCOMERANGE.getRange()) * Tax.PAYEMARRIEDOVERRATE.getRate());
-            }
+            } else if(user.getCoupleTotalIncomeAfterCredits() < TaxRange.PAYEMARRIEDTWOINCOMESRANGE.getRange() && user.getPartnerGrossIncome()>0){
+                PAYE = Tax.PAYEMARRIEDLOWERRATE.getRate() * user.getCoupleTotalIncomeAfterCredits();
+            } else { 
+                PAYE = (TaxRange.PAYEMARRIEDTWOINCOMESRANGE.getRange() * Tax.PAYEMARRIEDLOWERRATE.getRate())
+                        + ((user.getCoupleTotalIncomeAfterCredits() - TaxRange.PAYEMARRIEDTWOINCOMESRANGE.getRange()) * Tax.PAYEMARRIEDOVERRATE.getRate());}
+            
         }
         return PAYE;
     }

@@ -3,19 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/dougl/Documents/NetBeansProjects/FindOutYourTax/src/findoutyourtax/RegularUser.java</file>
-            <file>file:/C:/Users/dougl/Documents/NetBeansProjects/FindOutYourTax/src/findoutyourtax/User.java</file>
-            <file>file:/C:/Users/dougl/Documents/NetBeansProjects/FindOutYourTax/src/findoutyourtax/FindOutYourTax.java</file>
-            <file>file:/C:/Users/dougl/Documents/NetBeansProjects/FindOutYourTax/src/findoutyourtax/AdminUser.java</file>
-            <file>file:/C:/Users/dougl/Documents/NetBeansProjects/FindOutYourTax/src/database/DatabaseReader.java</file>
-            <file>file:/C:/Users/dougl/Documents/NetBeansProjects/FindOutYourTax/src/findoutyourtax/UserTaxes.java</file>
-            <file>file:/C:/Users/dougl/Documents/NetBeansProjects/FindOutYourTax/src/database/DatabaseWriter.java</file>
-            <file>file:/C:/Users/dougl/Documents/NetBeansProjects/FindOutYourTax/src/findoutyourtax/Tax.java</file>
-            <file>file:/C:/Users/dougl/Documents/NetBeansProjects/FindOutYourTax/src/findoutyourtax/TaxRange.java</file>
-            <file>file:/C:/Users/dougl/Documents/NetBeansProjects/FindOutYourTax/src/database/Database.java</file>
-            <file>file:/C:/Users/dougl/Documents/NetBeansProjects/FindOutYourTax/src/findoutyourtax/DisplayMenu.java</file>
-            <file>file:/C:/Users/dougl/Documents/NetBeansProjects/FindOutYourTax/src/findoutyourtax/CalculateTaxes.java</file>
-            <file>file:/C:/Users/dougl/Documents/NetBeansProjects/FindOutYourTax/src/database/DatabaseSetup.java</file>
+            <file>file:/C:/Users/felip/OneDrive/Documents/NetBeansProjects/FindOutYourTax/src/findoutyourtax/User.java</file>
+            <file>file:/C:/Users/felip/OneDrive/Documents/NetBeansProjects/FindOutYourTax/src/findoutyourtax/RegularUser.java</file>
+            <file>file:/C:/Users/felip/OneDrive/Documents/NetBeansProjects/FindOutYourTax/src/findoutyourtax/CalculateTaxes.java</file>
+            <file>file:/C:/Users/felip/OneDrive/Documents/NetBeansProjects/FindOutYourTax/src/findoutyourtax/DisplayTaxes.java</file>
+            <file>file:/C:/Users/felip/OneDrive/Documents/NetBeansProjects/FindOutYourTax/src/database/DatabaseReader.java</file>
+            <file>file:/C:/Users/felip/OneDrive/Documents/NetBeansProjects/FindOutYourTax/src/findoutyourtax/Tax.java</file>
+            <file>file:/C:/Users/felip/OneDrive/Documents/NetBeansProjects/FindOutYourTax/src/findoutyourtax/AdminUser.java</file>
+            <file>file:/C:/Users/felip/OneDrive/Documents/NetBeansProjects/FindOutYourTax/src/findoutyourtax/FindOutYourTax.java</file>
+            <file>file:/C:/Users/felip/OneDrive/Documents/NetBeansProjects/FindOutYourTax/src/findoutyourtax/TaxRange.java</file>
+            <file>file:/C:/Users/felip/OneDrive/Documents/NetBeansProjects/FindOutYourTax/src/findoutyourtax/DisplayMenu.java</file>
+            <file>file:/C:/Users/felip/OneDrive/Documents/NetBeansProjects/FindOutYourTax/src/findoutyourtax/UserTaxes.java</file>
         </group>
     </open-files>
 </project-private>
