@@ -61,11 +61,11 @@ public class RegularUser extends User implements DisplayMenu {
         do {
             System.out.println("---- MENU ----");
             option = input.getUserInt("Enter the number of the respective task you want to do:\n"
-                    + "1 - view profile\n"
+                    + "1 - View profile\n"
                     + "2 - Modify profile\n"
                     + "3 - Calculate taxes\n"
-                    + "4 - see previously calculation\n"
-                    + "5 - exit", 1, 5);
+                    + "4 - See previously calculation\n"
+                    + "5 - Exit", 1, 5);
             switch (option) {
                 case 1:
                     System.out.println(user.toString());//View the profile

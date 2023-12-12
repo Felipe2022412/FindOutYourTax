@@ -68,7 +68,7 @@ public class AdminUser extends User implements DisplayMenu {
         do {
             System.out.println("---- MENU ----");
             option = input.getUserInt("Enter the number of the respective task you want to do:\n"
-                    + "1 - view profile\n"
+                    + "1 - View profile\n"
                     + "2 - Modify profile\n"
                     + "3 - Access a list of all other users in the system\n"
                     + "4 - Remove other users from the system\n"
