@@ -4,10 +4,10 @@
  */
 package database;
 
-import findoutyourtax.AdminUser;
-import findoutyourtax.RegularUser;
-import findoutyourtax.User;
-import findoutyourtax.UserTaxes;
+import user.AdminUser;
+import user.RegularUser;
+import user.User;
+import user.UserTaxes;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;

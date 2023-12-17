@@ -2,11 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package findoutyourtax;
+package menus;
 
+import user.RegularUser;
+import user.User;
 import database.DatabaseReader;
 import database.DatabaseWriter;
-import ioutils.IOUtils;
+import utils.IOUtils;
 import java.util.ArrayList;
 
 /**

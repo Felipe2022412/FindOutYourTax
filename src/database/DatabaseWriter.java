@@ -4,8 +4,8 @@
  */
 package database;
 
-import findoutyourtax.User;
-import findoutyourtax.UserTaxes;
+import user.User;
+import user.UserTaxes;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;

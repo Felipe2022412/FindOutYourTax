@@ -2,7 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package findoutyourtax;
+package menus;
+
+import user.User;
 
 /**
  * Interface for the view methods for the admin - for each User's attribute.

@@ -4,9 +4,15 @@
  */
 package findoutyourtax;
 
+import menus.SingUpInterface;
+import menus.DisplayMenu;
+import menus.SignUpMenu;
+import user.AdminUser;
+import user.RegularUser;
+import user.User;
 import database.DatabaseSetup;
 import database.DatabaseReader;
-import ioutils.IOUtils;
+import utils.IOUtils;
 import java.sql.SQLException;
 
 /**

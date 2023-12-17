@@ -2,11 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package findoutyourtax;
+package user;
 
 import database.DatabaseReader;
 import database.DatabaseWriter;
-import ioutils.IOUtils;
+import utils.CSVFileReader;
+import menus.DisplayMenu;
+import profile.ModifyProfile;
+import profile.ModifyProfileInterface;
+import utils.IOUtils;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -69,7 +73,7 @@ public class RegularUser extends User implements DisplayMenu {
                     + "3 - Calculate taxes\n"
                     + "4 - Import CSV file\n"
                     + "5 - See previously calculation\n"
-                    + "6 - Exit", 1, 5);
+                    + "6 - Exit", 1, 6);
             switch (option) {
                 case 1:
                     System.out.println(user.toString());//View the profile
@@ -118,10 +122,13 @@ public class RegularUser extends User implements DisplayMenu {
 
                     break;
                 case 4:
+                    // Create a new instance of the CSVFileReader class
                     CSVFileReader fileReader = new CSVFileReader();
+                    // Call the CSVFileReaderUser method of the fileReader object, passing the 'user' object
+                    // This method returns an array of UserTaxes objects based on the user's information
 
                     UserTaxes[] userTaxesArray = fileReader.CSVFileReaderUser(user);
-                    
+
                     for (UserTaxes userTax : userTaxesArray) {
                         System.out.println("=================================");
                         System.out.println(userTax.toString());
