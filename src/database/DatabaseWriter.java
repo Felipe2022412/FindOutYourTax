@@ -70,23 +70,7 @@ public class DatabaseWriter extends Database {
         }
     }
 
-    /*public boolean removeUser(int userId) {
-        try {
-            Statement stmt = conn.createStatement();
-            stmt.execute("USE " + DB_NAME + ";");
-            String sqlRemoveOperations = String.format("DELETE FROM %s WHERE userID = %d;", TABLE_NAME_TAXINFO, userId);
-            stmt.execute(sqlRemoveOperations);
-            String sqlRemove = String.format("DELETE FROM %s WHERE userID = %d;", TABLE_NAME_USERDATA, userId);
 
-            stmt.execute(sqlRemove);
-
-            return true;
-
-        } catch (Exception e) {
-            System.out.println(e);
-            return false;
-        }
-    }*/
     public boolean removeUser(int userId) {
         try {
             Statement stmt = conn.createStatement();
@@ -133,7 +117,7 @@ public class DatabaseWriter extends Database {
             Statement stmt = conn.createStatement();
             stmt.execute("USE " + DB_NAME + ";");
 
-            // Assuming TaxInfo table structure matches UserTaxes fields
+            // Assuming TaxInfo table structure matches UserTaxes fields.
             String sql = String.format("INSERT INTO " + TABLE_NAME_TAXINFO + " (userID, grossIncome, taxCredits, incomeAfterCredits, partnerGrossIncome, partnerTaxCredits, partnerIncomeAfterCredits, coupleTotalIncomeAfterCredits, totalTaxesDue, liquidAmount) "
                     + "VALUES (%d, %f, %f, %f, %f, %f, %f, %f, %f, %f);",
                     userTaxes.getUser().getUserId(),

@@ -357,7 +357,8 @@ public class IOUtils {
         return ppsn.matches("\\d{7}[A-Za-z]{1,2}");
 
     }
-
+    //This method was created because the password for the admin user do not follow the Valid passoword from the method when the user create a new user
+    //So it will allow the user to use the default password for CCT admin
     public String basicInput(String prompt) {
         System.out.println(prompt); // Display prompt
         Scanner myKB = new Scanner(System.in);

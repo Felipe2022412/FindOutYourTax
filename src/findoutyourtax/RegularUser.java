@@ -7,7 +7,10 @@ package findoutyourtax;
 import database.DatabaseReader;
 import database.DatabaseWriter;
 import ioutils.IOUtils;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Class for the Regular User with its methods - extends the class User and
@@ -64,8 +67,9 @@ public class RegularUser extends User implements DisplayMenu {
                     + "1 - View profile\n"
                     + "2 - Modify profile\n"
                     + "3 - Calculate taxes\n"
-                    + "4 - See previously calculation\n"
-                    + "5 - Exit", 1, 5);
+                    + "4 - Import CSV file\n"
+                    + "5 - See previously calculation\n"
+                    + "6 - Exit", 1, 5);
             switch (option) {
                 case 1:
                     System.out.println(user.toString());//View the profile
@@ -114,6 +118,20 @@ public class RegularUser extends User implements DisplayMenu {
 
                     break;
                 case 4:
+                    System.out.println("Under construction...");
+                    CSVFileReader fileReader = new CSVFileReader();
+
+                    UserTaxes[] userTaxesArray = fileReader.CSVFileReaderUser(user);
+                    
+                    for (UserTaxes userTax : userTaxesArray) {
+                        System.out.println("=================================");
+                        System.out.println(userTax.toString());
+                    }
+                    System.out.println("----------------------------------");
+
+                    break;
+
+                case 5:
                     ArrayList<UserTaxes> usersOperation = databaseReader.getAllTaxes(user);
                     int count = 1;
 
@@ -132,7 +150,7 @@ public class RegularUser extends User implements DisplayMenu {
                     }
                     break;
 
-                case 5:
+                case 6:
                     System.out.println("Bye. See you soon.");
                     break;
                 default:
