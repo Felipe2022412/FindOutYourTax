@@ -118,7 +118,6 @@ public class RegularUser extends User implements DisplayMenu {
 
                     break;
                 case 4:
-                    System.out.println("Under construction...");
                     CSVFileReader fileReader = new CSVFileReader();
 
                     UserTaxes[] userTaxesArray = fileReader.CSVFileReaderUser(user);
@@ -157,7 +156,7 @@ public class RegularUser extends User implements DisplayMenu {
                     throw new AssertionError();
             }
 
-        } while (option != 5);
+        } while (option != 6);
 
     }
 }

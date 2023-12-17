@@ -20,41 +20,62 @@ public class CSVFileReader {
         ArrayList<UserTaxes> userTaxesList = new ArrayList<>();
         BufferedReader br = null;
 
+        String filePath;
+        if (user.isMarried()) {
+            filePath = "taxesInfoMarriedDemo.csv"; // File for married users
+        } else {
+            filePath = "taxesInfoSingleDemo.csv"; // File for single users
+        }
+
         try {
-            br = new BufferedReader(new FileReader("taxesInfoMeriedDemo.csv"));//this file is only for a single user because I am not allow to use GUI so the user can select the file from the sistem
-                                                                                     //If needed can change the file name for taxesInfoMeriedDemo.csv that is on the directory folder of this program
+            br = new BufferedReader(new FileReader(filePath));
             String line;
 
             while ((line = br.readLine()) != null) {
                 String[] userData = line.split(",");
                 UserTaxes userTaxes = null;
 
-                // User is married
-                if (userData.length == 4) {
-                    double grossIncome = Double.parseDouble(userData[0]);
-                    double taxCredits = Double.parseDouble(userData[1]);
-                    double partnerGrossIncome = Double.parseDouble(userData[2]);
-                    double partnerTaxCredits = Double.parseDouble(userData[3]);
-                    userTaxes = new UserTaxes(user, grossIncome, taxCredits, partnerGrossIncome, partnerTaxCredits);
-
-                    // User is single
-                } else if (userData.length == 2) {
-                    double grossIncome = Double.parseDouble(userData[0].replace("\"", "").trim());//Need to use the replace method because of the Excel format and trim to remove spaces (https://stackoverflow.com/questions/12961114/java-replace-character-with)
-                    double taxCredits = Double.parseDouble(userData[1].replace("\"", "").trim());
-                    userTaxes = new UserTaxes(user, grossIncome, taxCredits);
+                if (user.isMarried()) {
+                    // User is married
+                    if (userData.length == 4) {
+                        double grossIncome = Double.parseDouble(userData[0].replace("\"", "").trim());
+                        double taxCredits = Double.parseDouble(userData[1].replace("\"", "").trim());
+                        double partnerGrossIncome = Double.parseDouble(userData[2].replace("\"", "").trim());
+                        double partnerTaxCredits = Double.parseDouble(userData[3].replace("\"", "").trim());
+                        userTaxes = new UserTaxes(user, grossIncome, taxCredits, partnerGrossIncome, partnerTaxCredits);
+                    } else {
+                        System.out.println("Insufficient data for a married user: " + line);
+                    }
                 } else {
-                    System.out.println("Insufficient data for a single user: " + line);
+                    // User is single
+                    if (userData.length == 2) {
+                        double grossIncome = Double.parseDouble(userData[0].replace("\"", "").trim());
+                        double taxCredits = Double.parseDouble(userData[1].replace("\"", "").trim());
+                        userTaxes = new UserTaxes(user, grossIncome, taxCredits);
+                    } else {
+                        System.out.println("Insufficient data for a single user: " + line);
+                    }
                 }
 
                 if (userTaxes != null) {
                     userTaxesList.add(userTaxes);
                 }
             }
+        } catch (FileNotFoundException ex) {
+            System.out.println("File not found: " + filePath);
         } catch (IOException ex) {
-            System.out.println("File not found.");
+            System.out.println("Error reading file: " + filePath);
+        } finally {
+            try {
+                if (br != null) {
+                    br.close();
+                }
+            } catch (IOException ex) {
+                System.out.println("Error closing file: " + filePath);
+            }
         }
 
-        // Convert ArrayList to Array, so it eassy to manege
+        // Convert ArrayList to Array
         return userTaxesList.toArray(new UserTaxes[0]);
     }
 }
