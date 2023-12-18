@@ -7,7 +7,7 @@ package user;
 /**
  * Class for User personal details
  *
- * @author felip
+ * @author Douglas and Felipe
  */
 public abstract class User {
 

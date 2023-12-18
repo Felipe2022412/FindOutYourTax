@@ -8,7 +8,7 @@ import tax.CalculateTaxes;
 
 /**
  *
- * @author dougl
+ * @author Douglas and Felipe
  */
 public final class UserTaxes extends CalculateTaxes {
 

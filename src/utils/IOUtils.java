@@ -218,7 +218,7 @@ public class IOUtils {
     /**
      * Get a valid email address from the user by issuing a prompt. Keep asking
      * if the user does not enter a valid email address.
-     *
+     * Reference: https://www.baeldung.com/java-email-validation-regex
      * @param prompt the prompt to issue
      * @return a VALID email address
      * @author Douglas Dierings and Felipe Marques
@@ -252,7 +252,7 @@ public class IOUtils {
     /**
      * Get a valid password from the user by issuing a prompt. Keep asking if
      * the user does not enter a valid password.
-     *
+     * Reference: https://www.geeksforgeeks.org/how-to-validate-a-password-using-regular-expressions-in-java/
      * @param prompt the prompt to issue
      * @return a VALID password
      * @author Douglas Dierings and Felipe Marques
@@ -266,7 +266,7 @@ public class IOUtils {
             System.out.println(prompt); // Display prompt
 
             userPassword = myKB.nextLine(); // Get user input
-            valid = isValidPassword(userPassword);
+            valid = isValidPassword(userPassword);//Call the method to test the password
 
             if (!valid) {
                 System.out.println("Invalid password. Please enter a password with at least one number, one capital letter, and one symbol.");
@@ -314,7 +314,7 @@ public class IOUtils {
     // Method to check if the date of birth is valid to store later in the SQL database, so we do not get errors
     private boolean isValidDateOfBirth(String dateOfBirth) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        dateFormat.setLenient(false); //Disable lenient mode to ensuring that the date format must match exactly
+        dateFormat.setLenient(false); //Disable lenient mode to ensuring that the date format must match exactly so i do not have problams when insert the date to DB
 
         try {
             Date parsedDate = (Date) dateFormat.parse(dateOfBirth);
@@ -327,7 +327,7 @@ public class IOUtils {
     /**
      * Get a valid PPSN from the user by issuing a prompt. Keep asking if the
      * user does not enter a valid PPSN in the format '1234567A' or '1234567AB'.
-     *
+     * Reference: https://stackoverflow.com/questions/20385963/validate-a-string-pps-number#:~:text=A%20valid%20PPS%20number%20will,be%20considered%20invalid%20PPS%20numbers.
      * @param prompt the prompt to issue
      * @return a VALID PPSN
      * @author Douglas Dierings and Felipe Marques
@@ -357,8 +357,8 @@ public class IOUtils {
         return ppsn.matches("\\d{7}[A-Za-z]{1,2}");
 
     }
-    //This method was created because the password for the admin user do not follow the Valid passoword from the method when the user create a new user
-    //So it will allow the user to use the default password for CCT admin
+    //This method was created because the password for the admin user do not follow the Valid passoword that I use to create an user
+    //So it will allow the user to use the default password for CCT admin, but it will stil checking if the password is valid, and is case sensitive
     public String basicInput(String prompt) {
         System.out.println(prompt); // Display prompt
         Scanner myKB = new Scanner(System.in);

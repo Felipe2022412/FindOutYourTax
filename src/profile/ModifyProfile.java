@@ -10,7 +10,8 @@ import utils.IOUtils;
 
 /**
  * ModifyProfile class implements the ModifyProfileInterface and provides
- * methods to modify User profiles. Authors: Douglas and Felipe
+ * methods to modify User profiles.
+ * @author Douglas and Felipe
  */
 public class ModifyProfile implements ModifyProfileInterface {
 

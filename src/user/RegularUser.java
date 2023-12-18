@@ -18,7 +18,7 @@ import java.util.ArrayList;
  * Class for the Regular User with its methods - extends the class User and
  * implements its specifics interfaces to use the methods modify and view.
  *
- * @author dougl
+ * @author Douglas and Felipe
  */
 public class RegularUser extends User implements DisplayMenu {
 

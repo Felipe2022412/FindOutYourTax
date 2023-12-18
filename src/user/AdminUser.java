@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * Class for the Admin User with its methods - extends the class User and
  * implements its specifics interfaces to use the methods modify and view.
  *
- * @author dougl
+ * @author Douglas and Felipe
  */
 public class AdminUser extends User implements DisplayMenu {
     //Inicialaizer the intefaces and objects

@@ -9,7 +9,7 @@ import user.UserTaxes;
 /**
  * Class to calculate each tax and total amount owed
  *
- * @author felip
+ * @author Douglas and Felipe
  */
 //extending UserIncome to be able to use their income,
 public class CalculateTaxes {
