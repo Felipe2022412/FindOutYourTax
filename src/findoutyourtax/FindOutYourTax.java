@@ -17,13 +17,17 @@ import java.sql.SQLException;
 
 /**
  * GitHub Link: https://github.com/Felipe2022412/FindOutYourTax.git
- * Video Demo is avaliable on youtube with the private link: https://youtu.be/dno25clBJK0
+ * Video Demo is available on YouTube with the private link: https://youtu.be/dno25clBJK0
  * @author Douglas and Felipe
  */
 public class FindOutYourTax {
 
     /**
      * @param args the command line arguments
+     * @throws java.lang.ClassNotFoundException
+     * @throws java.lang.InstantiationException
+     * @throws java.lang.IllegalAccessException
+     * @throws java.sql.SQLException
      */
     public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         // TODO code application logic here
@@ -32,7 +36,7 @@ public class FindOutYourTax {
         IOUtils input = new IOUtils();
         User user;
 
-        //Interfaces
+        //Interface
         DisplayMenu displayMenu;
         int option;
 
@@ -42,7 +46,7 @@ public class FindOutYourTax {
         //Object that is use to read from database
         DatabaseReader databaseReader = new DatabaseReader();
 
-        //Start themenu for the user
+        //Start the menu for the user
         System.out.println("===== Welcome to Find out Your tax =====\n");
         //Will loop until the user chose to leave
         do {

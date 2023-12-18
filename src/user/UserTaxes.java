@@ -11,7 +11,8 @@ import tax.CalculateTaxes;
  * @author Douglas and Felipe
  */
 public final class UserTaxes extends CalculateTaxes {
-
+    
+    //Variables
     private User user;
     private double grossIncome;
     private double taxCredits;

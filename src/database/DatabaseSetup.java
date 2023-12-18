@@ -77,7 +77,7 @@ public class DatabaseSetup extends Database {
             }
             stmt.close();//close the conection for security reasons
             return true;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e);
             return false;
         }

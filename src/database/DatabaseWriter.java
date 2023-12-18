@@ -14,6 +14,8 @@ import static database.Database.TABLE_NAME_USERINFO;
 import static database.Database.TABLE_NAME_USERTAXINFO;
 
 /**
+ * This class is responsible for writing and updating data in the database. It
+ * includes methods to register, modify, remove users and save user operations.
  *
  * @author Douglas and Felipe
  */
@@ -21,6 +23,13 @@ public class DatabaseWriter extends Database {
 
     private Connection conn;
 
+    /**
+     * Constructor for DatabaseWriter.Establishes a connection to the database.
+     *
+     * @throws java.lang.ClassNotFoundException
+     * @throws java.lang.InstantiationException
+     * @throws java.lang.IllegalAccessException
+     */
     public DatabaseWriter() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         try {
             conn = new DatabaseConection().connectToDB();
@@ -29,6 +38,12 @@ public class DatabaseWriter extends Database {
         }
     }
 
+    /**
+     * Registers a new user in the database.Inserts user data into the userinfo
+     * table.
+     *
+     * @param user
+     */
     public void registerUser(User user) {
         try {
             Statement stmt = conn.createStatement();
@@ -38,10 +53,10 @@ public class DatabaseWriter extends Database {
                     user.getUserId(), user.getFirstName(), user.getLastName(), user.getUserName(), user.getPassword(), user.getDateOfBirth(), user.getPpsNo(), user.getEmail(), user.isMarried(), user.isAdminAccess());
 
             stmt.execute(sql);
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
-        
+
     }
 
     public void modifyUser(User user) {
@@ -65,12 +80,18 @@ public class DatabaseWriter extends Database {
                     user.getUserId());
 
             stmt.execute(sql);
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
     }
 
-
+    /**
+     * Modifies the details of an existing user in the database.Updates user
+     * data in the userinfo table.
+     *
+     * @return boolean
+     * @param userId
+     */
     public boolean removeUser(int userId) {
         try {
             Statement stmt = conn.createStatement();
@@ -106,7 +127,7 @@ public class DatabaseWriter extends Database {
 
             return true;
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e);
             return false;
         }

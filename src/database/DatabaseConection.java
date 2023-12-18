@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 /**
  * DatabaseConnection class for handling database connections. Extends the
- * Database class.
+ * Database class to get all info needed.
  * @author Douglas and Felipe
  */
 public class DatabaseConection extends Database {
