@@ -37,7 +37,7 @@ public class DatabaseReader extends Database {
         try {
             Statement stmt = conn.createStatement();
             stmt.execute("USE " + DB_NAME + ";");
-            String query = String.format("SELECT userID, admin, firstName, lastName, dateOfBirth, ppsNo, email, married FROM %s WHERE userName = '%s' AND BINARY password = '%s';", TABLE_NAME_USERDATA, userName, password);
+            String query = String.format("SELECT userID, admin, firstName, lastName, dateOfBirth, ppsNo, email, married FROM %s WHERE userName = '%s' AND BINARY password = '%s';", TABLE_NAME_USERINFO, userName, password);
 
             ResultSet results = stmt.executeQuery(query);
 
@@ -84,7 +84,7 @@ public class DatabaseReader extends Database {
             Statement stmt = conn.createStatement();
             stmt.execute("USE " + DB_NAME + ";");
             //String query = String.format("SELECT admin FROM %s WHERE userName = '%s' AND password = '%s';", TABLE_NAME, userName, password);
-            String query = String.format("SELECT userID, admin, firstName, lastName FROM %s WHERE userId = '%d';", TABLE_NAME_USERDATA, userId);
+            String query = String.format("SELECT userID, admin, firstName, lastName FROM %s WHERE userId = '%d';", TABLE_NAME_USERINFO, userId);
 
             ResultSet results = stmt.executeQuery(query);
 
@@ -113,7 +113,7 @@ public class DatabaseReader extends Database {
         try {
             Statement stmt = conn.createStatement();
             stmt.execute("USE " + DB_NAME + ";");
-            String query = String.format("SELECT userID, admin, firstName, lastName, userName, password, dateOfBirth, ppsNo, email, married FROM %s;", TABLE_NAME_USERDATA);
+            String query = String.format("SELECT userID, admin, firstName, lastName, userName, password, dateOfBirth, ppsNo, email, married FROM %s;", TABLE_NAME_USERINFO);
 
             ResultSet results = stmt.executeQuery(query);
 
@@ -147,7 +147,7 @@ public class DatabaseReader extends Database {
         try {
             Statement stmt = conn.createStatement();
             stmt.execute("USE " + DB_NAME + ";");
-            String query = String.format("SELECT userID, grossIncome, taxCredits, partnerGrossIncome, partnerTaxCredits, totalTaxesDue, liquidAmount FROM %s WHERE userID = %d;", TABLE_NAME_TAXINFO, user.getUserId());
+            String query = String.format("SELECT userID, grossIncome, taxCredits, partnerGrossIncome, partnerTaxCredits, totalTaxesDue, liquidAmount FROM %s WHERE userID = %d;", TABLE_NAME_USERTAXINFO, user.getUserId());
 
             ResultSet results = stmt.executeQuery(query);
 
@@ -181,7 +181,7 @@ public class DatabaseReader extends Database {
                     + "U.userID, U.firstName, U.lastName, U.userName, U.dateOfBirth, U.ppsNo, U.email, U.married "
                     + "FROM %s T "
                     + "JOIN %s U ON T.userID = U.userID "
-                    + "WHERE U.admin = false;", TABLE_NAME_TAXINFO, TABLE_NAME_USERDATA);
+                    + "WHERE U.admin = false;", TABLE_NAME_USERTAXINFO, TABLE_NAME_USERINFO);
 
             ResultSet results = stmt.executeQuery(query);
 
@@ -225,7 +225,7 @@ public class DatabaseReader extends Database {
         try {
             Statement stmt = conn.createStatement();
             stmt.execute("USE " + DB_NAME + ";");
-            String query = "SELECT MAX(userID) FROM " + TABLE_NAME_USERDATA + ";";
+            String query = "SELECT MAX(userID) FROM " + TABLE_NAME_USERINFO + ";";
             ResultSet results = stmt.executeQuery(query);
 
             if (results.next()) {

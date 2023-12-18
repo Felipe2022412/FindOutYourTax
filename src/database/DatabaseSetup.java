@@ -33,7 +33,7 @@ public class DatabaseSetup extends Database {
             Statement stmt = conn.createStatement();
             stmt.execute("CREATE DATABASE IF NOT EXISTS " + DB_NAME + ";");//Create the database
             stmt.execute("USE " + DB_NAME + ";");//Select the database to be used
-            String sqlUserTable = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME_USERDATA + " ("
+            String sqlUserTable = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME_USERINFO + " ("
                     + "userID INT AUTO_INCREMENT PRIMARY KEY,"
                     + "firstName VARCHAR(255) NOT NULL,"
                     + "lastName VARCHAR(255) NOT NULL,"
@@ -46,7 +46,7 @@ public class DatabaseSetup extends Database {
                     + "admin BOOLEAN"
                     + ");";
 
-            String sqlTableTaxInfo = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME_TAXINFO + " ("
+            String sqlTableTaxInfo = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME_USERTAXINFO + " ("
                     + "    operationID INT AUTO_INCREMENT," // Unique identifier for each operation
                     + "    userID INT,"
                     + "    grossIncome DECIMAL(12, 2)," // Example: up to 12 total digits, with 2 after the decimal point
@@ -59,7 +59,7 @@ public class DatabaseSetup extends Database {
                     + "    totalTaxesDue DECIMAL(12, 2),"
                     + "    liquidAmount DECIMAL(12, 2),"
                     + "    PRIMARY KEY (operationID),"
-                    + "    FOREIGN KEY (userID) REFERENCES " + TABLE_NAME_USERDATA + " (userID)"
+                    + "    FOREIGN KEY (userID) REFERENCES " + TABLE_NAME_USERINFO + " (userID)"
                     + ");";
 
             //Execute SQL commands
@@ -68,19 +68,20 @@ public class DatabaseSetup extends Database {
 
             // Insert an admin user into USERDATA table
             // Check if the admin user already exists
-            String sqlCheckAdminUser = "SELECT * FROM " + TABLE_NAME_USERDATA + " WHERE userName = 'CCT';";
+            String sqlCheckAdminUser = "SELECT * FROM " + TABLE_NAME_USERINFO + " WHERE userName = 'CCT';";
             if (!stmt.executeQuery(sqlCheckAdminUser).next()) {
                 // Create the admin user
-                String sqlAdminUser = String.format("INSERT INTO " + TABLE_NAME_USERDATA + " (firstName, lastName, userName, password, dateOfBirth, ppsNo, email, married, admin) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', %b, %b);",
+                String sqlAdminUser = String.format("INSERT INTO " + TABLE_NAME_USERINFO + " (firstName, lastName, userName, password, dateOfBirth, ppsNo, email, married, admin) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', %b, %b);",
                         "Gustavo", "Guanabara", "CCT", "Dublin", "1978-03-17", "1234567AB", "guanabara@gmail.com", true, true);
                 stmt.execute(sqlAdminUser);
             }
-
+            stmt.close();//close the conection for security reasons
             return true;
         } catch (Exception e) {
             System.out.println(e);
             return false;
         }
+        
     }
 
 }

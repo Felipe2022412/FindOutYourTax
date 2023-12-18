@@ -130,7 +130,7 @@ public class AdminUser extends User implements DisplayMenu {
                     ArrayList<UserTaxes> usersOperations = databaseReader.getAllTaxesAllUsers();
                     int count = 1;
                     if (usersOperations.isEmpty()) {
-                        System.out.println("No tax information available.");
+                        System.out.println("No operations available.");
                     } else {
                         System.out.println("List of operations:");
                         for (UserTaxes userInDB : usersOperations) {

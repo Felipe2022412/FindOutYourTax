@@ -85,11 +85,11 @@ public class RegularUser extends User implements DisplayMenu {
                     int saveOption;//Will store the choice of the user save/do again/exit
                     do {
                         //get the input from the user to do the calculation
-                        double grossIncome = input.getUserDecimal("Enter your gross income:");
-                        double taxCredits = input.getUserDecimal("Enter your tax credits:");
+                        double grossIncome = input.getUserDecimal("Enter your annual gross income:");
+                        double taxCredits = input.getUserDecimal("Enter your annul tax credits:");
                         if (user.isMarried()) {//Check if the user is meried and ask for the parther income
-                            double partnerGrossIncome = input.getUserDecimal("Enter your partner gross income:");
-                            double partnerTaxCredits = input.getUserDecimal("Enter your partner tax credits:");
+                            double partnerGrossIncome = input.getUserDecimal("Enter your partner annual gross income:");
+                            double partnerTaxCredits = input.getUserDecimal("Enter your partner annual tax credits:");
                             userTaxes = new UserTaxes(user, grossIncome, taxCredits, partnerGrossIncome, partnerTaxCredits);
                         } else {
                             userTaxes = new UserTaxes(user, grossIncome, taxCredits);

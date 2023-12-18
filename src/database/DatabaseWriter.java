@@ -9,9 +9,9 @@ import user.UserTaxes;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
-import static database.Database.TABLE_NAME_USERDATA;
-import static database.Database.TABLE_NAME_TAXINFO;
 import java.sql.ResultSet;
+import static database.Database.TABLE_NAME_USERINFO;
+import static database.Database.TABLE_NAME_USERTAXINFO;
 
 /**
  *
@@ -34,14 +34,14 @@ public class DatabaseWriter extends Database {
             Statement stmt = conn.createStatement();
             // SQL query to insert data into the UserData table
             stmt.execute("USE " + DB_NAME + ";");
-            String sql = String.format("INSERT INTO " + TABLE_NAME_USERDATA + " VALUES ('%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', %b, %b);",
+            String sql = String.format("INSERT INTO " + TABLE_NAME_USERINFO + " VALUES ('%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', %b, %b);",
                     user.getUserId(), user.getFirstName(), user.getLastName(), user.getUserName(), user.getPassword(), user.getDateOfBirth(), user.getPpsNo(), user.getEmail(), user.isMarried(), user.isAdminAccess());
 
             stmt.execute(sql);
         } catch (Exception e) {
             System.out.println(e);
         }
-
+        
     }
 
     public void modifyUser(User user) {
@@ -60,7 +60,7 @@ public class DatabaseWriter extends Database {
                     + "married = %b, "
                     + "admin = %b "
                     + "WHERE userID = %d;",
-                    TABLE_NAME_USERDATA, user.getFirstName(), user.getLastName(), user.getUserName(), user.getPassword(),
+                    TABLE_NAME_USERINFO, user.getFirstName(), user.getLastName(), user.getUserName(), user.getPassword(),
                     user.getDateOfBirth(), user.getPpsNo(), user.getEmail(), user.isMarried(), user.isAdminAccess(),
                     user.getUserId());
 
@@ -77,7 +77,7 @@ public class DatabaseWriter extends Database {
             stmt.execute("USE " + DB_NAME + ";");
 
             // Check if the user exists before proceeding with deletion
-            String sqlCheckUserExistence = String.format("SELECT COUNT(*) FROM %s WHERE userID = %d;", TABLE_NAME_USERDATA, userId);
+            String sqlCheckUserExistence = String.format("SELECT COUNT(*) FROM %s WHERE userID = %d;", TABLE_NAME_USERINFO, userId);
             ResultSet userExistenceResult = stmt.executeQuery(sqlCheckUserExistence);
 
             if (userExistenceResult.next() && userExistenceResult.getInt(1) == 0) {
@@ -87,7 +87,7 @@ public class DatabaseWriter extends Database {
             }
 
             // Check if the user is the admin before proceeding with deletion
-            String sqlCheckAdmin = String.format("SELECT admin FROM %s WHERE userID = %d;", TABLE_NAME_USERDATA, userId);
+            String sqlCheckAdmin = String.format("SELECT admin FROM %s WHERE userID = %d;", TABLE_NAME_USERINFO, userId);
             ResultSet adminCheckResult = stmt.executeQuery(sqlCheckAdmin);
 
             if (adminCheckResult.next() && adminCheckResult.getBoolean("admin")) {
@@ -97,11 +97,11 @@ public class DatabaseWriter extends Database {
             }
 
             // Delete associated records from taxinfo table
-            String sqlRemoveOperations = String.format("DELETE FROM %s WHERE userID = %d;", TABLE_NAME_TAXINFO, userId);
+            String sqlRemoveOperations = String.format("DELETE FROM %s WHERE userID = %d;", TABLE_NAME_USERTAXINFO, userId);
             stmt.execute(sqlRemoveOperations);
 
             // Delete the user from userdata table
-            String sqlRemoveUser = String.format("DELETE FROM %s WHERE userID = %d;", TABLE_NAME_USERDATA, userId);
+            String sqlRemoveUser = String.format("DELETE FROM %s WHERE userID = %d;", TABLE_NAME_USERINFO, userId);
             stmt.execute(sqlRemoveUser);
 
             return true;
@@ -118,7 +118,7 @@ public class DatabaseWriter extends Database {
             stmt.execute("USE " + DB_NAME + ";");
 
             // Assuming TaxInfo table structure matches UserTaxes fields.
-            String sql = String.format("INSERT INTO " + TABLE_NAME_TAXINFO + " (userID, grossIncome, taxCredits, incomeAfterCredits, partnerGrossIncome, partnerTaxCredits, partnerIncomeAfterCredits, coupleTotalIncomeAfterCredits, totalTaxesDue, liquidAmount) "
+            String sql = String.format("INSERT INTO " + TABLE_NAME_USERTAXINFO + " (userID, grossIncome, taxCredits, incomeAfterCredits, partnerGrossIncome, partnerTaxCredits, partnerIncomeAfterCredits, coupleTotalIncomeAfterCredits, totalTaxesDue, liquidAmount) "
                     + "VALUES (%d, %f, %f, %f, %f, %f, %f, %f, %f, %f);",
                     userTaxes.getUser().getUserId(),
                     userTaxes.getGrossIncome(),
