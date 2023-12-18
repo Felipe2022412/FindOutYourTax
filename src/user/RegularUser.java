@@ -11,10 +11,8 @@ import menus.DisplayMenu;
 import profile.ModifyProfile;
 import profile.ModifyProfileInterface;
 import utils.IOUtils;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  * Class for the Regular User with its methods - extends the class User and
