@@ -16,8 +16,9 @@ import utils.IOUtils;
 import java.sql.SQLException;
 
 /**
- *
- * @author felip
+ * GitHub Link: https://github.com/Felipe2022412/FindOutYourTax.git
+ * Video Demo is avaliable inside the github repositorie of this program
+ * @author Douglas and Felipe
  */
 public class FindOutYourTax {
 
