@@ -17,7 +17,7 @@ import java.sql.SQLException;
 
 /**
  * GitHub Link: https://github.com/Felipe2022412/FindOutYourTax.git
- * Video Demo is avaliable inside the github repositorie of this program
+ * Video Demo is avaliable on youtube with the private link: https://youtu.be/dno25clBJK0
  * @author Douglas and Felipe
  */
 public class FindOutYourTax {
