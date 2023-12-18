@@ -116,7 +116,7 @@ public class AdminUser extends User implements DisplayMenu {
                             }
                         }
                         //get the user to be removed
-                        int userToBeRemove = input.getUserInt("Enter the user ID to be revoved:",2);
+                        int userToBeRemove = input.getUserInt("Enter the user ID to be revoved:",1);
                         //Remove the user if the userID match if not prints user not found
                         if (databaseWriter.removeUser(userToBeRemove)) {
                             System.out.println("User removed.");
