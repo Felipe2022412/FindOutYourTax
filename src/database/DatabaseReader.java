@@ -93,39 +93,6 @@ public class DatabaseReader extends Database {
     }
 
     /**
-     * Retrieves a user from the database based on the user ID. This method is
-     * intended for admin users only.
-     */
-    /*public User getUser(int userId) {
-
-        User user = null;
-
-        try {
-            Statement stmt = conn.createStatement();
-            stmt.execute("USE " + DB_NAME + ";");
-            String query = String.format("SELECT userID, admin, firstName, lastName FROM %s WHERE userId = '%d';", TABLE_NAME_USERINFO, userId);
-
-            ResultSet results = stmt.executeQuery(query);
-
-            if (results.next()) {
-                int userID = results.getInt("userID");
-                String firstName = results.getString("firstName");
-                String lastName = results.getString("lastName");
-
-                // Create an AdminUser
-                User adminUser = new AdminUser(userID, firstName, lastName);
-                user = adminUser;
-            } else {
-                // Handle the case where no user with the specified userId is found
-                System.out.println("No user found with userId: " + userId);
-            }
-        } catch (SQLException e) {
-            System.out.println("Error identifying the user: " + e.getMessage());
-        }
-
-        return user;
-    }*/
-    /**
      * Retrieves a list of all users from the database.The list includes both
      * admin and regular users.
      *
