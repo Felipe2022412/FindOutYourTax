@@ -17,7 +17,7 @@ public class CalculateTaxes {
 
     //Method to calculate the PAYE - the tax is progressive an over the gross amount
     protected double PAYECalc(UserTaxes user) {
-        double PAYE;
+        double PAYE;/*https://www.revenue.ie/en/personal-tax-credits-reliefs-and-exemptions/tax-relief-charts/index.aspx*/
         if (!user.isMarried()) { //to check if the user is married
             if (user.getIncomeAfterCredits() <= TaxRange.PAYESINGLERANGE.getRange()) { //checking if the income after tax credits is lower than the first range for a single person
                 PAYE = Tax.PAYESINGLELOWERRATE.getRate() * user.getIncomeAfterCredits();
@@ -45,7 +45,7 @@ public class CalculateTaxes {
 
     //Method to calculate the USC - the tax is progressive an over the gross amount
     protected double USCCalc(UserTaxes user) {
-        double USC;
+        double USC; /*https://www.revenue.ie/en/jobs-and-pensions/usc/standard-rates-thresholds.aspx*/
         if (user.getIncomeAfterCredits() <= TaxRange.USCRANGEONE.getRange()) {//checking if income after credits is lower than the USC first range
             USC = Tax.USCCLASSONERATE.getRate() * user.getIncomeAfterCredits();
         } else if (user.getIncomeAfterCredits() > TaxRange.USCRANGEONE.getRange() && user.getIncomeAfterCredits() <= TaxRange.USCRANGETWO.getRange()) {//checking if income after credits is higher than the USC first range and lower than the second range
@@ -68,7 +68,7 @@ public class CalculateTaxes {
 
     //Method to calculate the PRSI - the tax is progressive an over the gross amount
     protected double PRSICalc(UserTaxes user) {
-        double PRSI;
+        double PRSI; /*https://www.gov.ie/en/publication/80e5ab-prsi-pay-related-social-insurance/*/
         if (user.getIncomeAfterCredits() <= TaxRange.PRSIRANGE.getRange()) {//checking if income after credits is higher than the PRSI range
             PRSI = user.getIncomeAfterCredits() * Tax.PRSICLASSONERATE.getRate();
         } else {//otherwise if income after credits is higher than the PRSI range
